@@ -10,17 +10,10 @@ public class Usuario extends Persona{
     private List<Transaccion> transacciones;
     private List<Presupuesto> presupuestos;
 
-    public Usuario(Double saldo, String id, String cedula, String nombreCompleto, String correo, String telefono, String contrasenia, String codigoRecuperacion, String direccion, List<Cuenta> cuentas, List<Transaccion> transacciones, List<Presupuesto> presupuestos) {
-        super(id, cedula, nombreCompleto, correo, telefono, contrasenia, codigoRecuperacion);
+    public Usuario(Double saldo, String id, String cedula, String nombreCompleto, String correo, String telefono, String contrasenia, String codigoRecuperacion, Boolean esCuentaActiva, String direccion, List<Cuenta> cuentas, List<Transaccion> transacciones, List<Presupuesto> presupuestos) {
+        super(id, cedula, nombreCompleto, correo, telefono, contrasenia, codigoRecuperacion, esCuentaActiva);
 
-        if (id == null || id.isBlank()) throw new IllegalArgumentException("El id no puede estar vacio");
-        if (cedula == null || cedula.isBlank()) throw new IllegalArgumentException("La cedula no puede estar vacia");
-        if (nombreCompleto == null || nombreCompleto.isBlank()) throw new IllegalArgumentException("El nombre completo no puede estar vacio");
-        if (correo == null || correo.isBlank()) throw new IllegalArgumentException("El correo no puede estar vacio");
-        if (telefono == null || telefono.isBlank()) throw new IllegalArgumentException("El telefono no puede estar vacio");
-        if (contrasenia == null || contrasenia.isBlank()) throw new IllegalArgumentException("La contrasenia no puede estar vacio");
-        if (!(contrasenia.length() >= 8 && contrasenia.matches(".*[A-Z].*") && contrasenia.matches(".*\\d.*"))) throw new IllegalArgumentException("La contrasenia no es lo suficientemente segura");
-        if (direccion == null || direccion.isBlank()) throw new IllegalArgumentException("La direccion no puede estar vacia");
+        Validar.queNoVacio(direccion, "La dirección no puede estar vacía");
 
         this.saldo = 0.0;
         this.direccion = direccion;
@@ -81,13 +74,25 @@ public class Usuario extends Persona{
                 ", cuentas=" + cuentas +
                 ", transacciones=" + transacciones +
                 ", presupuestos=" + presupuestos +
-                ", id='" + id + '\'' +
-                ", cedula='" + cedula + '\'' +
-                ", nombreCompleto='" + nombreCompleto + '\'' +
-                ", correo='" + correo + '\'' +
-                ", telefono='" + telefono + '\'' +
-                ", contrasenia='" + contrasenia + '\'' +
-                ", codigoRecuperacion='" + codigoRecuperacion + '\'' +
+                ", super='" + super.toString() + '\'' +
                 '}';
+    }
+
+    public void agregarCuenta(Cuenta cuenta) {
+        Validar.queNoNulo(cuenta, "La cuenta no puede ser nula");
+        this.cuentas.add(cuenta);
+        actualizarSaldoTotal();
+    }
+
+    public void agregarTransaccion(Transaccion transaccion) {
+        Validar.queNoNulo(transaccion, "La transacción no puede ser nula");
+        this.transacciones.add(transaccion);
+        actualizarSaldoTotal();
+    }
+
+    private void actualizarSaldoTotal() {
+        this.saldo = this.cuentas.stream()
+                .mapToDouble(Cuenta::getMonto)
+                .sum();
     }
 }
