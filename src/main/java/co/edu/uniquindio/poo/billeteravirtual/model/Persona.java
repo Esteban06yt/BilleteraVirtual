@@ -97,7 +97,7 @@ public abstract class Persona {
     }
 
     public String generarCodigoRecuperacion() {
-        codigoRecuperacion = CodigoGenerador.generarCodigo6Chars();
+        codigoRecuperacion = CodigoGenerador.generarCodigo();
         return codigoRecuperacion;
     }
 }
