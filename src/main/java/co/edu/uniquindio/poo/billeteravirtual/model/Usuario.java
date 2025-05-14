@@ -4,12 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Usuario extends Persona{
+    private Double saldo;
     private String direccion;
     private List<Cuenta> cuentas;
     private List<Transaccion> transacciones;
     private List<Presupuesto> presupuestos;
 
-    public Usuario(String id, String cedula, String nombreCompleto, String correo, String telefono, String contrasenia, String codigoRecuperacion, String direccion, List<Cuenta> cuentas, List<Transaccion> transacciones, List<Presupuesto> presupuestos) {
+    public Usuario(Double saldo, String id, String cedula, String nombreCompleto, String correo, String telefono, String contrasenia, String codigoRecuperacion, String direccion, List<Cuenta> cuentas, List<Transaccion> transacciones, List<Presupuesto> presupuestos) {
         super(id, cedula, nombreCompleto, correo, telefono, contrasenia, codigoRecuperacion);
 
         if (id == null || id.isBlank()) throw new IllegalArgumentException("El id no puede estar vacio");
@@ -21,6 +22,7 @@ public class Usuario extends Persona{
         if (!(contrasenia.length() >= 8 && contrasenia.matches(".*[A-Z].*") && contrasenia.matches(".*\\d.*"))) throw new IllegalArgumentException("La contrasenia no es lo suficientemente segura");
         if (direccion == null || direccion.isBlank()) throw new IllegalArgumentException("La direccion no puede estar vacia");
 
+        this.saldo = 0.0;
         this.direccion = direccion;
         this.cuentas = new ArrayList<>();
         this.transacciones = new ArrayList<>();
@@ -35,12 +37,16 @@ public class Usuario extends Persona{
         this.direccion = direccion;
     }
 
-    public Double getSaldoTotal() {
-        Double saldoTotal = 0.0;
+    public Double getSaldo() {
+        Double saldo = 0.0;
         for (Cuenta cuenta : cuentas){
-            saldoTotal += cuenta.getMonto();
+            saldo += cuenta.getMonto();
         }
-        return saldoTotal;
+        return saldo;
+    }
+
+    public void setSaldo(Double saldo) {
+        this.saldo = saldo;
     }
 
     public List<Cuenta> getCuentas() {
@@ -71,7 +77,7 @@ public class Usuario extends Persona{
     public String toString() {
         return "Usuario{" +
                 "direccion='" + direccion + '\'' +
-                ", saldoTotal=" + getSaldoTotal() +
+                ", saldoTotal=" + getSaldo() +
                 ", cuentas=" + cuentas +
                 ", transacciones=" + transacciones +
                 ", presupuestos=" + presupuestos +
