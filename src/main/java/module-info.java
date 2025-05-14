@@ -13,4 +13,6 @@ module co.edu.uniquindio.poo.billeteravirtual {
 
     opens co.edu.uniquindio.poo.billeteravirtual to javafx.fxml;
     exports co.edu.uniquindio.poo.billeteravirtual;
+    exports co.edu.uniquindio.poo.billeteravirtual.controller;
+    opens co.edu.uniquindio.poo.billeteravirtual.controller to javafx.fxml;
 }
