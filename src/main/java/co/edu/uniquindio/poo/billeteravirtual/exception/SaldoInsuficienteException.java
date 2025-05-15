@@ -1,4 +1,4 @@
-package co.edu.uniquindio.poo.billeteravirtual.model;
+package co.edu.uniquindio.poo.billeteravirtual.exception;
 
 public class SaldoInsuficienteException extends RuntimeException {
     public SaldoInsuficienteException(String mensaje) {
