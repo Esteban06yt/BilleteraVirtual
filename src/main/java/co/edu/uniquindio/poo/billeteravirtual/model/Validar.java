@@ -135,4 +135,16 @@ public final class Validar {
         queNoNulo(transaccion, "La transacción no puede ser nula");
         quePositivo(transaccion.getMonto(), "El monto debe ser positivo");
     }
+
+    public static void queCorreoUnico(String correo, boolean existeCorreo) {
+        if (existeCorreo) {
+            throw new IllegalArgumentException("El correo electrónico ya está registrado");
+        }
+    }
+
+    public static void queCedulaUnica(String cedula, boolean existeCedula) {
+        if (existeCedula) {
+            throw new IllegalArgumentException("La cédula ya está registrada");
+        }
+    }
 }
