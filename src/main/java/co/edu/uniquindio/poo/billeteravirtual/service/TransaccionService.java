@@ -1,5 +1,6 @@
 package co.edu.uniquindio.poo.billeteravirtual.service;
 
+import co.edu.uniquindio.poo.billeteravirtual.enums.TipoTransaccion;
 import co.edu.uniquindio.poo.billeteravirtual.model.*;
 
 import java.time.LocalDateTime;

@@ -1,6 +1,6 @@
 package co.edu.uniquindio.poo.billeteravirtual.dto;
 
-import co.edu.uniquindio.poo.billeteravirtual.model.TipoCuenta;
+import co.edu.uniquindio.poo.billeteravirtual.enums.TipoCuenta;
 
 public class CuentaDTO {
     private String nombreBanco;

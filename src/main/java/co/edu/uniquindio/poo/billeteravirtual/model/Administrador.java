@@ -1,5 +1,8 @@
 package co.edu.uniquindio.poo.billeteravirtual.model;
 
+import co.edu.uniquindio.poo.billeteravirtual.enums.Permiso;
+import co.edu.uniquindio.poo.billeteravirtual.enums.RolAdministrador;
+
 public class Administrador extends Persona {
     private RolAdministrador rol;
 

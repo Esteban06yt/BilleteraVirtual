@@ -1,5 +1,7 @@
 package co.edu.uniquindio.poo.billeteravirtual.model;
 
+import co.edu.uniquindio.poo.billeteravirtual.enums.TipoCuenta;
+
 public class Cuenta {
     private String idCuenta;
     private String nombreBanco;
