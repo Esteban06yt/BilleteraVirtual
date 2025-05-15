@@ -1,5 +1,7 @@
 package co.edu.uniquindio.poo.billeteravirtual.model;
 
+import co.edu.uniquindio.poo.billeteravirtual.enums.RolAdministrador;
+
 import java.util.ArrayList;
 import java.util.List;
 

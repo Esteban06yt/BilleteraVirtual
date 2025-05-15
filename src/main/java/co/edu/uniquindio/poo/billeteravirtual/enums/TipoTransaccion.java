@@ -1,4 +1,4 @@
-package co.edu.uniquindio.poo.billeteravirtual.model;
+package co.edu.uniquindio.poo.billeteravirtual.enums;
 
 public enum TipoTransaccion {
     DEPOSITO("Depósito"),

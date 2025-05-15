@@ -1,4 +1,4 @@
-package co.edu.uniquindio.poo.billeteravirtual.model;
+package co.edu.uniquindio.poo.billeteravirtual.enums;
 
 import java.util.EnumSet;
 import java.util.Set;
