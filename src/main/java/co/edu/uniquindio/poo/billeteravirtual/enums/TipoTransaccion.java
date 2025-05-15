@@ -5,8 +5,7 @@ public enum TipoTransaccion {
     RETIRO("Retiro"),
     TRANSFERENCIA("Transferencia"),
     PAGO("Pago de servicio"),
-    RECARGA("Recarga"),
-    PRESTAMO("Prestamo");
+    RECARGA("Recarga");
 
     private final String descripcion;
 

@@ -4,22 +4,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Usuario extends Persona{
-    private Double saldo;
+    private Double saldo = getSaldo();
     private String direccion;
-    private List<Cuenta> cuentas;
-    private List<Transaccion> transacciones;
-    private List<Presupuesto> presupuestos;
+    private List<Cuenta> cuentas = new ArrayList<>();
+    private List<Transaccion> transacciones = new ArrayList<>();
+    private List<Presupuesto> presupuestos = new ArrayList<>();
 
     public Usuario(Double saldo, String id, String cedula, String nombreCompleto, String correo, String telefono, String contrasenia, String codigoRecuperacion, Boolean esCuentaActiva, String direccion, List<Cuenta> cuentas, List<Transaccion> transacciones, List<Presupuesto> presupuestos) {
         super(id, cedula, nombreCompleto, correo, telefono, contrasenia, codigoRecuperacion, esCuentaActiva);
 
         Validar.queNoVacio(direccion, "La dirección no puede estar vacía");
 
-        this.saldo = 0.0;
         this.direccion = direccion;
-        this.cuentas = new ArrayList<>();
-        this.transacciones = new ArrayList<>();
-        this.presupuestos = new ArrayList<>();
     }
 
     public String getDireccion() {

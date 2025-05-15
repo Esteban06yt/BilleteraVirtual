@@ -13,7 +13,6 @@ public class Cuenta {
         this.idCuenta = idCuenta;
         this.nombreBanco = nombreBanco;
         this.numeroCuenta = numeroCuenta;
-        this.monto = monto;
         this.tipo = tipo;
     }
 

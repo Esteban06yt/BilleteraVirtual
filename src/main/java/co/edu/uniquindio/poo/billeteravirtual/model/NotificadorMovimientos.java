@@ -3,7 +3,7 @@ package co.edu.uniquindio.poo.billeteravirtual.model;
 import co.edu.uniquindio.poo.billeteravirtual.service.EmailService;
 
 public class NotificadorMovimientos {
-    private EmailService emailService;
+    private final EmailService emailService;
 
     public NotificadorMovimientos(EmailService emailService) {
         this.emailService = emailService;

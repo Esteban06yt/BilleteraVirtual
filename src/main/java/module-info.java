@@ -10,6 +10,8 @@ module co.edu.uniquindio.poo.billeteravirtual {
     requires org.kordamp.bootstrapfx.core;
     requires eu.hansolo.tilesfx;
     requires com.almasb.fxgl.all;
+    requires java.logging;
+    requires java.mail;
 
     opens co.edu.uniquindio.poo.billeteravirtual to javafx.fxml;
     exports co.edu.uniquindio.poo.billeteravirtual;
