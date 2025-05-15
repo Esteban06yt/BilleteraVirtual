@@ -1,25 +1,24 @@
 package co.edu.uniquindio.poo.billeteravirtual.service;
 
-import co.edu.uniquindio.poo.billeteravirtual.model.CodigoGenerador;
 import co.edu.uniquindio.poo.billeteravirtual.model.Persona;
 
 public class RecuperacionContraseniaService {
-    private Persona persona;
+    private final Persona persona;
+    private final EmailService emailService;
 
-    public RecuperacionContraseniaService(Persona persona) {
+    public RecuperacionContraseniaService(Persona persona, EmailService emailService) {
         this.persona = persona;
+        this.emailService = emailService;
     }
 
     public boolean enviarCodigoPorEmail() {
         String asunto = "Código de recuperación - Billetera Virtual";
         String cuerpo = String.format(
-                "Estimado %s,\n\n" +
-                "Su código de recuperación es: %s\n\n" +
-                "Si no solicitó este código, ignore este mensaje.",
+                "Estimado %s,\n\n" + "Su código de recuperación es: %s\n\n" + "Si no solicitó este código, ignore este mensaje.",
                 persona.getNombreCompleto().split(" ")[0], // Primer nombre
                 persona.getCodigoRecuperacion()
         );
-        return EmailService.enviarEmail(this.persona.getCorreo(), asunto, cuerpo);
+        return emailService.enviarEmail(persona.getCorreo(), asunto, cuerpo);
     }
 
     public boolean cambiarContrasenia(String nuevaContrasenia, String codigo) {
@@ -29,9 +28,5 @@ public class RecuperacionContraseniaService {
             return true;
         }
         return false;
-    }
-
-    private boolean validarFortalezaContrasenia(String contrasenia) {
-        return contrasenia.length() >= 8 && contrasenia.matches(".*[A-Z].*") && contrasenia.matches(".*\\d.*");
     }
 }

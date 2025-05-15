@@ -9,8 +9,6 @@ public class Presupuesto {
     public Presupuesto(String idPresupuesto, String nombre, Double montoAsignado, Double montoGastado) {
         this.idPresupuesto = idPresupuesto;
         this.nombre = nombre;
-        this.montoAsignado = montoAsignado;
-        this.montoGastado = montoGastado;
     }
 
     public String getIdPresupuesto() {

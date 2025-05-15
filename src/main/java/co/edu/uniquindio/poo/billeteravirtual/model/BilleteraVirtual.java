@@ -7,12 +7,10 @@ import java.util.List;
 
 public class BilleteraVirtual {
     private static BilleteraVirtual instancia;
-    private List<Persona> personas;
     private List<Usuario> usuarios;
     private List<Administrador> administradores;
 
     private BilleteraVirtual() {
-        this.personas = new ArrayList<>();
         this.usuarios = new ArrayList<>();
         this.administradores = new ArrayList<>();
     }
@@ -22,14 +20,6 @@ public class BilleteraVirtual {
             instancia = new BilleteraVirtual();
         }
         return instancia;
-    }
-
-    public List<Persona> getPersonas() {
-        return personas;
-    }
-
-    public void setPersonas(List<Persona> personas) {
-        this.personas = personas;
     }
 
     public List<Usuario> getUsuarios() {
@@ -129,7 +119,6 @@ public class BilleteraVirtual {
     @Override
     public String toString() {
         return "BilleteraVirtual{" +
-                "personas=" + personas +
                 ", usuarios=" + usuarios +
                 ", administradores=" + administradores +
                 '}';

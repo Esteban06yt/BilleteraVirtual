@@ -11,14 +11,18 @@ public class Transaccion {
     private final String descripcion;
     private final TipoTransaccion tipo;
     private final Categoria categoria;
+    private final Usuario emisor;
+    private final Usuario destinatario;
 
-    public Transaccion(String idTransaccion, LocalDateTime fechaHora, Double monto, String descripcion, TipoTransaccion tipo, Categoria categoria) {
+    public Transaccion(String idTransaccion, LocalDateTime fechaHora, Double monto, String descripcion, TipoTransaccion tipo, Categoria categoria, Usuario emisor, Usuario destinatario) {
         this.idTransaccion = idTransaccion;
         this.fechaHora = fechaHora;
         this.monto = monto;
         this.descripcion = descripcion;
         this.tipo = tipo;
         this.categoria = categoria;
+        this.emisor = emisor;
+        this.destinatario = destinatario;
     }
 
     public String getIdTransaccion() {
@@ -45,6 +49,14 @@ public class Transaccion {
         return categoria;
     }
 
+    public Usuario getEmisor() {
+        return emisor;
+    }
+
+    public Usuario getDestinatario() {
+        return destinatario;
+    }
+
     @Override
     public String toString() {
         return "Transaccion{" +
@@ -54,6 +66,8 @@ public class Transaccion {
                 ", descripcion='" + descripcion + '\'' +
                 ", tipo=" + tipo +
                 ", categoria=" + categoria +
+                ", emisor=" + emisor +
+                ", destinatario=" + destinatario +
                 '}';
     }
 }

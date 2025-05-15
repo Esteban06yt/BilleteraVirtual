@@ -66,6 +66,15 @@ public final class Validar {
         }
     }
 
+    public static void queCorreoDestinatarioValido(String correo, String mensajeError) {
+        queNoVacio(correo, "El correo no puede estar vacío");
+
+        String regex = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$";
+        if (!correo.matches(regex)) {
+            throw new IllegalArgumentException("Formato de correo electrónico inválido");
+        }
+    }
+
     public static void queTelefonoValido(String telefono) {
         queNoVacio(telefono, "El teléfono no puede estar vacío");
 

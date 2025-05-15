@@ -7,8 +7,8 @@ public abstract class Persona {
     protected String correo;
     protected String telefono;
     protected String contrasenia;
-    protected String codigoRecuperacion;
-    protected Boolean esCuentaActiva;
+    protected String codigoRecuperacion = generarCodigoRecuperacion();
+    protected Boolean esCuentaActiva = true;
 
     public Persona(String id, String cedula, String nombreCompleto, String correo, String telefono, String contrasenia, String codigoRecuperacion, Boolean esCuentaActiva) {
         Validar.queNoVacio(id, "El id no puede estar vacío");
@@ -24,8 +24,6 @@ public abstract class Persona {
         this.correo = correo.toLowerCase();
         this.telefono = telefono;
         this.contrasenia = contrasenia;
-        this.codigoRecuperacion = generarCodigoRecuperacion();
-        this.esCuentaActiva = true;
     }
 
     public String getId() {
