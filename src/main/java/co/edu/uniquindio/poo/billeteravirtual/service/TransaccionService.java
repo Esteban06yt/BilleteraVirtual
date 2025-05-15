@@ -1,10 +1,6 @@
 package co.edu.uniquindio.poo.billeteravirtual.service;
 
-import co.edu.uniquindio.poo.billeteravirtual.dto.TransaccionDTO;
-import co.edu.uniquindio.poo.billeteravirtual.model.NotificadorMovimientos;
-import co.edu.uniquindio.poo.billeteravirtual.model.SaldoInsuficiente;
-import co.edu.uniquindio.poo.billeteravirtual.model.TipoTransaccion;
-import co.edu.uniquindio.poo.billeteravirtual.model.Transaccion;
+import co.edu.uniquindio.poo.billeteravirtual.model.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -13,103 +9,100 @@ public class TransaccionService {
     private final TransaccionRepository transaccionRepository;
     private final NotificadorMovimientos notificador;
     private final SaldoService saldoService;
+    private final CategoriaService categoriaService;
 
-    // Inyección de dependencias
-    public TransaccionService(TransaccionRepository transaccionRepository, NotificadorMovimientos notificador, SaldoService saldoService) {
+    public TransaccionService(TransaccionRepository transaccionRepository, NotificadorMovimientos notificador, SaldoService saldoService, CategoriaService categoriaService) {
         this.transaccionRepository = transaccionRepository;
         this.notificador = notificador;
         this.saldoService = saldoService;
+        this.categoriaService = categoriaService;
     }
 
-    // Principio de Responsabilidad Única (SRP)
-    public Transaccion depositar(String cuentaId, double monto, String descripcion) {
+    public Transaccion depositar(String idCuenta, Double monto, String descripcion, String idCategoria) {
         Validar.quePositivo(monto, "El monto debe ser positivo");
+        Validar.queNoVacio(idCuenta, "La cuenta no puede estar vacía");
 
+        Categoria categoria = categoriaService.obtenerCategoria(idCategoria);
         Transaccion transaccion = new Transaccion(
-                TipoTransaccion.DEPOSITO,
-                monto,
+                GeneradorId.generarId("TRX"),
                 LocalDateTime.now(),
+                monto,
                 descripcion,
-                null,
-                cuentaId
+                TipoTransaccion.DEPOSITO,
+                categoria
         );
 
-        saldoService.actualizarSaldo(cuentaId, monto);
+        saldoService.actualizarSaldo(idCuenta, monto);
         transaccionRepository.guardar(transaccion);
-        notificador.notificarDeposito(cuentaId, monto);
+        notificador.notificarDeposito(idCuenta, monto, transaccion);
 
         return transaccion;
     }
 
-    // Principio Abierto/Cerrado (OCP)
-    public Transaccion retirar(String cuentaId, double monto, String descripcion) {
+    public Transaccion retirar(String idCuenta, Double monto, String descripcion, String idCategoria) {
         Validar.quePositivo(monto, "El monto debe ser positivo");
+        Validar.queNoVacio(idCuenta, "La cuenta no puede estar vacía");
 
-        if (!saldoService.haySaldoSuficiente(cuentaId, monto)) {
-            throw new SaldoInsuficiente("Saldo insuficiente para retiro");
+        if (!saldoService.haySaldoSuficiente(idCuenta, monto)) {
+            throw new SaldoInsuficienteException("Saldo insuficiente para retiro");
         }
 
+        Categoria categoria = categoriaService.obtenerCategoria(idCategoria);
         Transaccion transaccion = new Transaccion(
-                TipoTransaccion.RETIRO,
-                monto,
+                GeneradorId.generarId("TRX"),
                 LocalDateTime.now(),
+                monto,
                 descripcion,
-                cuentaId,
-                null
+                TipoTransaccion.RETIRO,
+                categoria
         );
 
-        saldoService.actualizarSaldo(cuentaId, -monto);
+        saldoService.actualizarSaldo(idCuenta, -monto);
         transaccionRepository.guardar(transaccion);
-        notificador.notificarRetiro(cuentaId, monto);
+        notificador.notificarRetiro(idCuenta, monto, transaccion);
 
         return transaccion;
     }
 
-    // Principio de Sustitución de Liskov (LSP)
-    public Transaccion transferir(String cuentaOrigen, String cuentaDestino,
-                                  double monto, String descripcion) {
+    public Transaccion transferir(String cuentaOrigen, String cuentaDestino, Double monto, String descripcion, String idCategoria) {
         Validar.quePositivo(monto, "El monto debe ser positivo");
+        Validar.queNoVacio(cuentaOrigen, "La cuenta origen no puede estar vacía");
+        Validar.queNoVacio(cuentaDestino, "La cuenta destino no puede estar vacía");
 
         if (!saldoService.haySaldoSuficiente(cuentaOrigen, monto)) {
-            throw new SaldoInsuficiente("Saldo insuficiente para transferencia");
+            throw new SaldoInsuficienteException("Saldo insuficiente para transferencia");
         }
 
+        Categoria categoria = categoriaService.obtenerCategoria(idCategoria);
         Transaccion transaccion = new Transaccion(
-                TipoTransaccion.TRANSFERENCIA,
-                monto,
+                GeneradorId.generarId("TRX"),
                 LocalDateTime.now(),
+                monto,
                 descripcion,
-                cuentaOrigen,
-                cuentaDestino
+                TipoTransaccion.TRANSFERENCIA,
+                categoria
         );
 
         saldoService.actualizarSaldo(cuentaOrigen, -monto);
         saldoService.actualizarSaldo(cuentaDestino, monto);
         transaccionRepository.guardar(transaccion);
-        notificador.notificarTransferencia(cuentaOrigen, cuentaDestino, monto);
+        notificador.notificarTransferencia(cuentaOrigen, cuentaDestino, monto, transaccion);
 
         return transaccion;
     }
 
-    // Principio de Segregación de Interfaces (ISP)
-    public List<Transaccion> obtenerHistorial(String cuentaId, LocalDateTime desde, LocalDateTime hasta) {
-        return transaccionRepository.buscarPorCuentaYFecha(cuentaId, desde, hasta);
+    public List<Transaccion> obtenerHistorial(String idCuenta, LocalDateTime desde, LocalDateTime hasta) {
+        Validar.queNoVacio(idCuenta, "La cuenta no puede estar vacía");
+        Validar.queNoNulo(desde, "La fecha desde no puede ser nula");
+        Validar.queNoNulo(hasta, "La fecha hasta no puede ser nula");
+
+        return transaccionRepository.buscarPorCuentaYFecha(idCuenta, desde, hasta);
     }
 
-    // Principio de Inversión de Dependencias (DIP)
-    public interface TransaccionRepository {
-        void guardar(Transaccion transaccion);
-        List<Transaccion> buscarPorCuentaYFecha(String cuentaId, LocalDateTime desde, LocalDateTime hasta);
-    }
+    public List<Transaccion> filtrarPorCategoria(String idCuenta, String idCategoria) {
+        Validar.queNoVacio(idCuenta, "La cuenta no puede estar vacía");
+        Validar.queNoVacio(idCategoria, "La categoría no puede estar vacía");
 
-    public interface NotificadorMovimientos {
-        void notificarDeposito(String cuentaId, double monto);
-        void notificarRetiro(String cuentaId, double monto);
-        void notificarTransferencia(String cuentaOrigen, String cuentaDestino, double monto);
-    }
-
-    public interface SaldoService {
-        void actualizarSaldo(String cuentaId, double monto);
-        boolean haySaldoSuficiente(String cuentaId, double monto);
+        return transaccionRepository.buscarPorCuentaYCategoria(idCuenta, idCategoria);
     }
 }
