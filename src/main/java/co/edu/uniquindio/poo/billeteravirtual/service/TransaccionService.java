@@ -11,7 +11,7 @@ public class TransaccionService {
     private final NotificadorMovimientos notificador;
     private final SaldoService saldoService;
     private final CategoriaService categoriaService;
-    private final BilleteraVirtual usuarioService;
+    private final UsuarioService usuarioService;
 
     public TransaccionService(TransaccionRepository transaccionRepository, NotificadorMovimientos notificador, SaldoService saldoService, CategoriaService categoriaService, UsuarioService usuarioService) {
         this.transaccionRepository = transaccionRepository;
