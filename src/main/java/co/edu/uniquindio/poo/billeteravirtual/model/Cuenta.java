@@ -10,9 +10,9 @@ public class Cuenta {
     private TipoCuenta tipo;
 
     public Cuenta(String idCuenta, String nombreBanco, Integer numeroCuenta, Double monto, TipoCuenta tipo) {
-        this.idCuenta = CodigoGenerador.generarIdCuenta();
+        this.idCuenta = CodigoGenerador.generarId();
         this.nombreBanco = nombreBanco;
-        this.numeroCuenta = numeroCuenta;
+        this.numeroCuenta = CodigoGenerador.generarIdCuenta();
         this.tipo = tipo;
     }
 
