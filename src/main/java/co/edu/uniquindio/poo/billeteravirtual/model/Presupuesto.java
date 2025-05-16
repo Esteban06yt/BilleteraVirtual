@@ -7,8 +7,10 @@ public class Presupuesto {
     private Double montoGastado = 0.0;
 
     public Presupuesto(String idPresupuesto, String nombre, Double montoAsignado, Double montoGastado) {
-        this.idPresupuesto = idPresupuesto;
+        this.idPresupuesto = CodigoGenerador.generarId();
         this.nombre = nombre;
+        this.montoAsignado = montoAsignado;
+        this.montoGastado = 0.0;
     }
 
     public String getIdPresupuesto() {

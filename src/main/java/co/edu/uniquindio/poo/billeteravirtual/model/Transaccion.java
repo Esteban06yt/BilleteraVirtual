@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
 
 public class Transaccion {
     private final String idTransaccion;
-    private final LocalDateTime fechaHora;
+    private LocalDateTime fechaHora;
     private final Double monto;
     private final String descripcion;
     private final TipoTransaccion tipo;
@@ -31,6 +31,10 @@ public class Transaccion {
 
     public LocalDateTime getFechaHora() {
         return fechaHora;
+    }
+
+    public void setFechaHora(LocalDateTime fechaHora) {
+        this.fechaHora = fechaHora;
     }
 
     public Double getMonto() {

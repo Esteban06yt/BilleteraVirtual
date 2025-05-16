@@ -18,12 +18,14 @@ public abstract class Persona {
         Validar.queTelefonoValido(telefono);
         Validar.queContraseniaSegura(contrasenia);
 
-        this.id = id;
+        this.id = CodigoGenerador.generarId();
         this.cedula = cedula;
         this.nombreCompleto = nombreCompleto;
         this.correo = correo.toLowerCase();
         this.telefono = telefono;
         this.contrasenia = contrasenia;
+        this.codigoRecuperacion = generarCodigoRecuperacion();
+        this.esCuentaActiva = true;
     }
 
     public String getId() {

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Usuario extends Persona{
-    private Double saldo = getSaldo();
+    private Double saldo = 0.0;
     private String direccion;
     private List<Cuenta> cuentas = new ArrayList<>();
     private List<Transaccion> transacciones = new ArrayList<>();
@@ -15,6 +15,7 @@ public class Usuario extends Persona{
 
         Validar.queNoVacio(direccion, "La dirección no puede estar vacía");
 
+        this.saldo = 0.0;
         this.direccion = direccion;
     }
 
