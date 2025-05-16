@@ -7,20 +7,30 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GestorTransacciones {
-
     private List<Transaccion> transacciones;
+    private final NotificadorMovimientos notificador;
 
     // Constructor
-    public GestorTransacciones() {
+    public GestorTransacciones(NotificadorMovimientos notificador) {
         this.transacciones = new ArrayList<>();
+        this.notificador = notificador;
     }
 
-    // Metodo para agregar una transacción
-    public void agregarTransaccion(Transaccion transaccion) {
-        // Asignar la fecha y hora actual a la transacción
-        transaccion.setFechaHora(LocalDateTime.now());
+    // Metodo para agregar una transacción usando el Builder
+    public void agregarTransaccion(String idTransaccion, Double monto, String descripcion, TipoTransaccion tipo, Categoria categoria, Usuario emisor, Usuario destinatario) {
+        // Crear la transacción utilizando el Builder
+        Transaccion transaccion = new Transaccion.Builder()
+                .withIdTransaccion(idTransaccion)
+                .withFechaHora(LocalDateTime.now())
+                .withMonto(monto)
+                .withDescripcion(descripcion)
+                .withTipo(tipo)
+                .withCategoria(categoria)
+                .withEmisor(emisor)
+                .withDestinatario(destinatario)
+                .build();
 
-        // Validar que la transacción no sea nula
+        // Validar la transacción
         Validar.queNoNulo(transaccion, "La transacción no puede ser nula");
         Validar.queTransaccionValida(transaccion);
 
@@ -45,26 +55,38 @@ public class GestorTransacciones {
                 // Transferencia: el emisor pierde el dinero y el destinatario lo recibe
                 transaccion.getEmisor().setSaldo(transaccion.getEmisor().getSaldo() - transaccion.getMonto());
                 transaccion.getDestinatario().setSaldo(transaccion.getDestinatario().getSaldo() + transaccion.getMonto());
+                // Notificar la transferencia al emisor
+                notificador.notificarTransferencia(transaccion.getEmisor(), transaccion.getMonto(), transaccion.getDestinatario());
                 break;
 
             case RETIRO:
                 // Retiro: el emisor pierde el dinero
                 transaccion.getEmisor().setSaldo(transaccion.getEmisor().getSaldo() - transaccion.getMonto());
+                // Notificar el retiro al emisor
+                notificador.notificarRetiro(transaccion.getEmisor(), transaccion.getMonto());
                 break;
 
             case DEPOSITO:
-                // Depósito: el emisor (usualmente quien recibe el depósito) gana dinero
+                // Depósito: el emisor (quien recibe el depósito) gana dinero
                 transaccion.getEmisor().setSaldo(transaccion.getEmisor().getSaldo() + transaccion.getMonto());
+                // Notificar el depósito al emisor
+                notificador.notificarDeposito(transaccion.getEmisor(), transaccion.getMonto());
                 break;
 
             case PAGO:
                 // Pago: el emisor paga el servicio, pierde el dinero
                 transaccion.getEmisor().setSaldo(transaccion.getEmisor().getSaldo() - transaccion.getMonto());
+                // Obtener la descripcion como servicio
+                String servicio = transaccion.getDescripcion();
+                // Notificar el pago al emisor
+                notificador.notificarPago(transaccion.getEmisor(), transaccion.getMonto(), servicio);
                 break;
 
             case RECARGA:
-                // Recarga: el emisor (usualmente quien recarga) gana el monto
+                // Recarga: el emisor (quien recarga) gana el monto
                 transaccion.getEmisor().setSaldo(transaccion.getEmisor().getSaldo() + transaccion.getMonto());
+                // Notificar la recarga al emisor
+                notificador.notificarRecarga(transaccion.getEmisor(), transaccion.getMonto());
                 break;
 
             default:
