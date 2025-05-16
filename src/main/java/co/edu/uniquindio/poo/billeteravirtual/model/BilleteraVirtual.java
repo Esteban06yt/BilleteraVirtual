@@ -22,6 +22,14 @@ public class BilleteraVirtual {
         return instancia;
     }
 
+    public static BilleteraVirtual getInstancia() {
+        return instancia;
+    }
+
+    public static void setInstancia(BilleteraVirtual instancia) {
+        BilleteraVirtual.instancia = instancia;
+    }
+
     public List<Usuario> getUsuarios() {
         return usuarios;
     }
@@ -40,10 +48,6 @@ public class BilleteraVirtual {
 
     public void agregarUsuario(Usuario usuario){
         usuarios.add(usuario);
-    }
-
-    public List<Usuario> listarUsuarios(){
-        return usuarios;
     }
 
     public Usuario buscarUsuario(String cedula){
@@ -79,10 +83,6 @@ public class BilleteraVirtual {
 
     public void agregarAdministrador(Administrador administrador){
         administradores.add(administrador);
-    }
-
-    public List<Administrador> listarAdministradores(){
-        return administradores;
     }
 
     public Administrador buscarAdministrador(String cedula){

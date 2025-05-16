@@ -2,7 +2,6 @@ package co.edu.uniquindio.poo.billeteravirtual.repository;
 
 import co.edu.uniquindio.poo.billeteravirtual.model.Transaccion;
 import co.edu.uniquindio.poo.billeteravirtual.model.Validar;
-import co.edu.uniquindio.poo.billeteravirtual.repository.TransaccionRepository;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
