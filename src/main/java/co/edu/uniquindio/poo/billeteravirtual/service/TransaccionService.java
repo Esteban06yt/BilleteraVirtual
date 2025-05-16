@@ -13,23 +13,23 @@ public class TransaccionService {
     private final NotificadorMovimientos notificador;
     private final SaldoService saldoService;
     private final CategoriaService categoriaService;
-    private final UsuarioService usuarioService;
+    private final BilleteraVirtual billeteraVirtual;
 
-    public TransaccionService(TransaccionRepository transaccionRepository, NotificadorMovimientos notificador, SaldoService saldoService, CategoriaService categoriaService, UsuarioService usuarioService) {
+    public TransaccionService(TransaccionRepository transaccionRepository, NotificadorMovimientos notificador, SaldoService saldoService, CategoriaService categoriaService, BilleteraVirtual billeteraVirtual) {
         this.transaccionRepository = transaccionRepository;
         this.notificador = notificador;
         this.saldoService = saldoService;
         this.categoriaService = categoriaService;
-        this.usuarioService = usuarioService;
+        this.billeteraVirtual = billeteraVirtual;
     }
 
-    public Transaccion depositar(String idCuenta, Double monto, String descripcion, String idCategoria, String idUsuario) {
+    public Transaccion depositar(String idCuenta, Double monto, String descripcion, String idCategoria, String cedula) {
         Validar.quePositivo(monto, "El monto debe ser positivo");
         Validar.queNoVacio(idCuenta, "La cuenta no puede estar vacía");
         Validar.queNoVacio(idUsuario, "El ID de usuario no puede estar vacío");
 
         Categoria categoria = categoriaService.obtenerCategoria(idCategoria);
-        Usuario usuario = usuarioService.obtenerUsuario(idUsuario);
+        Usuario usuario = billeteraVirtual.getUsuario(cedula);
 
         Transaccion transaccion = new Transaccion(
                 CodigoGenerador.generarId("DEP"),
@@ -170,7 +170,7 @@ public class TransaccionService {
                 null  // El operador es externo al sistema
         );
 
-        saldoService.actualizarSaldo(idCuenta, -monto);
+        usuario.getSaldo();
         transaccionRepository.guardar(transaccion);
         notificador.notificarRecarga(usuario, monto, operador, transaccion);
 
