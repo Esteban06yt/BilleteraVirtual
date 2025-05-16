@@ -4,11 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GestorCuentas {
-
     private List<Cuenta> cuentas;
+    private NotificadorMovimientos notificador;
 
-    public GestorCuentas() {
+    public GestorCuentas(NotificadorMovimientos notificador) {
         this.cuentas = new ArrayList<>();
+        this.notificador = notificador;
     }
 
     // Metodo para agregar una cuenta al sistema
@@ -92,5 +93,20 @@ public class GestorCuentas {
         Validar.queNoNulo(usuario, "El usuario no puede ser nulo");
 
         return usuario.getCuentas().stream().mapToDouble(Cuenta::getMonto).sum();
+    }
+
+    // Metodo que realiza una transferencia o pago de la cuenta seleccionada
+    public void realizarPago(Usuario usuario, Double monto, String idCuentaSeleccionada, String servicio) {
+        // Buscar la cuenta seleccionada
+        Cuenta cuentaSeleccionada = usuario.getCuentas().stream()
+                .filter(c -> c.getIdCuenta().equals(idCuentaSeleccionada))
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException("Cuenta no encontrada"));
+
+        // Restar dinero de la cuenta seleccionada
+        usuario.restarDeCuenta(monto, cuentaSeleccionada);
+
+        // Realizar la notificación del pago
+        notificador.notificarPago(usuario, monto, servicio);
     }
 }

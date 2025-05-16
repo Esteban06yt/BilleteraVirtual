@@ -28,11 +28,8 @@ public class Usuario extends Persona{
     }
 
     public Double getSaldo() {
-        Double saldo = 0.0;
-        for (Cuenta cuenta : cuentas){
-            saldo += cuenta.getMonto();
-        }
-        return saldo;
+        // Este metodo ahora solo devolverá el saldo de las cuentas, pero no se hará un cálculo sumando todos los saldos.
+        return cuentas.stream().mapToDouble(Cuenta::getMonto).sum();
     }
 
     public void setSaldo(Double saldo) {
@@ -91,5 +88,14 @@ public class Usuario extends Persona{
         this.saldo = this.cuentas.stream()
                 .mapToDouble(Cuenta::getMonto)
                 .sum();
+    }
+
+    public void restarDeCuenta(Double monto, Cuenta cuentaSeleccionada) {
+        // Este metodo se encarga de restar el dinero de la cuenta seleccionada.
+        if (cuentaSeleccionada.getMonto() >= monto) {
+            cuentaSeleccionada.setMonto(cuentaSeleccionada.getMonto() - monto);
+        } else {
+            throw new IllegalArgumentException("No hay suficiente saldo en la cuenta seleccionada.");
+        }
     }
 }
