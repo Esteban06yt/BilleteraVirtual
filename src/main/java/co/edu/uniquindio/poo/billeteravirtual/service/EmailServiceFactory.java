@@ -18,7 +18,6 @@ public class EmailServiceFactory {
         return instance;
     }
 
-    // Para pruebas puedes inyectar un mock
     public static synchronized void setInstance(EmailService mockService) {
         instance = mockService;
     }

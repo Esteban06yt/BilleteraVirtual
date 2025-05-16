@@ -6,7 +6,7 @@ public class Categoria {
     private String descripcion;
 
     public Categoria(String idCategoria, String nombre, String descripcion) {
-        this.idCategoria = idCategoria;
+        this.idCategoria = CodigoGenerador.generarId();
         this.nombre = nombre;
         this.descripcion = descripcion;
     }
