@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane fx:id="ap_crudUsuario" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="781.0" prefWidth="1033.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.poo.billeteravirtual.viewController.crudUsuarioViewController">
+   <children>
+      <SubScene height="355.0" layoutX="22.0" layoutY="401.0" width="989.0">
+         <root>
+            <Region />
+         </root>
+      </SubScene>
+      <SubScene height="355.0" layoutX="14.0" layoutY="14.0" width="989.0">
+        <root>
+          <Region />
+        </root>
+      </SubScene>
+      <!-- Título principal -->
+      <Text id="txt_titulo" fx:id="txt_titulo" fill="#231e7f" layoutX="361.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CRUD USUARIO" textAlignment="CENTER" wrappingWidth="340.0">
+         <font>
+            <Font name="Arial Black" size="33.0" />
+         </font>
+      </Text>
+
+      <!-- Logo -->
+      <ImageView fx:id="img_logo" fitHeight="268.0" fitWidth="268.0" layoutX="750.0" layoutY="436.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Imagen1-removebg-preview.png" />
+         </image>
+      </ImageView>
+
+      <!-- Tabla de Usuarios -->
+      <TableView id="tb_listClientes" fx:id="tb_listClientes" layoutX="57.0" layoutY="442.0" prefHeight="200.0" prefWidth="707.0">
+         <columns>
+            <TableColumn fx:id="tbc_nombre" prefWidth="115.0" text="Nombre" />
+            <TableColumn fx:id="tbc_cedula" prefWidth="115.0" text="Cedula" />
+            <TableColumn fx:id="tbc_telefono" prefWidth="124.0" text="Telefono" />
+            <TableColumn fx:id="tbc_correo" prefWidth="129.0" text="Correo" />
+            <TableColumn prefWidth="105.0" text="Direccion" />
+            <TableColumn prefWidth="117.0" text="Saldo" />
+         </columns>
+      </TableView>
+
+      <!-- Formulario de datos -->
+      <VBox layoutX="57.0" layoutY="124.0" spacing="20.0">
+   <children>
+            <TextField fx:id="txf_nombre" prefHeight="35.0" prefWidth="400.0" promptText="Nombre" />
+            <TextField fx:id="txf_cedula1" prefHeight="35.0" prefWidth="400.0" promptText="Cedula" />
+            <TextField fx:id="txf_direccion" prefHeight="35.0" prefWidth="400.0" promptText="Direccion" />
+   </children>
+      </VBox>
+
+      <!-- Botones de acción (Agregar, Actualizar, Eliminar) -->
+      <HBox layoutX="82.0" layoutY="420.0" spacing="20.0" />
+
+      <!-- Botón Volver -->
+      <Button fx:id="btn_volver" layoutX="57.0" layoutY="659.0" onAction="#onVolver" prefHeight="42.0" prefWidth="160.0" style="-fx-background-color: #27b0da; -fx-border-color: black; -fx-border-width: 2;" text="Volver" textFill="WHITE">
+         <font>
+            <Font name="Arial Black" size="16.0" />
+         </font>
+      </Button>
+      <Button fx:id="btn_eliminar" layoutX="604.0" layoutY="659.0" onAction="#onEliminar" prefHeight="42.0" prefWidth="160.0" style="-fx-background-color: #27b0da; -fx-border-color: black; -fx-border-width: 2;" text="Eliminar" textFill="WHITE">
+         <font>
+            <Font name="Arial Black" size="16.0" />
+         </font>
+      </Button>
+      <Button fx:id="btn_actualizarUsuario" layoutX="57.0" layoutY="301.0" onAction="#onActualizar" prefHeight="42.0" prefWidth="400.0" style="-fx-background-color: #231e7f; -fx-border-color: black; -fx-border-width: 2;" text="Actualizar Usuario" textFill="WHITE">
+         <font>
+            <Font name="Arial Black" size="16.0" />
+         </font>
+      </Button>
+      <Button fx:id="btn_agregarUsuario" layoutX="553.0" layoutY="302.0" onAction="#onAgregar" prefHeight="42.0" prefWidth="400.0" style="-fx-background-color: #231e7f; -fx-border-color: black; -fx-border-width: 2;" text="Agregar Usuario" textFill="WHITE">
+         <font>
+            <Font name="Arial Black" size="16.0" />
+         </font>
+      </Button>
+
+      <!-- Subtítulo -->
+      <Text fx:id="txt_subtitulo" fill="#27b0da" layoutX="45.0" layoutY="105.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gestion usuarios" textAlignment="CENTER" wrappingWidth="211.92919921875">
+         <font>
+            <Font name="Arial" size="24.0" />
+         </font>
+      </Text>
+      <VBox layoutX="553.0" layoutY="124.0" spacing="20.0">
+         <children>
+            <TextField fx:id="txf_telefono1" prefHeight="35.0" prefWidth="400.0" promptText="Telefono" />
+            <TextField fx:id="txf_correo1" prefHeight="35.0" prefWidth="400.0" promptText="Correo" />
+         </children>
+      </VBox>
+
+   </children>
+</AnchorPane>
