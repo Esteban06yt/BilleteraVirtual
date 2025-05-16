@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GestorTransacciones {
-    private List<Transaccion> transacciones;
+    private final List<Transaccion> transacciones;
     private final NotificadorMovimientos notificador;
 
     // Constructor
@@ -17,7 +17,13 @@ public class GestorTransacciones {
     }
 
     // Metodo para agregar una transacción usando el Builder
-    public void agregarTransaccion(String idTransaccion, Double monto, String descripcion, TipoTransaccion tipo, Categoria categoria, Usuario emisor, Usuario destinatario) {
+    public void agregarTransaccion(String idTransaccion, Double monto, String descripcion, TipoTransaccion tipo, Categoria categoria, Usuario emisor, Usuario destinatario, String idCuentaEmisor) {
+        // Buscar la cuenta específica del emisor
+        Cuenta cuentaEmisor = buscarCuentaDeUsuario(emisor, idCuentaEmisor);
+        if (cuentaEmisor == null) {
+            throw new IllegalArgumentException("La cuenta emisora no existe.");
+        }
+
         // Crear la transacción utilizando el Builder
         Transaccion transaccion = new Transaccion.Builder()
                 .withIdTransaccion(idTransaccion)
@@ -40,10 +46,8 @@ public class GestorTransacciones {
         }
 
         // Verificar que el emisor tiene suficiente saldo en caso de transferencias o pagos
-        if (transaccion.getTipo() == TipoTransaccion.TRANSFERENCIA || transaccion.getTipo() == TipoTransaccion.PAGO) {
-            if (transaccion.getEmisor().getSaldo() < transaccion.getMonto()) {
-                throw new IllegalArgumentException("El emisor no tiene suficiente saldo.");
-            }
+        if ((transaccion.getTipo() == TipoTransaccion.TRANSFERENCIA || transaccion.getTipo() == TipoTransaccion.PAGO) && cuentaEmisor.getMonto() < transaccion.getMonto()) {
+            throw new IllegalArgumentException("El emisor no tiene suficiente saldo en la cuenta seleccionada.");
         }
 
         // Agregar la transacción a la lista
@@ -53,29 +57,31 @@ public class GestorTransacciones {
         switch (transaccion.getTipo()) {
             case TRANSFERENCIA:
                 // Transferencia: el emisor pierde el dinero y el destinatario lo recibe
-                transaccion.getEmisor().setSaldo(transaccion.getEmisor().getSaldo() - transaccion.getMonto());
-                transaccion.getDestinatario().setSaldo(transaccion.getDestinatario().getSaldo() + transaccion.getMonto());
+                cuentaEmisor.setMonto(cuentaEmisor.getMonto() - transaccion.getMonto());
+                Cuenta cuentaDestino = buscarCuentaDeUsuario(destinatario, transaccion.getDestinatario().getCuentas().getFirst().getIdCuenta());
+                assert cuentaDestino != null;
+                cuentaDestino.setMonto(cuentaDestino.getMonto() + transaccion.getMonto());
                 // Notificar la transferencia al emisor
                 notificador.notificarTransferencia(transaccion.getEmisor(), transaccion.getMonto(), transaccion.getDestinatario());
                 break;
 
             case RETIRO:
                 // Retiro: el emisor pierde el dinero
-                transaccion.getEmisor().setSaldo(transaccion.getEmisor().getSaldo() - transaccion.getMonto());
+                cuentaEmisor.setMonto(cuentaEmisor.getMonto() - transaccion.getMonto());
                 // Notificar el retiro al emisor
                 notificador.notificarRetiro(transaccion.getEmisor(), transaccion.getMonto());
                 break;
 
             case DEPOSITO:
                 // Depósito: el emisor (quien recibe el depósito) gana dinero
-                transaccion.getEmisor().setSaldo(transaccion.getEmisor().getSaldo() + transaccion.getMonto());
+                cuentaEmisor.setMonto(cuentaEmisor.getMonto() + transaccion.getMonto());
                 // Notificar el depósito al emisor
                 notificador.notificarDeposito(transaccion.getEmisor(), transaccion.getMonto());
                 break;
 
             case PAGO:
                 // Pago: el emisor paga el servicio, pierde el dinero
-                transaccion.getEmisor().setSaldo(transaccion.getEmisor().getSaldo() - transaccion.getMonto());
+                cuentaEmisor.setMonto(cuentaEmisor.getMonto() - transaccion.getMonto());
                 // Obtener la descripcion como servicio
                 String servicio = transaccion.getDescripcion();
                 // Notificar el pago al emisor
@@ -84,7 +90,7 @@ public class GestorTransacciones {
 
             case RECARGA:
                 // Recarga: el emisor (quien recarga) gana el monto
-                transaccion.getEmisor().setSaldo(transaccion.getEmisor().getSaldo() + transaccion.getMonto());
+                cuentaEmisor.setMonto(cuentaEmisor.getMonto() + transaccion.getMonto());
                 // Notificar la recarga al emisor
                 notificador.notificarRecarga(transaccion.getEmisor(), transaccion.getMonto());
                 break;
@@ -92,6 +98,15 @@ public class GestorTransacciones {
             default:
                 throw new IllegalArgumentException("Tipo de transacción desconocido.");
         }
+    }
+
+    private Cuenta buscarCuentaDeUsuario(Usuario usuario, String idCuenta) {
+        for (Cuenta cuenta : usuario.getCuentas()) {
+            if (cuenta.getIdCuenta().equals(idCuenta)) {
+                return cuenta;
+            }
+        }
+        return null;
     }
 
     // Metodo para eliminar una transacción por ID
