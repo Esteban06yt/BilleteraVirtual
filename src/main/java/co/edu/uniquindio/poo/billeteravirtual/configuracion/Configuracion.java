@@ -14,7 +14,7 @@ public class Configuracion {
         }
     }
 
-    // Métodos para acceder a las propiedades
+    // Metodos para acceder a las propiedades
     public static String getSmtpHost() {
         return props.getProperty("mail.smtp.host");
     }
