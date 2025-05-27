@@ -1,5 +1,6 @@
 package co.edu.uniquindio.poo.billeteravirtual.viewController;
 
+import co.edu.uniquindio.poo.billeteravirtual.App;
 import co.edu.uniquindio.poo.billeteravirtual.controller.AdministradorController;
 import co.edu.uniquindio.poo.billeteravirtual.model.Administrador;
 import co.edu.uniquindio.poo.billeteravirtual.enums.RolAdministrador;
@@ -107,7 +108,10 @@ public class AdministradorViewController {
 
         }
 
-//                @FXML
-//                void 231e7f(ActionEvent event) {
+        App app;
+
+        public void setApp(App app) {
+                this.app = app;
+        }
 
 }
