@@ -62,7 +62,7 @@ public class GestorAdministradores {
     }
 
     /**
-     * Autentica un administrador por correo y contraseña.
+     * Auténtica un administrador por correo y contraseña.
      * @return el Administrador si las credenciales son válidas, o null en caso contrario.
      */
     public Administrador autenticarAdministrador(String correo, String contrasenia) {

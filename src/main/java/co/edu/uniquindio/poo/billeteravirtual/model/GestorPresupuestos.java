@@ -39,15 +39,16 @@ public class GestorPresupuestos {
     /**
      * Elimina un presupuesto de un usuario según su ID.
      */
-    public void eliminarPresupuestoDeUsuario(Usuario usuario, String idPresupuesto) {
-        Validar.queNoNulo(usuario, "El usuario no puede ser nulo");
+    // Metodo para eliminar un presupuesto de un usuario por ID (retorna boolean)
+    public boolean eliminarPresupuestoDeUsuario(Usuario usuario, String idPresupuesto) {
         Validar.queNoVacio(idPresupuesto, "El ID del presupuesto no puede estar vacío");
+        Validar.queNoNulo(usuario, "El usuario no puede ser nulo");
 
         Optional<Presupuesto> presupuesto = buscarPresupuestoPorIdYUsuario(usuario, idPresupuesto);
-        if (presupuesto.isPresent()) {
-            usuario.getPresupuestos().remove(presupuesto.get());
+        if (presupuesto != null) {
+            return usuario.getPresupuestos().remove(presupuesto);
         } else {
-            throw new IllegalArgumentException("No se encontró un presupuesto con ese ID para este usuario.");
+            return false; // No se encontró el presupuesto
         }
     }
 
