@@ -24,8 +24,7 @@ public class SistemaBilleteraFacade {
         return sistema.getGestorUsuarios().getUsuarios();
     }
 
-    public boolean actualizarUsuario(String cedula, String nombre, String correo,
-                                     String telefono, String contrasenia, String direccion) {
+    public boolean actualizarUsuario(String cedula, String nombre, String correo, String telefono, String contrasenia, String direccion) {
         return sistema.getGestorUsuarios()
                 .actualizarUsuario(cedula, nombre, correo, telefono, contrasenia, direccion);
     }
@@ -49,10 +48,8 @@ public class SistemaBilleteraFacade {
         return sistema.getGestorAdministradores().getAdministradores();
     }
 
-    public boolean actualizarAdministrador(String cedula, String nombre, String correo,
-                                           String telefono, String contrasenia, RolAdministrador rol) {
-        return sistema.getGestorAdministradores()
-                .actualizarAdministrador(cedula, nombre, correo, telefono, contrasenia, rol);
+    public boolean actualizarAdministrador(String cedula, String nombre, String correo, String telefono, String contrasenia, RolAdministrador rol) {
+        return sistema.getGestorAdministradores().actualizarAdministrador(cedula, nombre, correo, telefono, contrasenia, rol);
     }
 
     public boolean eliminarAdministrador(String cedula) {
@@ -93,9 +90,7 @@ public class SistemaBilleteraFacade {
     // -------------------------
     // Transacciones
     // -------------------------
-    public void agregarTransaccion(String idTransaccion, Double monto, String descripcion,
-                                   TipoTransaccion tipo, Categoria categoria,
-                                   Usuario emisor, Usuario destinatario, String idCuentaEmisor) {
+    public void agregarTransaccion(String idTransaccion, Double monto, String descripcion, TipoTransaccion tipo, Categoria categoria, Usuario emisor, Usuario destinatario, String idCuentaEmisor) {
         sistema.getGestorTransacciones()
                 .agregarTransaccion(idTransaccion, monto, descripcion, tipo,
                         categoria, emisor, destinatario, idCuentaEmisor);
@@ -125,21 +120,25 @@ public class SistemaBilleteraFacade {
     // -------------------------
     // Presupuestos
     // -------------------------
-    public void agregarPresupuesto(Presupuesto presupuesto) {
-        sistema.getGestorPresupuestos().agregarPresupuestoAUsuario(presupuesto);
+
+    public void agregarPresupuesto(Presupuesto presupuesto, Usuario usuarioActual) {
+        Validar.queNoNulo(usuarioActual, "No hay un usuario activo");
+        sistema.getGestorPresupuestos().agregarPresupuestoAUsuario(usuarioActual, presupuesto);
     }
 
-    public boolean eliminarPresupuesto(String idPresupuesto) {
+    public boolean eliminarPresupuesto(String idPresupuesto, Usuario usuarioActual) {
+        Validar.queNoNulo(usuarioActual, "No hay un usuario activo");
         try {
-            sistema.getGestorPresupuestos().eliminarPresupuestoDeUsuario(idPresupuesto);
+            sistema.getGestorPresupuestos().eliminarPresupuestoDeUsuario(usuarioActual, idPresupuesto);
             return true;
         } catch (IllegalArgumentException e) {
             return false;
         }
     }
 
-    public List<Presupuesto> listarPresupuestos() {
-        return sistema.getGestorPresupuestos().listarPresupuestos();
+    public List<Presupuesto> listarPresupuestos(Usuario usuarioActual) {
+        Validar.queNoNulo(usuarioActual, "No hay un usuario activo");
+        return sistema.getGestorPresupuestos().obtenerPresupuestosDeUsuario(usuarioActual);
     }
 
     // -------------------------
