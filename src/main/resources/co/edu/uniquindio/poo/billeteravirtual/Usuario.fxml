@@ -78,7 +78,7 @@
             <TableColumn fx:id="tbc_destinatarioTransaccion" prefWidth="134.0" text="Destinatario" />
          </columns>
       </TableView>
-      <TableView id="tb_listaUsuarios" fx:id="tb_usuario" layoutX="58.0" layoutY="77.0" prefHeight="57.0" prefWidth="757.0">
+      <TableView id="tb_usuario" fx:id="tb_usuario" layoutX="58.0" layoutY="77.0" prefHeight="57.0" prefWidth="757.0">
          <columns>
             <TableColumn fx:id="tbc_nombreUsuario" prefWidth="115.0" text="Nombre" />
             <TableColumn fx:id="tbc_cedulaUsuario" prefWidth="115.0" text="Cedula" />

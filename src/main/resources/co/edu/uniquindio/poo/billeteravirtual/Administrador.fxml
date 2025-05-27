@@ -47,7 +47,7 @@
             </font>
         </Button>
         <VBox layoutX="553.0" layoutY="124.0" spacing="20.0" />
-        <TableView id="tb_listaUsuarios" fx:id="tb_usuario" layoutX="58.0" layoutY="77.0" prefHeight="57.0" prefWidth="757.0">
+        <TableView id="tb_administrador" fx:id="tb_administrador" layoutX="58.0" layoutY="77.0" prefHeight="57.0" prefWidth="757.0">
             <columns>
                 <TableColumn fx:id="tbc_nombre" prefWidth="168.0" text="Nombre" />
                 <TableColumn fx:id="tbc_cedula" prefWidth="139.0" text="Cedula" />

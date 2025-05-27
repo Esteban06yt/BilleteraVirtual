@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane fx:id="ap_modificarPerfil" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="390.0" prefWidth="1033.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.poo.billeteravirtual.controller.ModificarPerfilAdministradorController">
+    <children>
+        <SubScene height="355.0" layoutX="14.0" layoutY="14.0" width="989.0">
+            <root>
+                <Region />
+            </root>
+        </SubScene>
+        <!-- Título principal -->
+        <Text id="txt_titulo" fx:id="txt_titulo" fill="#231e7f" layoutX="323.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" text="MODIFICAR PERFIL" textAlignment="CENTER" wrappingWidth="371.0">
+            <font>
+                <Font name="Arial Black" size="33.0" />
+            </font>
+        </Text>
+
+        <!-- Logo -->
+        <ImageView fx:id="img_logo" fitHeight="135.0" fitWidth="160.0" layoutX="837.0" layoutY="262.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@Imagen1-removebg-preview.png" />
+            </image>
+        </ImageView>
+
+        <!-- Formulario de datos -->
+        <VBox layoutX="57.0" layoutY="124.0" spacing="20.0">
+            <children>
+                <TextField fx:id="txf_nombre" prefHeight="35.0" prefWidth="400.0" promptText="Nombre" />
+                <TextField fx:id="txf_cedula" prefHeight="35.0" prefWidth="400.0" promptText="Cedula" />
+            </children>
+        </VBox>
+
+        <!-- Botones de acción (Agregar, Actualizar, Eliminar) -->
+        <HBox layoutX="82.0" layoutY="420.0" spacing="20.0" />
+
+        <!-- Botón Volver -->
+        <Button fx:id="btn_volver" layoutX="553.0" layoutY="301.0" onAction="#onVolver" prefHeight="42.0" prefWidth="160.0" style="-fx-background-color: #27b0da; -fx-border-color: black; -fx-border-width: 2;" text="Volver" textFill="WHITE">
+            <font>
+                <Font name="Arial Black" size="16.0" />
+            </font>
+        </Button>
+        <Button fx:id="btn_actualizarAdministrador" layoutX="57.0" layoutY="301.0" onAction="#onActualizarAdministrador" prefHeight="42.0" prefWidth="400.0" style="-fx-background-color: #231e7f; -fx-border-color: black; -fx-border-width: 2;" text="Actualizar Perfil" textFill="WHITE">
+            <font>
+                <Font name="Arial Black" size="16.0" />
+            </font>
+        </Button>
+
+        <!-- Subtítulo -->
+        <Text fx:id="txt_subtitulo" fill="#27b0da" layoutX="45.0" layoutY="105.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Modificar Perfil" textAlignment="CENTER" wrappingWidth="211.92919921875">
+            <font>
+                <Font name="Arial" size="24.0" />
+            </font>
+        </Text>
+        <VBox layoutX="553.0" layoutY="124.0" spacing="20.0">
+            <children>
+                <TextField fx:id="txf_telefono" prefHeight="35.0" prefWidth="400.0" promptText="Telefono" />
+                <TextField fx:id="txf_correo" prefHeight="35.0" prefWidth="400.0" promptText="Correo" />
+                <TextField fx:id="txf_contrasenia" prefHeight="35.0" prefWidth="400.0" promptText="Contraseña" />
+            </children>
+        </VBox>
+
+    </children>
+</AnchorPane>
