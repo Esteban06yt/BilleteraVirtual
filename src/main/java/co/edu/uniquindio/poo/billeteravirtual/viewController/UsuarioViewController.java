@@ -1,5 +1,6 @@
 package co.edu.uniquindio.poo.billeteravirtual.viewController;
 
+import co.edu.uniquindio.poo.billeteravirtual.App;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -140,29 +141,9 @@ public class UsuarioViewController {
         @FXML
         private TableColumn<?, ?> tbc_descripcionTransaccion;
 
-//        @FXML
-//        void 231e7f(
-//        ActionEvent event) {
-//
-//        }
-//        @FXML
-//        void 231e7f(ActionEvent event) {
-//
-//        }
-//
-//        @FXML
-//        void 231e7f(ActionEvent event) {
-//
-//        }
-//
-//        @FXML
-//        void 231e7f(ActionEvent event) {
-//
-//        }
-
         @FXML
         void onVolver(ActionEvent event) {
-
+                app.openLoginUsuario();
         }
 
         @FXML
@@ -172,17 +153,17 @@ public class UsuarioViewController {
 
         @FXML
         void onModificarPerfil(ActionEvent event) {
-
+                app.openModificarPerfil();
         }
 
         @FXML
         void onRealizarTransaccion(ActionEvent event) {
-
+                app.openTransaccion();
         }
 
         @FXML
         void onCrudPresupuestos(ActionEvent event) {
-
+                app.openPresupuesto();
         }
 
         @FXML
@@ -200,6 +181,12 @@ public class UsuarioViewController {
         @FXML
         void onGenerarReporte(ActionEvent event) {
 
+        }
+
+        App app;
+
+        public void setApp(App app) {
+                this.app = app;
         }
 
 }

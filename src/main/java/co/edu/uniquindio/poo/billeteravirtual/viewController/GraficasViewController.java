@@ -1,8 +1,10 @@
 package co.edu.uniquindio.poo.billeteravirtual.viewController;
 
+import co.edu.uniquindio.poo.billeteravirtual.App;
 import co.edu.uniquindio.poo.billeteravirtual.model.Categoria;
 import co.edu.uniquindio.poo.billeteravirtual.model.GestorEstadisticas;
 import co.edu.uniquindio.poo.billeteravirtual.model.Usuario;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.ComboBox;
@@ -21,9 +23,6 @@ public class GraficasViewController {
 
     @FXML private PieChart gastosChart;
     @FXML private ComboBox<Usuario> usuarioCombo;
-
-    private GestorEstadisticas gestorEstadisticas;
-
     public void initialize() {
         // Aquí deberías inyectar/obtener la instancia de GestorEstadisticas
         // gestorEstadisticas = ...
@@ -40,70 +39,67 @@ public class GraficasViewController {
         });
     }
 
-        @FXML
-        private NumberAxis y_numeroGastos;
+    private GestorEstadisticas gestorEstadisticas;
+    @FXML
+    private NumberAxis y_numeroGastos;
 
-        @FXML
-        private StackedBarChart<?, ?> stacked_gastosMasComunes;
+    @FXML
+    private StackedBarChart<?, ?> stacked_gastosMasComunes;
 
-        @FXML
-        private LineChart<?, ?> line_saldoPromedio;
+    @FXML
+    private LineChart<?, ?> line_saldoPromedio;
 
-        @FXML
-        private Button btn_volver;
+    @FXML
+    private Button btn_volver;
 
-        @FXML
-        private Text txt_subtitulo;
+    @FXML
+    private Text txt_subtitulo;
 
-        @FXML
-        private NumberAxis y_numeroTransacciones;
+    @FXML
+    private NumberAxis y_numeroTransacciones;
 
-        @FXML
-        private Text txt_titulo;
+    @FXML
+    private Text txt_titulo;
 
-        @FXML
-        private AnchorPane ap_graficas;
+    @FXML
+    private AnchorPane ap_graficas;
 
-        @FXML
-        private CategoryAxis x_usarios;
+    @FXML
+    private CategoryAxis x_usarios;
 
-        @FXML
-        private NumberAxis y_saldo;
+    @FXML
+    private NumberAxis y_saldo;
 
-        @FXML
-        private ImageView img_logo;
+    @FXML
+    private ImageView img_logo;
 
-        @FXML
-        private CategoryAxis x_tipoGasto;
+    @FXML
+    private CategoryAxis x_tipoGasto;
 
-        @FXML
-        private CategoryAxis x_usuarioTransacciones;
+    @FXML
+    private CategoryAxis x_usuarioTransacciones;
 
-        @FXML
-        private Button btn_actualizar;
+    @FXML
+    private Button btn_actualizar;
 
-        @FXML
-        private StackedBarChart<?, ?> stacked_usuarioMasTransacciones;
+    @FXML
+    private StackedBarChart<?, ?> stacked_usuarioMasTransacciones;
 
-//        @FXML
-//        void 231e7f(ActionEvent event) {
-//
-//        }
-//        @FXML
-//        void onActualizar(ActionEvent event) {
-//
-//        }
-//
-//        @FXML
-//        void 231e7f(ActionEvent event) {
-//
-//        }
-//
-//        @FXML
-//        void onVolver(ActionEvent event) {
-//
-//        }
+    @FXML
+    void onActualizar(ActionEvent event) {
+
+    }
+
+    @FXML
+    void onVolver(ActionEvent event) {
+        app.openAdministrador();
+    }
 
 
+    App app;
+
+    public void setApp(App app) {
+        this.app = app;
+    }
 
 }

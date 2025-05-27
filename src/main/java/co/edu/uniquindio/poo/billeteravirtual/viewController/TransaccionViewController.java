@@ -1,5 +1,6 @@
 package co.edu.uniquindio.poo.billeteravirtual.viewController;
 
+import co.edu.uniquindio.poo.billeteravirtual.App;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -38,12 +39,12 @@ public class TransaccionViewController {
 
     @FXML
     void onVolver(ActionEvent event) {
-
+        app.openUsuario();
     }
 
-//    @FXML
-//    void 231e7f(ActionEvent event) {
-//
-//    }
+    App app;
 
+    public void setApp(App app) {
+        this.app = app;
+    }
 }

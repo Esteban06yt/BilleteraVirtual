@@ -1,5 +1,6 @@
 package co.edu.uniquindio.poo.billeteravirtual.viewController;
 
+import co.edu.uniquindio.poo.billeteravirtual.App;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -65,24 +66,9 @@ public class TransferenciaViewController {
     @FXML
     private Text txt_subtitulo1;
 
-//    @FXML
-//    void 231e7f(ActionEvent event) {
-//
-//    }
-//
-//    @FXML
-//    void 27b0da(ActionEvent event) {
-//
-//    }
-//
-//    @FXML
-//    void 27b0da(ActionEvent event) {
-//
-//    }
-
     @FXML
     void onVolver(ActionEvent event) {
-
+        app.openTransaccion();
     }
 
     @FXML
@@ -93,6 +79,12 @@ public class TransferenciaViewController {
     @FXML
     void onActualizar(ActionEvent event) {
 
+    }
+
+    App app;
+
+    public void setApp(App app) {
+        this.app = app;
     }
 
 
