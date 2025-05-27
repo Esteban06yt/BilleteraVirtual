@@ -1,15 +1,15 @@
 package co.edu.uniquindio.poo.billeteravirtual.model;
 
-public class Session {
-    private static Session instancia;
+public class UsuarioSession {
+    private static UsuarioSession instancia;
     private Usuario usuario;
 
-    public static Session getINSTANCIA() {
+    public static UsuarioSession getINSTANCIA() {
         return instancia;
     }
 
-    public static void setINSTANCIA(Session instancia) {
-        Session.instancia = instancia;
+    public static void setINSTANCIA(UsuarioSession instancia) {
+        UsuarioSession.instancia = instancia;
     }
 
     public Usuario getUsuario() {
@@ -20,12 +20,12 @@ public class Session {
         this.usuario = usuario;
     }
 
-    private Session() {
+    private UsuarioSession() {
     }
 
-    public static Session getInstancia() {
+    public static UsuarioSession getInstancia() {
         if (instancia == null) {
-            instancia = new Session();
+            instancia = new UsuarioSession();
         }
         return instancia;
     }

@@ -102,16 +102,4 @@ public class GestorPresupuestos {
 
         return usuario.getPresupuestos().stream().mapToDouble(Presupuesto::calcularDisponible).sum();
     }
-
-    // Metodo para agregar un usuario al gestor
-    public void agregarUsuario(Usuario usuario) {
-        Validar.queNoNulo(usuario, "El usuario no puede ser nulo");
-
-        // Verificar si el usuario ya está registrado
-        if (usuarios.contains(usuario)) {
-            throw new IllegalArgumentException("Este usuario ya está registrado.");
-        }
-
-        usuarios.add(usuario);
-    }
 }
