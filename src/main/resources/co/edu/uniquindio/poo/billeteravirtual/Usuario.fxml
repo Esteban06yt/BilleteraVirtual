@@ -41,12 +41,12 @@
         <HBox layoutX="82.0" layoutY="420.0" spacing="20.0" />
 
         <!-- Botón Volver -->
-        <Button fx:id="btn_volver" layoutX="410.0" layoutY="245.0" onAction="#onVolver" prefHeight="42.0" prefWidth="160.0" style="-fx-background-color: #27b0da; -fx-border-color: black; -fx-border-width: 2;" text="Volver" textFill="WHITE">
+        <Button fx:id="btn_volver" layoutX="580.0" layoutY="245.0" onAction="#onVolver" prefHeight="42.0" prefWidth="160.0" style="-fx-background-color: #231e7f; -fx-border-color: black; -fx-border-width: 2;" text="Volver" textFill="WHITE">
             <font>
                 <Font name="Arial Black" size="16.0" />
             </font>
         </Button>
-        <Button fx:id="btn_actualizar" layoutX="239.0" layoutY="245.0" onAction="#onActualizar" prefHeight="42.0" prefWidth="160.0" style="-fx-background-color: #231e7f; -fx-border-color: black; -fx-border-width: 2;" text="Actualizar" textFill="WHITE">
+        <Button fx:id="btn_actualizar" layoutX="412.0" layoutY="245.0" onAction="#onActualizar" prefHeight="42.0" prefWidth="160.0" style="-fx-background-color: #27b0da; -fx-border-color: black; -fx-border-width: 2;" text="Actualizar" textFill="WHITE">
             <font>
                 <Font name="Arial Black" size="16.0" />
             </font>
@@ -137,6 +137,11 @@
             <Font name="Arial" size="24.0" />
          </font>
       </Text>
+      <Button fx:id="btn_generarReporte" layoutX="232.0" layoutY="245.0" onAction="#onGenerarReporte" prefHeight="42.0" prefWidth="172.0" style="-fx-background-color: #231e7f; -fx-border-color: black; -fx-border-width: 2;" text="Generar Reporte" textFill="WHITE">
+         <font>
+            <Font name="Arial Black" size="16.0" />
+         </font>
+      </Button>
 
     </children>
 </AnchorPane>

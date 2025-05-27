@@ -79,7 +79,7 @@
                 <Font name="Arial Black" size="16.0" />
             </font>
         </Button>
-      <Button fx:id="btn_verCuentas" layoutX="331.0" layoutY="659.0" onAction="#onVerCuentas" prefHeight="42.0" prefWidth="160.0" style="-fx-background-color: #27b0da; -fx-border-color: black; -fx-border-width: 2;" text="Ver cuentas" textFill="WHITE">
+      <Button fx:id="btn_verCuentas" layoutX="235.0" layoutY="659.0" onAction="#onVerCuentas" prefHeight="42.0" prefWidth="160.0" style="-fx-background-color: #27b0da; -fx-border-color: black; -fx-border-width: 2;" text="Ver cuentas" textFill="WHITE">
          <font>
             <Font name="Arial Black" size="16.0" />
          </font>
@@ -98,6 +98,11 @@
             <TextField fx:id="txf_contrasenia" prefHeight="35.0" prefWidth="400.0" promptText="Contraseña" />
             </children>
         </VBox>
+      <Button fx:id="btn_agregarCuenta" layoutX="411.0" layoutY="659.0" onAction="#onAgregarCuenta" prefHeight="42.0" prefWidth="173.0" style="-fx-background-color: #27b0da; -fx-border-color: black; -fx-border-width: 2;" text="Agregar Cuenta" textFill="WHITE">
+         <font>
+            <Font name="Arial Black" size="16.0" />
+         </font>
+      </Button>
 
     </children>
 </AnchorPane>
