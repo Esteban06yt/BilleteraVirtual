@@ -6,26 +6,64 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
+import javafx.fxml.FXML;
 
 public class ModificarPerfilViewController {
-    public AnchorPane ap_modificarPerfil;
-    public Text txt_titulo;
-    public Text txt_subtitulo;
-    public ImageView img_logo;
-    public TextField txf_nombre;
-    public TextField txf_cedula;
-    public TextField txf_direccion;
-    public TextField txf_telefono;
-    public TextField txf_correo;
-    public TextField txf_contrasenia;
-    public Button btn_volver;
-    public Button btn_actualizarUsuario;
 
-    public void onVolver(ActionEvent actionEvent) {
+        @FXML
+        private TextField txf_nombre;
 
-    }
+        @FXML
+        private TextField txf_telefono;
 
-    public void onActualizarUsuario(ActionEvent actionEvent) {
+        @FXML
+        private ImageView img_logo;
 
-    }
+        @FXML
+        private TextField txf_cedula;
+
+        @FXML
+        private AnchorPane ap_modificarPerfil;
+
+        @FXML
+        private TextField txf_correo;
+
+        @FXML
+        private Button btn_volver;
+
+        @FXML
+        private Button btn_actualizarUsuario;
+
+        @FXML
+        private Text txt_subtitulo;
+
+        @FXML
+        private Text txt_titulo;
+
+        @FXML
+        private TextField txf_contrasenia;
+
+        @FXML
+        private TextField txf_direccion;
+
+        @FXML
+        void 231e7f(ActionEvent event) {
+
+        }
+
+        @FXML
+        void onVolver(ActionEvent event) {
+
+        }
+
+        @FXML
+        void onActualizarUsuario(ActionEvent event) {
+
+        }
+
+        @FXML
+        void 27b0da(ActionEvent event) {
+
+        }
+
 }

@@ -5,28 +5,63 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
+import javafx.fxml.FXML;
 
 public class RecuperacionContraseniaViewController {
 
-    public AnchorPane ap_recuperacionContrasenia;
-    public Button btn_volver;
-    public Button btn_cambiarContrasenia;
-    public Button btn_enviarCodigo;
-    public Text txt_iniciarSesion;
-    public Text txt_usuario;
-    public TextField txf_correo;
-    public TextField txf_codigo;
-    public TextField txf_contrasenia;
 
-    public void onVolver(ActionEvent actionEvent) {
 
-    }
+        @FXML
+        private AnchorPane ap_recuperacionContrasenia;
 
-    public void onCambiarContrasenia(ActionEvent actionEvent) {
+        @FXML
+        private TextField txf_correo;
 
-    }
+        @FXML
+        private Button btn_enviarCodigo;
 
-    public void onEnviarCodigo(ActionEvent actionEvent) {
+        @FXML
+        private Button btn_volver;
 
-    }
+        @FXML
+        private TextField txf_codigo;
+
+        @FXML
+        private Text txt_iniciarSesion;
+
+        @FXML
+        private Text txt_usuario;
+
+        @FXML
+        private TextField txf_contrasenia;
+
+        @FXML
+        private Button btn_cambiarContrasenia;
+
+        @FXML
+        void onVolver(ActionEvent event) {
+
+        }
+
+        @FXML
+        void onCambiarContrasenia(ActionEvent event) {
+
+        }
+
+        @FXML
+        void 231e7f(ActionEvent event) {
+
+        }
+
+        @FXML
+        void 27b0da(ActionEvent event) {
+
+        }
+
+        @FXML
+        void onEnviarCodigo(ActionEvent event) {
+
+        }
+
+
 }

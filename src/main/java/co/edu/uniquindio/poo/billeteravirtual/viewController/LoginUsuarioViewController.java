@@ -5,32 +5,65 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
+import javafx.fxml.FXML;
 
 public class LoginUsuarioViewController {
 
-    public AnchorPane ap_loginUsuario;
-    public Button btn_ingresar;
-    public Button btn_crearCuenta;
-    public Button btn_volver;
-    public Button btn_olvideContrasenia;
-    public Text txt_iniciarSesion;
-    public Text txt_usuario;
-    public TextField txf_correo;
-    public TextField txf_contrasenia;
+        @FXML
+        private Button btn_olvideContrasenia;
 
-    public void onIngresar(ActionEvent actionEvent) {
+        @FXML
+        private Button btn_crearCuenta;
 
-    }
+        @FXML
+        private AnchorPane ap_loginUsuario;
 
-    public void onCrearCuenta(ActionEvent actionEvent) {
+        @FXML
+        private TextField txf_correo;
 
-    }
+        @FXML
+        private Button btn_volver;
 
-    public void onVolver(ActionEvent actionEvent) {
+        @FXML
+        private Text txt_iniciarSesion;
 
-    }
+        @FXML
+        private Button btn_ingresar;
 
-    public void onOlvideContrasenia(ActionEvent actionEvent) {
+        @FXML
+        private TextField txf_contrasenia;
 
-    }
+        @FXML
+        private Text txt_usuario;
+
+        @FXML
+        void onIngresar(ActionEvent event) {
+
+        }
+
+        @FXML
+        void onCrearCuenta(ActionEvent event) {
+
+        }
+
+        @FXML
+        void onVolver(ActionEvent event) {
+
+        }
+
+        @FXML
+        void onOlvideContrasenia(ActionEvent event) {
+
+        }
+
+        @FXML
+        void 231e7f(ActionEvent event) {
+
+        }
+
+        @FXML
+        void 27b0da(ActionEvent event) {
+
+        }
+
 }

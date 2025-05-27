@@ -8,38 +8,83 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
+import javafx.fxml.FXML;
 
 public class PresupuestoViewController {
 
-    public AnchorPane ap_presupuesto;
-    public ImageView img_logo;
-    public Text txt_titulo;
-    public Text txt_subtitulo;
-    public TextField txf_nombre;
-    public TextField txf_montoAsignado;
-    public TableView tb_listaPresupuestos;
-    public TableColumn tbc_nombre;
-    public TableColumn tbc_montoAsignado;
-    public TableColumn tbc_montoGastado;
-    public TableColumn tbc_montoRestante;
-    public Button btn_volver;
-    public Button btn_eliminarPresupuesto;
-    public Button btn_actualizar;
-    public Button btn_agregarPresupuesto;
+        @FXML
+        private TextField txf_nombre;
 
-    public void onVolver(ActionEvent actionEvent) {
+        @FXML
+        private Button btn_agregarPresupuesto;
 
-    }
+        @FXML
+        private Button btn_volver;
 
-    public void onEliminarPresupuesto(ActionEvent actionEvent) {
+        @FXML
+        private AnchorPane ap_presupuesto;
 
-    }
+        @FXML
+        private Text txt_subtitulo;
 
-    public void onActualizar(ActionEvent actionEvent) {
+        @FXML
+        private Text txt_titulo;
 
-    }
+        @FXML
+        private TableColumn<?, ?> tbc_montoRestante;
 
-    public void onAgregarPresupuesto(ActionEvent actionEvent) {
+        @FXML
+        private TableColumn<?, ?> tbc_montoAsignado;
 
-    }
+        @FXML
+        private Button btn_eliminarPresupuesto;
+
+        @FXML
+        private TableColumn<?, ?> tbc_nombre;
+
+        @FXML
+        private TableColumn<?, ?> tbc_montoGastado;
+
+        @FXML
+        private ImageView img_logo;
+
+        @FXML
+        private TableView<?> tb_listaPresupuestos;
+
+        @FXML
+        private TextField txf_montoAsignado;
+
+        @FXML
+        private Button btn_actualizar;
+
+        @FXML
+        void 231e7f(ActionEvent event) {
+
+        }
+
+        @FXML
+        void onVolver(ActionEvent event) {
+
+        }
+
+        @FXML
+        void onEliminarPresupuesto(ActionEvent event) {
+
+        }
+
+        @FXML
+        void onActualizar(ActionEvent event) {
+
+        }
+
+        @FXML
+        void onAgregarPresupuesto(ActionEvent event) {
+
+        }
+
+        @FXML
+        void 27b0da(ActionEvent event) {
+
+        }
+
 }
