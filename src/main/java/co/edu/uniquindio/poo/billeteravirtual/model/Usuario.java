@@ -10,8 +10,8 @@ public class Usuario extends Persona{
     private List<Transaccion> transacciones = new ArrayList<>();
     private List<Presupuesto> presupuestos = new ArrayList<>();
 
-    public Usuario(Double saldo, String id, String cedula, String nombreCompleto, String correo, String telefono, String contrasenia, String codigoRecuperacion, Boolean esCuentaActiva, String direccion, List<Cuenta> cuentas, List<Transaccion> transacciones, List<Presupuesto> presupuestos) {
-        super(id, cedula, nombreCompleto, correo, telefono, contrasenia, codigoRecuperacion, esCuentaActiva);
+    public Usuario(String cedula, String nombreCompleto, String correo, String telefono, String contrasenia, String direccion, List<Cuenta> cuentas, List<Transaccion> transacciones, List<Presupuesto> presupuestos) {
+        super(cedula, nombreCompleto, correo, telefono, contrasenia);
 
         Validar.queNoVacio(direccion, "La dirección no puede estar vacía");
 
@@ -97,5 +97,10 @@ public class Usuario extends Persona{
         } else {
             throw new IllegalArgumentException("No hay suficiente saldo en la cuenta seleccionada.");
         }
+    }
+
+    public boolean puedeModificarCuenta(Cuenta cuenta) {
+        return this.getCuentas().stream()
+                .anyMatch(c -> c.getIdCuenta().equals(cuenta.getIdCuenta()));
     }
 }

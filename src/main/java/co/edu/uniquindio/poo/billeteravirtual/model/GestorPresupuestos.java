@@ -1,6 +1,7 @@
 package co.edu.uniquindio.poo.billeteravirtual.model;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
@@ -12,56 +13,75 @@ public class GestorPresupuestos {
         this.usuarios = new ArrayList<>();
     }
 
-    // Metodo para agregar un presupuesto a un usuario
+    public List<Usuario> getUsuarios() {
+        return usuarios;
+    }
+
+    public void setUsuarios(List<Usuario> usuarios) {
+        Validar.queNoNulo(usuarios, "La lista de usuarios no puede ser nula");
+        this.usuarios = usuarios;
+    }
+
+    /**
+     * Agrega un presupuesto a un usuario si no está ya asociado.
+     */
     public void agregarPresupuestoAUsuario(Usuario usuario, Presupuesto presupuesto) {
         Validar.queNoNulo(usuario, "El usuario no puede ser nulo");
         Validar.queNoNulo(presupuesto, "El presupuesto no puede ser nulo");
 
-        // Verificar si el presupuesto ya existe para este usuario
-        if (buscarPresupuestoPorIdYUsuario(usuario, presupuesto.getIdPresupuesto()) != null) {
+        if (buscarPresupuestoPorIdYUsuario(usuario, presupuesto.getIdPresupuesto()).isPresent()) {
             throw new IllegalArgumentException("Este presupuesto ya está asociado a este usuario.");
         }
 
         usuario.getPresupuestos().add(presupuesto);
     }
 
-    // Metodo para eliminar un presupuesto de un usuario por ID
+    /**
+     * Elimina un presupuesto de un usuario según su ID.
+     */
     public void eliminarPresupuestoDeUsuario(Usuario usuario, String idPresupuesto) {
+        Validar.queNoNulo(usuario, "El usuario no puede ser nulo");
         Validar.queNoVacio(idPresupuesto, "El ID del presupuesto no puede estar vacío");
 
-        Presupuesto presupuesto = buscarPresupuestoPorIdYUsuario(usuario, idPresupuesto);
-        if (presupuesto != null) {
-            usuario.getPresupuestos().remove(presupuesto);
+        Optional<Presupuesto> presupuesto = buscarPresupuestoPorIdYUsuario(usuario, idPresupuesto);
+        if (presupuesto.isPresent()) {
+            usuario.getPresupuestos().remove(presupuesto.get());
         } else {
             throw new IllegalArgumentException("No se encontró un presupuesto con ese ID para este usuario.");
         }
     }
 
-    // Metodo para buscar un presupuesto por ID y usuario
-    public Presupuesto buscarPresupuestoPorIdYUsuario(Usuario usuario, String idPresupuesto) {
+    /**
+     * Busca un presupuesto por ID dentro de los del usuario.
+     */
+    public Optional<Presupuesto> buscarPresupuestoPorIdYUsuario(Usuario usuario, String idPresupuesto) {
+        Validar.queNoNulo(usuario, "El usuario no puede ser nulo");
         Validar.queNoVacio(idPresupuesto, "El ID del presupuesto no puede estar vacío");
 
-        for (Presupuesto presupuesto : usuario.getPresupuestos()) {
-            if (presupuesto.getIdPresupuesto().equals(idPresupuesto)) {
-                return presupuesto;
-            }
-        }
-        return null;
+        return usuario.getPresupuestos().stream()
+                .filter(p -> idPresupuesto.equals(p.getIdPresupuesto()))
+                .findFirst();
     }
 
-    // Metodo para obtener todos los presupuestos de un usuario
+    /**
+     * Retorna todos los presupuestos del usuario.
+     */
     public List<Presupuesto> obtenerPresupuestosDeUsuario(Usuario usuario) {
         Validar.queNoNulo(usuario, "El usuario no puede ser nulo");
-
-        return usuario.getPresupuestos();
+        return new ArrayList<>(usuario.getPresupuestos()); // Para evitar modificación directa
     }
 
-    // Metodo para actualizar el monto gastado de un presupuesto de un usuario
+    /**
+     * Actualiza el monto gastado de un presupuesto si es válido.
+     */
     public void actualizarMontoGastadoDePresupuesto(Usuario usuario, String idPresupuesto, Double montoGastado) {
+        Validar.queNoNulo(usuario, "El usuario no puede ser nulo");
+        Validar.queNoVacio(idPresupuesto, "El ID del presupuesto no puede estar vacío");
         Validar.quePositivo(montoGastado, "El monto gastado debe ser positivo");
 
-        Presupuesto presupuesto = buscarPresupuestoPorIdYUsuario(usuario, idPresupuesto);
-        if (presupuesto != null) {
+        Optional<Presupuesto> presupuestoOpt = buscarPresupuestoPorIdYUsuario(usuario, idPresupuesto);
+        if (presupuestoOpt.isPresent()) {
+            Presupuesto presupuesto = presupuestoOpt.get();
             if (presupuesto.getMontoAsignado() >= montoGastado) {
                 presupuesto.setMontoGastado(montoGastado);
             } else {
@@ -72,34 +92,47 @@ public class GestorPresupuestos {
         }
     }
 
-    // Metodo para obtener el presupuesto con el mayor monto restante de un usuario
+    /**
+     * Retorna el presupuesto con mayor monto disponible.
+     */
     public Presupuesto obtenerPresupuestoConMayorDisponibleDeUsuario(Usuario usuario) {
         Validar.queNoNulo(usuario, "El usuario no puede ser nulo");
 
-        Optional<Presupuesto> presupuestoOpt = usuario.getPresupuestos().stream()
-                .max((p1, p2) -> Double.compare(p1.calcularDisponible(), p2.calcularDisponible()));
-
-        return presupuestoOpt.orElse(null);
+        return usuario.getPresupuestos().stream()
+                .max(Comparator.comparingDouble(Presupuesto::calcularDisponible))
+                .orElse(null);
     }
 
-    // Metodo para obtener el total asignado a los presupuestos de un usuario
+    /**
+     * Retorna la suma del monto asignado de todos los presupuestos.
+     */
     public double obtenerTotalAsignadoDeUsuario(Usuario usuario) {
         Validar.queNoNulo(usuario, "El usuario no puede ser nulo");
 
-        return usuario.getPresupuestos().stream().mapToDouble(Presupuesto::getMontoAsignado).sum();
+        return usuario.getPresupuestos().stream()
+                .mapToDouble(Presupuesto::getMontoAsignado)
+                .sum();
     }
 
-    // Metodo para obtener el total gastado de los presupuestos de un usuario
+    /**
+     * Retorna el total gastado en todos los presupuestos del usuario.
+     */
     public double obtenerTotalGastadoDeUsuario(Usuario usuario) {
         Validar.queNoNulo(usuario, "El usuario no puede ser nulo");
 
-        return usuario.getPresupuestos().stream().mapToDouble(Presupuesto::getMontoGastado).sum();
+        return usuario.getPresupuestos().stream()
+                .mapToDouble(Presupuesto::getMontoGastado)
+                .sum();
     }
 
-    // Metodo para obtener el total disponible de los presupuestos de un usuario
+    /**
+     * Retorna el monto total disponible en los presupuestos del usuario.
+     */
     public double obtenerTotalDisponibleDeUsuario(Usuario usuario) {
         Validar.queNoNulo(usuario, "El usuario no puede ser nulo");
 
-        return usuario.getPresupuestos().stream().mapToDouble(Presupuesto::calcularDisponible).sum();
+        return usuario.getPresupuestos().stream()
+                .mapToDouble(Presupuesto::calcularDisponible)
+                .sum();
     }
 }

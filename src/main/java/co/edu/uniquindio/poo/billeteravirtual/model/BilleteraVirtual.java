@@ -1,140 +1,86 @@
 package co.edu.uniquindio.poo.billeteravirtual.model;
 
-import co.edu.uniquindio.poo.billeteravirtual.enums.RolAdministrador;
-
-import java.util.ArrayList;
-import java.util.List;
+import co.edu.uniquindio.poo.billeteravirtual.service.EmailServiceFactory;
+import co.edu.uniquindio.poo.billeteravirtual.model.NotificadorMovimientos;
+import co.edu.uniquindio.poo.billeteravirtual.model.GestorUsuarios;
+import co.edu.uniquindio.poo.billeteravirtual.model.GestorAdministradores;
+import co.edu.uniquindio.poo.billeteravirtual.model.GestorPresupuestos;
+import co.edu.uniquindio.poo.billeteravirtual.model.GestorCategorias;
+import co.edu.uniquindio.poo.billeteravirtual.model.GestorCuentas;
+import co.edu.uniquindio.poo.billeteravirtual.model.GestorTransacciones;
+import co.edu.uniquindio.poo.billeteravirtual.model.GestorEstadisticas;
+import co.edu.uniquindio.poo.billeteravirtual.model.GestorReportes;
 
 public class BilleteraVirtual {
-    private static BilleteraVirtual instancia;
-    private List<Usuario> usuarios;
-    private List<Administrador> administradores;
+
+    private static BilleteraVirtual instance;
+
+    private final GestorUsuarios gestorUsuarios;
+    private final GestorAdministradores gestorAdministradores;
+    private final GestorPresupuestos gestorPresupuestos;
+    private final GestorCategorias gestorCategorias;
+    private final GestorCuentas gestorCuentas;
+    private final GestorTransacciones gestorTransacciones;
+    private final GestorEstadisticas gestorEstadisticas;
+    private final GestorReportes gestorReportes;
 
     private BilleteraVirtual() {
-        this.usuarios = new ArrayList<>();
-        this.administradores = new ArrayList<>();
+        NotificadorMovimientos notificador = new NotificadorMovimientos(
+                EmailServiceFactory.getInstance()
+        );
+        this.gestorUsuarios = new GestorUsuarios();
+        this.gestorAdministradores = new GestorAdministradores();
+        this.gestorPresupuestos = new GestorPresupuestos();
+        this.gestorCategorias = new GestorCategorias();
+        this.gestorCuentas = new GestorCuentas(notificador);
+        this.gestorTransacciones = new GestorTransacciones(notificador);
+        this.gestorEstadisticas = new GestorEstadisticas(
+                gestorUsuarios.getUsuarios(),
+                gestorTransacciones.listarTransacciones()
+        );
+        this.gestorReportes = new GestorReportes();
     }
 
-    public static BilleteraVirtual getInsancia(){
-        if (instancia == null){
-            instancia = new BilleteraVirtual();
+    public static BilleteraVirtual getInstance(){
+        if (instance == null){
+            instance = new BilleteraVirtual();
         }
-        return instancia;
+        return instance;
     }
 
-    public static BilleteraVirtual getInstancia() {
-        return instancia;
+    public static void setInstance(BilleteraVirtual instance) {
+        BilleteraVirtual.instance = instance;
     }
 
-    public static void setInstancia(BilleteraVirtual instancia) {
-        BilleteraVirtual.instancia = instancia;
+    public GestorUsuarios getGestorUsuarios() {
+        return gestorUsuarios;
     }
 
-    public List<Usuario> getUsuarios() {
-        return usuarios;
+    public GestorAdministradores getGestorAdministradores() {
+        return gestorAdministradores;
     }
 
-    public void setUsuarios(List<Usuario> usuarios) {
-        this.usuarios = usuarios;
+    public GestorPresupuestos getGestorPresupuestos() {
+        return gestorPresupuestos;
     }
 
-    public List<Administrador> getAdministradores() {
-        return administradores;
+    public GestorCategorias getGestorCategorias() {
+        return gestorCategorias;
     }
 
-    public void setAdministradores(List<Administrador> administradores) {
-        this.administradores = administradores;
+    public GestorCuentas getGestorCuentas() {
+        return gestorCuentas;
     }
 
-    public void agregarUsuario(Usuario usuario){
-        usuarios.add(usuario);
+    public GestorTransacciones getGestorTransacciones() {
+        return gestorTransacciones;
     }
 
-    public Usuario buscarUsuario(String cedula){
-        for (Usuario u : usuarios){
-            if (u.getCedula().equalsIgnoreCase(cedula))
-                return u;
-        }
-        return null;
+    public GestorEstadisticas getGestorEstadisticas() {
+        return gestorEstadisticas;
     }
 
-    public boolean actualizarUsuario(String cedula, String nombreCompleto, String correo, String telefono, String contrasenia, String direccion){
-        Usuario u = buscarUsuario(cedula);
-        if (u != null){
-            u.setCedula(cedula);
-            u.setNombreCompleto(nombreCompleto);
-            u.setCorreo(correo);
-            u.setTelefono(telefono);
-            u.setContrasenia(contrasenia);
-            u.setDireccion(direccion);
-            return true;
-        }
-        return false;
-    }
-
-    public boolean eliminarUsuario(String cedula){
-        Usuario u = buscarUsuario(cedula);
-        if (u != null){
-            usuarios.remove(u);
-            return true;
-        }
-        return false;
-    }
-
-    public void agregarAdministrador(Administrador administrador){
-        administradores.add(administrador);
-    }
-
-    public Administrador buscarAdministrador(String cedula){
-        for (Administrador a : administradores){
-            if (a.getCedula().equalsIgnoreCase(cedula))
-                return a;
-        }
-        return null;
-    }
-
-    public boolean actualizarAdministrador(String cedula, String nombreCompleto, String correo, String telefono, String contrasenia, RolAdministrador rol){
-        Administrador a = buscarAdministrador(cedula);
-        if (a != null){
-            a.setCedula(cedula);
-            a.setNombreCompleto(nombreCompleto);
-            a.setCorreo(correo);
-            a.setTelefono(telefono);
-            a.setContrasenia(contrasenia);
-            a.setRol(rol);
-            return true;
-        }
-        return false;
-    }
-
-    public boolean eliminarAdministrador(String cedula){
-        Administrador a = buscarAdministrador(cedula);
-        if (a != null){
-            administradores.remove(a);
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public String toString() {
-        return "BilleteraVirtual{" +
-                ", usuarios=" + usuarios +
-                ", administradores=" + administradores +
-                '}';
-    }
-
-    public Persona autenticar(String correo, String contrasenia){
-        for (Usuario u : usuarios){
-            if (u.getCorreo().equalsIgnoreCase(correo) && u.getContrasenia().equalsIgnoreCase(contrasenia)){
-                return u;
-            }
-        }
-        for (Administrador a : administradores) {
-            if (a.getCorreo().equalsIgnoreCase(correo) && a.getContrasenia().equalsIgnoreCase(contrasenia)) {
-                return a;
-            }
-        }
-        return null;
+    public GestorReportes getGestorReportes() {
+        return gestorReportes;
     }
 }

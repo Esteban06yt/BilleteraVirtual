@@ -37,10 +37,11 @@
         <!-- Tabla de Usuarios -->
         <TableView id="tb_listaUsuarios" fx:id="tb_listaPresupuestos" layoutX="57.0" layoutY="421.0" prefHeight="221.0" prefWidth="707.0">
             <columns>
-                <TableColumn fx:id="tbc_nombre" prefWidth="151.0" text="Nombre" />
-                <TableColumn fx:id="tbc_montoAsignado" prefWidth="186.0" text="Monto Asignado" />
-                <TableColumn fx:id="tbc_montoGastado" prefWidth="188.0" text="Monto Gastado" />
-                <TableColumn fx:id="tbc_montoRestante" prefWidth="181.0" text="Monto Restante" />
+                <TableColumn fx:id="tbc_nombre" prefWidth="117.0" text="Nombre" />
+                <TableColumn fx:id="tbc_montoAsignado" prefWidth="129.0" text="Monto Asignado" />
+                <TableColumn fx:id="tbc_montoGastado" prefWidth="130.0" text="Monto Gastado" />
+                <TableColumn fx:id="tbc_montoRestante" prefWidth="134.0" text="Monto Restante" />
+            <TableColumn fx:id="tbc_categoria" prefWidth="196.0" text="Categoria" />
             </columns>
         </TableView>
 
@@ -65,12 +66,12 @@
                 <Font name="Arial Black" size="16.0" />
             </font>
         </Button>
-        <Button fx:id="btn_actualizar" layoutX="553.0" layoutY="182.0" onAction="#onActualizar" prefHeight="42.0" prefWidth="400.0" style="-fx-background-color: #231e7f; -fx-border-color: black; -fx-border-width: 2;" text="Actualizar" textFill="WHITE">
+        <Button fx:id="btn_actualizar" layoutX="553.0" layoutY="246.0" onAction="#onActualizar" prefHeight="42.0" prefWidth="400.0" style="-fx-background-color: #231e7f; -fx-border-color: black; -fx-border-width: 2;" text="Actualizar" textFill="WHITE">
             <font>
                 <Font name="Arial Black" size="16.0" />
             </font>
         </Button>
-        <Button fx:id="btn_agregarPresupuesto" layoutX="57.0" layoutY="182.0" onAction="#onAgregarPresupuesto" prefHeight="42.0" prefWidth="400.0" style="-fx-background-color: #231e7f; -fx-border-color: black; -fx-border-width: 2;" text="Agregar Presupuesto" textFill="WHITE">
+        <Button fx:id="btn_agregarPresupuesto" layoutX="57.0" layoutY="246.0" onAction="#onAgregarPresupuesto" prefHeight="42.0" prefWidth="400.0" style="-fx-background-color: #231e7f; -fx-border-color: black; -fx-border-width: 2;" text="Agregar Presupuesto" textFill="WHITE">
             <font>
                 <Font name="Arial Black" size="16.0" />
             </font>
@@ -87,6 +88,7 @@
                 <TextField fx:id="txf_montoAsignado" prefHeight="35.0" prefWidth="400.0" promptText="Monto Asignado" />
             </children>
         </VBox>
+      <ComboBox fx:id="cmb_categoria" layoutX="57.0" layoutY="179.0" prefHeight="35.0" prefWidth="400.0" promptText="Categoria" />
 
     </children>
 </AnchorPane>
