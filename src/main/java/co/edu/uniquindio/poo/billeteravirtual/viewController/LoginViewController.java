@@ -27,12 +27,12 @@ public class LoginViewController {
 
         @FXML
         void onUsuario(ActionEvent event) {
-
+                app.openLoginUsuario();
         }
 
         @FXML
         void onAdministrador(ActionEvent event) {
-                app.openAdministrador();
+                app.openLoginAdministrador();
         }
 
         App app;

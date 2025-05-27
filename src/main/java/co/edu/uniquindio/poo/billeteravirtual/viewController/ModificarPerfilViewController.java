@@ -1,5 +1,6 @@
 package co.edu.uniquindio.poo.billeteravirtual.viewController;
 
+import co.edu.uniquindio.poo.billeteravirtual.App;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
@@ -46,18 +47,9 @@ public class ModificarPerfilViewController {
         @FXML
         private TextField txf_direccion;
 
-//        @FXML
-//        void 231e7f(ActionEvent event) {
-//
-//        }
-//        @FXML
-//        void 27b0da(ActionEvent event) {
-//
-//        }
-
         @FXML
         void onVolver(ActionEvent event) {
-
+                app.openUsuario();
         }
 
         @FXML
@@ -66,4 +58,9 @@ public class ModificarPerfilViewController {
         }
 
 
+        App app;
+
+        public void setApp(App app) {
+                this.app = app;
+        }
 }

@@ -1,5 +1,6 @@
 package co.edu.uniquindio.poo.billeteravirtual.viewController;
 
+import co.edu.uniquindio.poo.billeteravirtual.App;
 import javafx.event.ActionEvent;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -58,19 +59,9 @@ public class CrudCuentaViewController {
         @FXML
         private Button btn_agregarCuenta;
 
-//        @FXML
-//        void 231e7f(ActionEvent event) {
-//
-//        }
-//
-//        @FXML
-//        void 27b0da(ActionEvent event) {
-//
-//        }
-
         @FXML
         void onVolver(ActionEvent event) {
-
+                app.openAdministrador();
         }
 
         @FXML
@@ -89,4 +80,9 @@ public class CrudCuentaViewController {
         }
 
 
+        App app;
+
+        public void setApp(App app) {
+                this.app = app;
+        }
 }
