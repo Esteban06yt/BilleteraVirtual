@@ -1,19 +1,34 @@
 package co.edu.uniquindio.poo.billeteravirtual.model;
 
 import co.edu.uniquindio.poo.billeteravirtual.enums.TipoTransaccion;
+import co.edu.uniquindio.poo.billeteravirtual.interfaces.EstrategiaTransaccion;
+import co.edu.uniquindio.poo.billeteravirtual.strategy.*;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class GestorTransacciones {
     private final List<Transaccion> transacciones;
     private final NotificadorMovimientos notificador;
 
+    // Mapa para asociar tipo de transacción con su estrategia
+    private final Map<TipoTransaccion, EstrategiaTransaccion> estrategias;
+
     // Constructor
     public GestorTransacciones(NotificadorMovimientos notificador) {
         this.transacciones = new ArrayList<>();
         this.notificador = notificador;
+        this.estrategias = new HashMap<>();
+
+        // Registrar las estrategias para cada tipo
+        estrategias.put(TipoTransaccion.TRANSFERENCIA, new EstrategiaTransferencia());
+        estrategias.put(TipoTransaccion.RETIRO, new EstrategiaRetiro());
+        estrategias.put(TipoTransaccion.DEPOSITO, new EstrategiaDeposito());
+        estrategias.put(TipoTransaccion.PAGO, new EstrategiaPago());
+        estrategias.put(TipoTransaccion.RECARGA, new EstrategiaRecarga());
     }
 
     // Metodo para agregar una transacción usando el Builder
@@ -53,54 +68,15 @@ public class GestorTransacciones {
         // Agregar la transacción a la lista
         transacciones.add(transaccion);
 
-        // Actualizar el saldo de los usuarios según el tipo de transacción
-        switch (transaccion.getTipo()) {
-            case TRANSFERENCIA:
-                // Transferencia: el emisor pierde el dinero y el destinatario lo recibe
-                cuentaEmisor.setMonto(cuentaEmisor.getMonto() - transaccion.getMonto());
-                Cuenta cuentaDestino = buscarCuentaDeUsuario(destinatario, transaccion.getDestinatario().getCuentas().getFirst().getIdCuenta());
-                assert cuentaDestino != null;
-                cuentaDestino.setMonto(cuentaDestino.getMonto() + transaccion.getMonto());
-                // Notificar la transferencia al emisor
-                notificador.notificarTransferencia(transaccion.getEmisor(), transaccion.getMonto(), transaccion.getDestinatario());
-                break;
-
-            case RETIRO:
-                // Retiro: el emisor pierde el dinero
-                cuentaEmisor.setMonto(cuentaEmisor.getMonto() - transaccion.getMonto());
-                // Notificar el retiro al emisor
-                notificador.notificarRetiro(transaccion.getEmisor(), transaccion.getMonto());
-                break;
-
-            case DEPOSITO:
-                // Depósito: el emisor (quien recibe el depósito) gana dinero
-                cuentaEmisor.setMonto(cuentaEmisor.getMonto() + transaccion.getMonto());
-                // Notificar el depósito al emisor
-                notificador.notificarDeposito(transaccion.getEmisor(), transaccion.getMonto());
-                break;
-
-            case PAGO:
-                // Pago: el emisor paga el servicio, pierde el dinero
-                cuentaEmisor.setMonto(cuentaEmisor.getMonto() - transaccion.getMonto());
-                // Obtener la descripcion como servicio
-                String servicio = transaccion.getDescripcion();
-                // Notificar el pago al emisor
-                notificador.notificarPago(transaccion.getEmisor(), transaccion.getMonto(), servicio);
-                break;
-
-            case RECARGA:
-                // Recarga: el emisor (quien recarga) gana el monto
-                cuentaEmisor.setMonto(cuentaEmisor.getMonto() + transaccion.getMonto());
-                // Notificar la recarga al emisor
-                notificador.notificarRecarga(transaccion.getEmisor(), transaccion.getMonto());
-                break;
-
-            default:
-                throw new IllegalArgumentException("Tipo de transacción desconocido.");
+        EstrategiaTransaccion estrategia = estrategias.get(tipo);
+        if (estrategia == null) {
+            throw new IllegalArgumentException("Tipo de transacción no soportado: " + tipo);
         }
+
+        estrategia.procesar(transaccion, this);
     }
 
-    private Cuenta buscarCuentaDeUsuario(Usuario usuario, String idCuenta) {
+    public Cuenta buscarCuentaDeUsuario(Usuario usuario, String idCuenta) {
         for (Cuenta cuenta : usuario.getCuentas()) {
             if (cuenta.getIdCuenta().equals(idCuenta)) {
                 return cuenta;
@@ -245,5 +221,13 @@ public class GestorTransacciones {
             }
         }
         return transaccionesPorFecha;
+    }
+
+    public List<Transaccion> getTransacciones() {
+        return transacciones;
+    }
+
+    public NotificadorMovimientos getNotificador() {
+        return notificador;
     }
 }

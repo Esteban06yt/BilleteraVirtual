@@ -1,4 +1,4 @@
-package co.edu.uniquindio.poo.billeteravirtual.repository;
+package co.edu.uniquindio.poo.billeteravirtual.interfaces;
 
 import co.edu.uniquindio.poo.billeteravirtual.model.Transaccion;
 

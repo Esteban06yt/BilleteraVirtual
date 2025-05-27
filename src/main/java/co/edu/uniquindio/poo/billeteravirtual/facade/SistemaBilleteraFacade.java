@@ -3,6 +3,7 @@ package co.edu.uniquindio.poo.billeteravirtual.facade;
 import co.edu.uniquindio.poo.billeteravirtual.enums.*;
 import co.edu.uniquindio.poo.billeteravirtual.model.*;
 
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -232,5 +233,13 @@ public class SistemaBilleteraFacade {
 
     public void exportarPDFTransacciones(List<Transaccion> transacciones, String ruta) throws java.io.IOException {
         sistema.getGestorReportes().exportarTransaccionesAPDF(transacciones, ruta);
+    }
+
+    public void exportarCSVTransaccionesAdapter(List<Transaccion> transacciones, String ruta) throws IOException {
+        sistema.getGestorReportes().exportarACSV(transacciones, ruta);
+    }
+
+    public void exportarPDFTransaccionesAdapter(List<Transaccion> transacciones, String ruta) throws IOException {
+        sistema.getGestorReportes().exportarAPDF(transacciones, ruta);
     }
 }
