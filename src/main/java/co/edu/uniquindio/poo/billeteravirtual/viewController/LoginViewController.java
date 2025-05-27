@@ -24,10 +24,10 @@ public class LoginViewController {
         @FXML
         private Button btn_administrador;
 
-        @FXML
-        void 231e7f(ActionEvent event) {
-
-        }
+//        @FXML
+//        void 231e7f(ActionEvent event) {
+//
+//        }
 
         @FXML
         void onUsuario(ActionEvent event) {

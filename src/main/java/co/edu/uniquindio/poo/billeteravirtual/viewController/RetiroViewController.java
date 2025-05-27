@@ -61,10 +61,19 @@ public class RetiroViewController {
         @FXML
         private Text txt_subtitulo1;
 
-        @FXML
-        void 231e7f(ActionEvent event) {
-
-        }
+//        @FXML
+//        void 231e7f(ActionEvent event) {
+//
+//        }
+//        @FXML
+//        void 27b0da(ActionEvent event) {
+//
+//        }
+//
+//        @FXML
+//        void 27b0da(ActionEvent event) {
+//
+//        }
 
         @FXML
         void onVolver(ActionEvent event) {
@@ -78,16 +87,6 @@ public class RetiroViewController {
 
         @FXML
         void onActualizar(ActionEvent event) {
-
-        }
-
-        @FXML
-        void 27b0da(ActionEvent event) {
-
-        }
-
-        @FXML
-        void 27b0da(ActionEvent event) {
 
         }
 
