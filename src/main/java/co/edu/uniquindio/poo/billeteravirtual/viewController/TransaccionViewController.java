@@ -41,9 +41,9 @@ public class TransaccionViewController {
 
     }
 
-    @FXML
-    void 231e7f(ActionEvent event) {
-
-    }
+//    @FXML
+//    void 231e7f(ActionEvent event) {
+//
+//    }
 
 }

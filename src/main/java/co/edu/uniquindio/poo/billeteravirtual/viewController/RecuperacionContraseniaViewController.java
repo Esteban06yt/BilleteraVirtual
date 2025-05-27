@@ -48,15 +48,15 @@ public class RecuperacionContraseniaViewController {
 
         }
 
-        @FXML
-        void 231e7f(ActionEvent event) {
-
-        }
-
-        @FXML
-        void 27b0da(ActionEvent event) {
-
-        }
+//        @FXML
+//        void 231e7f(ActionEvent event) {
+//
+//        }
+//
+//        @FXML
+//        void 27b0da(ActionEvent event) {
+//
+//        }
 
         @FXML
         void onEnviarCodigo(ActionEvent event) {

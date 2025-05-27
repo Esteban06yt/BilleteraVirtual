@@ -57,10 +57,15 @@ public class PresupuestoViewController {
         @FXML
         private Button btn_actualizar;
 
-        @FXML
-        void 231e7f(ActionEvent event) {
-
-        }
+//        @FXML
+//        void 231e7f(ActionEvent event) {
+//
+//        }
+//
+//        @FXML
+//        void 27b0da(ActionEvent event) {
+//
+//        }
 
         @FXML
         void onVolver(ActionEvent event) {
@@ -82,9 +87,5 @@ public class PresupuestoViewController {
 
         }
 
-        @FXML
-        void 27b0da(ActionEvent event) {
-
-        }
 
 }

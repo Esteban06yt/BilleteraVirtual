@@ -46,10 +46,14 @@ public class ModificarPerfilViewController {
         @FXML
         private TextField txf_direccion;
 
-        @FXML
-        void 231e7f(ActionEvent event) {
-
-        }
+//        @FXML
+//        void 231e7f(ActionEvent event) {
+//
+//        }
+//        @FXML
+//        void 27b0da(ActionEvent event) {
+//
+//        }
 
         @FXML
         void onVolver(ActionEvent event) {
@@ -61,9 +65,5 @@ public class ModificarPerfilViewController {
 
         }
 
-        @FXML
-        void 27b0da(ActionEvent event) {
-
-        }
 
 }

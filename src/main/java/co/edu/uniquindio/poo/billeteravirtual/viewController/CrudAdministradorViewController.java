@@ -73,10 +73,15 @@ public class CrudAdministradorViewController {
         @FXML
         private TableColumn<?, ?> tbc_correo;
 
-        @FXML
-        void 231e7f(ActionEvent event) {
-
-        }
+//        @FXML
+//        void 231e7f(ActionEvent event) {
+//
+//        }
+//
+//        @FXML
+//        void 27b0da(ActionEvent event) {
+//
+//        }
 
         @FXML
         void onVolver(ActionEvent event) {
@@ -95,11 +100,6 @@ public class CrudAdministradorViewController {
 
         @FXML
         void onAgregar(ActionEvent event) {
-
-        }
-
-        @FXML
-        void 27b0da(ActionEvent event) {
 
         }
 
