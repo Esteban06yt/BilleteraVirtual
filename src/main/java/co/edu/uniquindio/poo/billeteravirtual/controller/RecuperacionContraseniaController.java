@@ -6,31 +6,27 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 
-public class LoginUsuarioController {
+public class RecuperacionContraseniaController {
 
-    public AnchorPane ap_loginUsuario;
-    public Button btn_ingresar;
-    public Button btn_crearCuenta;
+    public AnchorPane ap_recuperacionContrasenia;
     public Button btn_volver;
-    public Button btn_olvideContrasenia;
+    public Button btn_cambiarContrasenia;
+    public Button btn_enviarCodigo;
     public Text txt_iniciarSesion;
     public Text txt_usuario;
     public TextField txf_correo;
+    public TextField txf_codigo;
     public TextField txf_contrasenia;
-
-    public void onIngresar(ActionEvent actionEvent) {
-
-    }
-
-    public void onCrearCuenta(ActionEvent actionEvent) {
-
-    }
 
     public void onVolver(ActionEvent actionEvent) {
 
     }
 
-    public void onOlvideContrasenia(ActionEvent actionEvent) {
+    public void onCambiarContrasenia(ActionEvent actionEvent) {
+
+    }
+
+    public void onEnviarCodigo(ActionEvent actionEvent) {
 
     }
 }
