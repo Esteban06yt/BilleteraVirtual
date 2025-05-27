@@ -16,7 +16,9 @@ module co.edu.uniquindio.poo.billeteravirtual {
     requires org.apache.pdfbox;
 
     opens co.edu.uniquindio.poo.billeteravirtual to javafx.fxml;
+    opens co.edu.uniquindio.poo.billeteravirtual.controller to javafx.fxml;
+    opens co.edu.uniquindio.poo.billeteravirtual.viewController to javafx.fxml;
+
     exports co.edu.uniquindio.poo.billeteravirtual;
     exports co.edu.uniquindio.poo.billeteravirtual.controller;
-    opens co.edu.uniquindio.poo.billeteravirtual.controller to javafx.fxml;
 }
