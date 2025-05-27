@@ -12,6 +12,8 @@ module co.edu.uniquindio.poo.billeteravirtual {
     requires com.almasb.fxgl.all;
     requires java.logging;
     requires java.mail;
+    requires org.apache.commons.csv;
+    requires org.apache.pdfbox;
 
     opens co.edu.uniquindio.poo.billeteravirtual to javafx.fxml;
     exports co.edu.uniquindio.poo.billeteravirtual;
