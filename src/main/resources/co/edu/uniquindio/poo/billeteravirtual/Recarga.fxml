@@ -1,14 +1,93 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="co.edu.uniquindio.poo.billeteravirtual.controller.RecargaController"
-            prefHeight="400.0" prefWidth="600.0">
+<AnchorPane fx:id="ap_recarga" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="781.0" prefWidth="1033.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.poo.billeteravirtual.controller.RecargaController">
+    <children>
+        <SubScene height="355.0" layoutX="22.0" layoutY="401.0" width="989.0">
+            <root>
+                <Region />
+            </root>
+        </SubScene>
+        <SubScene height="355.0" layoutX="22.0" layoutY="36.0" width="989.0">
+            <root>
+                <Region />
+            </root>
+        </SubScene>
+        <!-- Título principal -->
+        <Text id="txt_titulo" fx:id="txt_titulo" fill="#231e7f" layoutX="362.0" layoutY="72.0" strokeType="OUTSIDE" strokeWidth="0.0" text="RECARGA" textAlignment="CENTER" wrappingWidth="340.0">
+            <font>
+                <Font name="Arial Black" size="33.0" />
+            </font>
+        </Text>
 
+        <!-- Logo -->
+        <ImageView fx:id="img_logo" fitHeight="268.0" fitWidth="268.0" layoutX="750.0" layoutY="436.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@Imagen1-removebg-preview.png" />
+            </image>
+        </ImageView>
+
+        <!-- Tabla de Usuarios -->
+        <TableView id="tb_listaCuentas" fx:id="tb_listaCuentas" layoutX="57.0" layoutY="427.0" prefHeight="215.0" prefWidth="707.0">
+            <columns>
+                <TableColumn fx:id="tbc_nombreBanco" prefWidth="164.0" text="Nombre Banco" />
+                <TableColumn fx:id="tbc_numeroCuenta" prefWidth="172.0" text="Numero Cuenta" />
+                <TableColumn fx:id="tbc_monto" minWidth="7.0" prefWidth="188.0" text="Monto" />
+                <TableColumn fx:id="tbc_tipo" minWidth="0.0" prefWidth="182.0" text="Tipo" />
+            </columns>
+        </TableView>
+
+        <!-- Formulario de datos -->
+        <VBox layoutX="57.0" layoutY="124.0" spacing="20.0">
+            <children>
+                <TextField fx:id="txf_monto" prefHeight="35.0" prefWidth="400.0" promptText="Monto" />
+            </children>
+        </VBox>
+
+        <!-- Botones de acción (Agregar, Actualizar, Eliminar) -->
+        <HBox layoutX="82.0" layoutY="420.0" spacing="20.0" />
+
+        <!-- Botón Volver -->
+        <Button fx:id="btn_volver" layoutX="57.0" layoutY="659.0" onAction="#onVolver" prefHeight="42.0" prefWidth="160.0" style="-fx-background-color: #27b0da; -fx-border-color: black; -fx-border-width: 2;" text="Volver" textFill="WHITE">
+            <font>
+                <Font name="Arial Black" size="16.0" />
+            </font>
+        </Button>
+        <Button fx:id="btn_realizarRecarga" layoutX="57.0" layoutY="237.0" onAction="#onRealizarRecarga" prefHeight="42.0" prefWidth="400.0" style="-fx-background-color: #231e7f; -fx-border-color: black; -fx-border-width: 2;" text="Realizar Recarga" textFill="WHITE">
+            <font>
+                <Font name="Arial Black" size="16.0" />
+            </font>
+        </Button>
+        <Button fx:id="btn_actualizar" layoutX="553.0" layoutY="237.0" onAction="#onActualizar" prefHeight="42.0" prefWidth="400.0" style="-fx-background-color: #231e7f; -fx-border-color: black; -fx-border-width: 2;" text="Actualizar" textFill="WHITE">
+            <font>
+                <Font name="Arial Black" size="16.0" />
+            </font>
+        </Button>
+
+        <!-- Subtítulo -->
+        <Text fx:id="txt_subtitulo" fill="#27b0da" layoutX="57.0" layoutY="107.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Realizar recarga" textAlignment="CENTER" wrappingWidth="196.92919921875">
+            <font>
+                <Font name="Arial" size="24.0" />
+            </font>
+        </Text>
+        <VBox layoutX="553.0" layoutY="124.0" spacing="20.0">
+            <children>
+                <TextField fx:id="txf_descripcion" prefHeight="35.0" prefWidth="400.0" promptText="Descripcion" />
+                <ComboBox fx:id="cmb_categoria" prefHeight="33.0" prefWidth="400.0" promptText="Categoria" />
+            </children>
+        </VBox>
+        <Text fx:id="txt_subtitulo1" fill="#27b0da" layoutX="57.0" layoutY="347.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Seleccione la cuenta a la cual llegara el dinero" textAlignment="CENTER" wrappingWidth="514.0">
+            <font>
+                <Font name="Arial" size="24.0" />
+            </font>
+        </Text>
+
+    </children>
 </AnchorPane>

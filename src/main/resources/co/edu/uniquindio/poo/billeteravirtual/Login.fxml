@@ -1,14 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
 <?import javafx.scene.*?>
+<?import javafx.scene.canvas.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.scene.control.*?>
+<?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="co.edu.uniquindio.poo.billeteravirtual.controller.LoginController"
-            prefHeight="400.0" prefWidth="600.0">
-
+<AnchorPane fx:id="ap_login" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="322.0" prefWidth="287.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.poo.billeteravirtual.controller.LoginController">
+    <children>
+        <SubScene height="297.0" layoutX="20.0" layoutY="13.0" width="248.0">
+            <root>
+                <Region />
+            </root>
+        </SubScene>
+        <Text fx:id="lbl_bienvenido" fill="#231e7f" layoutX="36.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BIENVENIDO" textAlignment="CENTER" wrappingWidth="216.92919921875">
+            <font>
+                <Font name="Bauhaus 93" size="33.0" />
+            </font>
+        </Text>
+        <Text fx:id="lbl_iniciarComo" layoutX="64.0" layoutY="123.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Iniciar como..." textAlignment="CENTER" wrappingWidth="160.86474609375">
+            <font>
+                <Font name="Berlin Sans FB" size="23.0" />
+            </font>
+        </Text>
+        <Button id="btn_cliente" fx:id="btn_usuario" layoutX="63.0" layoutY="153.0" mnemonicParsing="false" onAction="#onUsuario" prefHeight="42.0" prefWidth="161.0" style="-fx-background-color: #1565c0; -fx-border-color: black; -fx-border-width: 2;" text="Usuario" textFill="WHITE">
+            <font>
+                <Font name="Arial Black" size="17.0" />
+            </font>
+        </Button>
+        <Button id="btn_administrador" fx:id="btn_administrador" layoutX="63.0" layoutY="215.0" mnemonicParsing="false" onAction="#onAdministrador" prefHeight="42.0" prefWidth="161.0" style="-fx-background-color: #C70039; -fx-border-color: black; -fx-border-width: 2;" text="Administrador" textFill="WHITE">
+            <font>
+                <Font name="Arial Black" size="17.0" />
+            </font>
+        </Button>
+    </children>
 </AnchorPane>

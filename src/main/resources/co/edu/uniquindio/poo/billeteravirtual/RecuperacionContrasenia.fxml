@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane fx:id="ap_recuperacionContrasenia" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="440.0" prefWidth="579.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.poo.billeteravirtual.controller.RecuperacionContraseniaController">
+    <children>
+        <Label layoutX="214.0" layoutY="128.0" text="Nombre" />
+        <SubScene height="385.0" layoutX="27.0" layoutY="28.0" width="526.0">
+            <root>
+                <Region />
+            </root>
+        </SubScene>
+        <Text id="txt_nombre" layoutX="44.0" layoutY="133.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Correo" textAlignment="CENTER" wrappingWidth="160.86474609375">
+            <font>
+                <Font name="Berlin Sans FB" size="23.0" />
+            </font>
+        </Text>
+        <Button id="btn_volver" fx:id="btn_volver" layoutX="333.0" layoutY="360.0" mnemonicParsing="false" onAction="#onVolver" prefHeight="42.0" prefWidth="161.0" style="-fx-background-color: #1565c0; -fx-border-color: black; -fx-border-width: 2;" text="Volver" textFill="WHITE">
+            <font>
+                <Font name="Arial Black" size="17.0" />
+            </font>
+        </Button>
+        <Button id="btn_volver" fx:id="btn_cambiarContrasenia" layoutX="85.0" layoutY="360.0" mnemonicParsing="false" onAction="#onCambiarContrasenia" prefHeight="42.0" prefWidth="230.0" style="-fx-background-color: #C70039; -fx-border-color: black; -fx-border-width: 2;" text="Cambiar contraseña" textFill="WHITE">
+            <font>
+                <Font name="Arial Black" size="17.0" />
+            </font>
+        </Button>
+        <Text id="txt_iniciarSesion" fx:id="txt_iniciarSesion" fill="#231e7f" layoutX="161.0" layoutY="75.0" strokeType="OUTSIDE" strokeWidth="0.0" text="RECUPERACION" textAlignment="CENTER" wrappingWidth="258.92919921875">
+            <font>
+                <Font name="Bauhaus 93" size="33.0" />
+            </font>
+        </Text>
+        <TextField id="lbl_nombreAd" fx:id="txf_correo" layoutX="85.0" layoutY="140.0" prefHeight="38.0" prefWidth="409.0" promptText="Correo" />
+        <TextField id="lbl_contraseñaAd" fx:id="txf_codigo" layoutX="84.0" layoutY="216.0" prefHeight="38.0" prefWidth="230.0" promptText="Codigo recuperacion" />
+        <Text id="txt_contraseña" layoutX="59.0" layoutY="209.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Codigo" textAlignment="CENTER" wrappingWidth="130.86474609375">
+            <font>
+                <Font name="Berlin Sans FB" size="23.0" />
+            </font>
+        </Text>
+        <Text id="txt_administrador" fx:id="txt_usuario" fill="#27b0da" layoutX="209.0" layoutY="104.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CONTRASEÑA" textAlignment="CENTER" wrappingWidth="160.86474609375">
+            <font>
+                <Font name="Berlin Sans FB" size="23.0" />
+            </font>
+        </Text>
+      <Text id="txt_contraseña" layoutX="60.0" layoutY="285.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nueva contraseña" textAlignment="CENTER" wrappingWidth="230.0">
+         <font>
+            <Font name="Berlin Sans FB" size="23.0" />
+         </font>
+      </Text>
+      <TextField id="lbl_contraseñaAd" fx:id="txf_contrasenia" layoutX="84.0" layoutY="290.0" prefHeight="38.0" prefWidth="409.0" promptText="Nueva ontraseña" />
+      <Button id="btn_volver" fx:id="btn_enviarCodigo" layoutX="332.0" layoutY="214.0" mnemonicParsing="false" onAction="#onEnviarCodigo" prefHeight="42.0" prefWidth="161.0" style="-fx-background-color: #27b0da; -fx-border-color: black; -fx-border-width: 2;" text="Enviar codigo" textFill="WHITE">
+         <font>
+            <Font name="Arial Black" size="17.0" />
+         </font>
+      </Button>
+    </children>
+</AnchorPane>

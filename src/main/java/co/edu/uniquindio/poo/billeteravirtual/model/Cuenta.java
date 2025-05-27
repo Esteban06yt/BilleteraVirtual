@@ -3,9 +3,9 @@ package co.edu.uniquindio.poo.billeteravirtual.model;
 import co.edu.uniquindio.poo.billeteravirtual.enums.TipoCuenta;
 
 public class Cuenta {
-    private String idCuenta;
-    private String nombreBanco;
-    private Integer numeroCuenta;
+    private final String idCuenta;
+    private final String nombreBanco;
+    private final Integer numeroCuenta;
     private Double monto = 0.0;
     private TipoCuenta tipo;
 
@@ -20,24 +20,12 @@ public class Cuenta {
         return idCuenta;
     }
 
-    public void setIdCuenta(String idCuenta) {
-        this.idCuenta = idCuenta;
-    }
-
     public String getNombreBanco() {
         return nombreBanco;
     }
 
-    public void setNombreBanco(String nombreBanco) {
-        this.nombreBanco = nombreBanco;
-    }
-
     public Integer getNumeroCuenta() {
         return numeroCuenta;
-    }
-
-    public void setNumeroCuenta(Integer numeroCuenta) {
-        this.numeroCuenta = numeroCuenta;
     }
 
     public Double getMonto() {
