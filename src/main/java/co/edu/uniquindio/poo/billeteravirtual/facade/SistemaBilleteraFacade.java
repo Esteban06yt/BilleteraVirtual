@@ -3,11 +3,23 @@ package co.edu.uniquindio.poo.billeteravirtual.facade;
 import co.edu.uniquindio.poo.billeteravirtual.enums.*;
 import co.edu.uniquindio.poo.billeteravirtual.model.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 public class SistemaBilleteraFacade {
 
     private final BilleteraVirtual sistema = BilleteraVirtual.getInstance();
+
+    // -------------------------
+    // Autenticación
+    // -------------------------
+    public Administrador autenticarAdministrador(String correo, String contrasenia) {
+        return sistema.getGestorAdministradores().autenticarAdministrador(correo, contrasenia);
+    }
+
+    public Usuario autenticarUsuario(String correo, String contrasenia) {
+        return sistema.getGestorUsuarios().autenticarUsuario(correo, contrasenia);
+    }
 
     // -------------------------
     // Usuarios
@@ -87,6 +99,14 @@ public class SistemaBilleteraFacade {
         sistema.getGestorCuentas().realizarPago(usuario, monto, idCuenta, servicio);
     }
 
+    public double obtenerSaldoTotal() {
+        return sistema.getGestorCuentas().obtenerSaldoTotal();
+    }
+
+    public double obtenerSaldoTotalDeUsuario(Usuario usuario) {
+        return sistema.getGestorCuentas().obtenerSaldoTotalDeUsuario(usuario);
+    }
+
     // -------------------------
     // Transacciones
     // -------------------------
@@ -117,10 +137,25 @@ public class SistemaBilleteraFacade {
         return sistema.getGestorTransacciones().obtenerTransaccionesPorTipo(tipo);
     }
 
+    public List<Transaccion> filtrarTransaccionesPorMonto(Double montoMinimo, Double montoMaximo) {
+        return sistema.getGestorTransacciones().filtrarTransaccionesPorMonto(montoMinimo, montoMaximo);
+    }
+
+    public int obtenerNumeroTransaccionesDeUsuario(Usuario usuario) {
+        return sistema.getGestorTransacciones().obtenerNumeroTransaccionesDeUsuario(usuario);
+    }
+
+    public double obtenerSaldoTotalPorTipo(TipoTransaccion tipo) {
+        return sistema.getGestorTransacciones().obtenerSaldoTotalPorTipo(tipo);
+    }
+
+    public List<Transaccion> obtenerTransaccionesPorFecha(LocalDateTime fechaInicio, LocalDateTime fechaFin) {
+        return sistema.getGestorTransacciones().obtenerTransaccionesPorFecha(fechaInicio, fechaFin);
+    }
+
     // -------------------------
     // Presupuestos
     // -------------------------
-
     public void agregarPresupuesto(Presupuesto presupuesto, Usuario usuarioActual) {
         Validar.queNoNulo(usuarioActual, "No hay un usuario activo");
         sistema.getGestorPresupuestos().agregarPresupuestoAUsuario(usuarioActual, presupuesto);
@@ -163,6 +198,14 @@ public class SistemaBilleteraFacade {
 
     public Categoria buscarCategoriaPorNombre(String nombre) {
         return sistema.getGestorCategorias().buscarCategoriaPorNombre(nombre);
+    }
+
+    public int obtenerNumeroCategorias() {
+        return sistema.getGestorCategorias().obtenerNumeroCategorias();
+    }
+
+    public List<Categoria> filtrarCategoriasPorNombre(String nombreFiltro) {
+        return sistema.getGestorCategorias().filtrarCategoriasPorNombre(nombreFiltro);
     }
 
     // -------------------------
