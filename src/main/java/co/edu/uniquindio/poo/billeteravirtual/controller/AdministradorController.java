@@ -7,6 +7,7 @@ import javafx.collections.ObservableList;
 
 public class AdministradorController {
 
+    /**
     private Administrador administradorLogueado;
 
     public AdministradorController() {
@@ -21,6 +22,6 @@ public class AdministradorController {
 
     public void actualizarAdministrador() {
 
-    }
+    }*/
 
 }

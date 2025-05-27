@@ -78,8 +78,8 @@ public class AdministradorViewController {
         }
 
         private void cargarAdministrador() {
-                ObservableList<Administrador> admin = administradorController.getAdministradorLogueado();
-                tb_usuario.setItems(admin);
+                //ObservableList<Administrador> admin = administradorController.getAdministradorLogueado();
+                //tb_usuario.setItems(admin);
         }
 
         @FXML
@@ -89,7 +89,7 @@ public class AdministradorViewController {
 
         @FXML
         void onActualizar(ActionEvent event) {
-                administradorController.actualizarAdministrador();
+                //administradorController.actualizarAdministrador();
                 cargarAdministrador();
         }
 
