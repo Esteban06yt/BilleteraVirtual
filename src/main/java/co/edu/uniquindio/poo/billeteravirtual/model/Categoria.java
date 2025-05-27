@@ -5,7 +5,7 @@ public class Categoria {
     private String nombre;
     private String descripcion;
 
-    public Categoria(String idCategoria, String nombre, String descripcion) {
+    public Categoria(String nombre, String descripcion) {
         this.idCategoria = CodigoGenerador.generarId();
         this.nombre = nombre;
         this.descripcion = descripcion;
@@ -13,10 +13,6 @@ public class Categoria {
 
     public String getIdCategoria() {
         return idCategoria;
-    }
-
-    public void setIdCategoria(String idCategoria) {
-        this.idCategoria = idCategoria;
     }
 
     public String getNombre() {

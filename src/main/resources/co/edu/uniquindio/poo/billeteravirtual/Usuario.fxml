@@ -54,28 +54,29 @@
         <VBox layoutX="553.0" layoutY="124.0" spacing="20.0" />
       <TableView id="tb_listaUsuarios" fx:id="tb_listaPresupuestos" layoutX="59.0" layoutY="556.0" prefHeight="184.0" prefWidth="899.0">
          <columns>
-            <TableColumn fx:id="tbc_nombrePresupuesto" prefWidth="187.0" text="Nombre" />
-            <TableColumn fx:id="tbc_montoAsignadoPresupuesto" prefWidth="191.0" text="Monto Asignado" />
-            <TableColumn fx:id="tbc_montoGastadoPresupuesto" prefWidth="196.0" text="Monto Gastado" />
-            <TableColumn fx:id="tbc_montoRestantePresupuesto" prefWidth="182.0" text="Monto Restante" />
+            <TableColumn fx:id="tbc_nombrePresupuesto" prefWidth="153.0" text="Nombre" />
+            <TableColumn fx:id="tbc_montoAsignadoPresupuesto" prefWidth="143.0" text="Monto Asignado" />
+            <TableColumn fx:id="tbc_montoGastadoPresupuesto" prefWidth="163.0" text="Monto Gastado" />
+            <TableColumn fx:id="tbc_montoRestantePresupuesto" prefWidth="178.0" text="Monto Restante" />
+            <TableColumn fx:id="tbc_CategoriaPresupuesto" prefWidth="261.0" text="Categoria" />
          </columns>
       </TableView>
       <TableView id="tb_listaUsuarios" fx:id="tb_listaCuentas" layoutX="58.0" layoutY="345.0" prefHeight="184.0" prefWidth="899.0">
          <columns>
-            <TableColumn fx:id="tbc_nombreBancoCuenta" prefWidth="192.0" text="Nombre Banco" />
-            <TableColumn fx:id="tbc_numeroCuenta" prefWidth="186.0" text="Numero Cuenta" />
-            <TableColumn fx:id="tbc_montoCuenta" prefWidth="201.0" text="Monto" />
-            <TableColumn fx:id="tbc_tipoCuenta" prefWidth="177.0" text="Tipo" />
+            <TableColumn fx:id="tbc_nombreBancoCuenta" prefWidth="217.0" text="Nombre Banco" />
+            <TableColumn fx:id="tbc_numeroCuenta" prefWidth="230.0" text="Numero Cuenta" />
+            <TableColumn fx:id="tbc_montoCuenta" prefWidth="214.0" text="Monto" />
+            <TableColumn fx:id="tbc_tipoCuenta" prefWidth="237.0" text="Tipo" />
          </columns>
       </TableView>
       <TableView id="tb_listaUsuarios" fx:id="tb_listaTransacciones" layoutX="58.0" layoutY="769.0" prefHeight="184.0" prefWidth="899.0">
          <columns>
             <TableColumn fx:id="tbc_fechaTransaccion" prefWidth="115.0" text="Fecha" />
-            <TableColumn fx:id="tbc_montoTransaccion" prefWidth="115.0" text="Monto" />
-            <TableColumn fx:id="tbc_descripcionTransaccion" prefWidth="160.0" text="Descripcion" />
-            <TableColumn fx:id="tbc_tipoTransaccion" prefWidth="120.0" text="Tipo" />
-            <TableColumn fx:id="tbc_categoriaTransaccion" prefWidth="112.0" text="Categoria" />
-            <TableColumn fx:id="tbc_destinatarioTransaccion" prefWidth="134.0" text="Destinatario" />
+            <TableColumn fx:id="tbc_montoTransaccion" prefWidth="140.0" text="Monto" />
+            <TableColumn fx:id="tbc_descripcionTransaccion" prefWidth="144.0" text="Descripcion" />
+            <TableColumn fx:id="tbc_tipoTransaccion" prefWidth="158.0" text="Tipo" />
+            <TableColumn fx:id="tbc_categoriaTransaccion" prefWidth="132.0" text="Categoria" />
+            <TableColumn fx:id="tbc_destinatarioTransaccion" prefWidth="209.0" text="Destinatario" />
          </columns>
       </TableView>
       <TableView id="tb_usuario" fx:id="tb_usuario" layoutX="58.0" layoutY="77.0" prefHeight="57.0" prefWidth="757.0">

@@ -1,15 +1,16 @@
 package co.edu.uniquindio.poo.billeteravirtual.model;
 
 import co.edu.uniquindio.poo.billeteravirtual.enums.TipoCuenta;
+import co.edu.uniquindio.poo.billeteravirtual.interfaces.CuentaInterface;
 
-public class Cuenta {
+public class Cuenta implements CuentaInterface {
     private final String idCuenta;
     private final String nombreBanco;
     private final Integer numeroCuenta;
     private Double monto = 0.0;
     private TipoCuenta tipo;
 
-    public Cuenta(String idCuenta, String nombreBanco, Integer numeroCuenta, Double monto, TipoCuenta tipo) {
+    public Cuenta(String nombreBanco, TipoCuenta tipo) {
         this.idCuenta = CodigoGenerador.generarId();
         this.nombreBanco = nombreBanco;
         this.numeroCuenta = CodigoGenerador.generarIdCuenta();
@@ -55,11 +56,13 @@ public class Cuenta {
                 '}';
     }
 
-    // Métodos de negocio
-    public void transferir(double monto, Cuenta destino) {
-        if(this.monto >= monto) {
+    @Override
+    public void transferir(double monto, CuentaInterface destino) {
+        if (this.monto >= monto) {
             this.monto -= monto;
-            destino.monto += monto;
+            destino.setMonto(destino.getMonto() + monto);
+        } else {
+            throw new IllegalArgumentException("Saldo insuficiente");
         }
     }
 }

@@ -10,8 +10,7 @@ public abstract class Persona {
     protected String codigoRecuperacion = generarCodigoRecuperacion();
     protected Boolean esCuentaActiva = true;
 
-    public Persona(String id, String cedula, String nombreCompleto, String correo, String telefono, String contrasenia, String codigoRecuperacion, Boolean esCuentaActiva) {
-        Validar.queNoVacio(id, "El id no puede estar vacío");
+    public Persona(String cedula, String nombreCompleto, String correo, String telefono, String contrasenia) {
         Validar.queCedulaValida(cedula);
         Validar.queNoVacio(nombreCompleto, "El nombre completo no puede estar vacío");
         Validar.queCorreoValido(correo);

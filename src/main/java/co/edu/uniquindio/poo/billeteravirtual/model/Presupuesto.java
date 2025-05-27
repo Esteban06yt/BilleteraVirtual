@@ -1,16 +1,18 @@
 package co.edu.uniquindio.poo.billeteravirtual.model;
 
-public class Presupuesto {
+public class Presupuesto implements Cloneable {
     private String idPresupuesto;
     private String nombre;
-    private Double montoAsignado = 0.0;
+    private Double montoAsignado;
     private Double montoGastado = 0.0;
+    private Categoria categoria;
 
-    public Presupuesto(String idPresupuesto, String nombre, Double montoAsignado, Double montoGastado) {
+    public Presupuesto(String nombre, Double montoAsignado, Categoria categoria) {
         this.idPresupuesto = CodigoGenerador.generarId();
         this.nombre = nombre;
         this.montoAsignado = montoAsignado;
         this.montoGastado = 0.0;
+        this.categoria = categoria;
     }
 
     public String getIdPresupuesto() {
@@ -45,6 +47,25 @@ public class Presupuesto {
         this.montoGastado = montoGastado;
     }
 
+    public Categoria getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
+    }
+
+    @Override
+    public Presupuesto clone() {
+        try {
+            Presupuesto clon = (Presupuesto) super.clone();
+            // Generar nuevo ID para el clon
+            return new Presupuesto(this.nombre, this.montoAsignado, this.categoria);
+        } catch (CloneNotSupportedException e) {
+            throw new AssertionError(); // No debería ocurrir
+        }
+    }
+
     @Override
     public String toString() {
         return "Presupuesto{" +
@@ -52,7 +73,7 @@ public class Presupuesto {
                 ", nombre='" + nombre + '\'' +
                 ", montoAsignado=" + montoAsignado +
                 ", montoGastado=" + montoGastado +
-                ", montoRestante=" + calcularDisponible() +
+                ", categoria=" + categoria +
                 '}';
     }
 
