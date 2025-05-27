@@ -1,14 +1,142 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="co.edu.uniquindio.poo.billeteravirtual.controller.UsuarioController"
-            prefHeight="400.0" prefWidth="600.0">
+<AnchorPane fx:id="ap_usuario" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="974.0" prefWidth="1033.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.poo.billeteravirtual.controller.UsuarioController">
+    <children>
+        <SubScene height="645.0" layoutX="14.0" layoutY="317.0" width="989.0">
+            <root>
+                <Region />
+            </root>
+        </SubScene>
+        <SubScene height="294.0" layoutX="14.0" layoutY="14.0" width="989.0">
+            <root>
+                <Region />
+            </root>
+        </SubScene>
+        <!-- Título principal -->
+        <Text id="txt_titulo" fx:id="txt_titulo" fill="#231e7f" layoutX="361.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0" text="USUARIO" textAlignment="CENTER" wrappingWidth="340.0">
+            <font>
+                <Font name="Arial Black" size="33.0" />
+            </font>
+        </Text>
 
+        <!-- Logo -->
+        <ImageView fx:id="img_logo" fitHeight="129.0" fitWidth="168.0" layoutX="842.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@Imagen1-removebg-preview.png" />
+            </image>
+        </ImageView>
+
+        <!-- Formulario de datos -->
+        <VBox layoutX="57.0" layoutY="124.0" spacing="20.0" />
+
+        <!-- Botones de acción (Agregar, Actualizar, Eliminar) -->
+        <HBox layoutX="82.0" layoutY="420.0" spacing="20.0" />
+
+        <!-- Botón Volver -->
+        <Button fx:id="btn_volver" layoutX="410.0" layoutY="245.0" onAction="#onVolver" prefHeight="42.0" prefWidth="160.0" style="-fx-background-color: #27b0da; -fx-border-color: black; -fx-border-width: 2;" text="Volver" textFill="WHITE">
+            <font>
+                <Font name="Arial Black" size="16.0" />
+            </font>
+        </Button>
+        <Button fx:id="btn_actualizar" layoutX="239.0" layoutY="245.0" onAction="#onActualizar" prefHeight="42.0" prefWidth="160.0" style="-fx-background-color: #231e7f; -fx-border-color: black; -fx-border-width: 2;" text="Actualizar" textFill="WHITE">
+            <font>
+                <Font name="Arial Black" size="16.0" />
+            </font>
+        </Button>
+        <VBox layoutX="553.0" layoutY="124.0" spacing="20.0" />
+      <TableView id="tb_listaUsuarios" fx:id="tb_listaPresupuestos" layoutX="59.0" layoutY="556.0" prefHeight="184.0" prefWidth="899.0">
+         <columns>
+            <TableColumn fx:id="tbc_nombrePresupuesto" prefWidth="187.0" text="Nombre" />
+            <TableColumn fx:id="tbc_montoAsignadoPresupuesto" prefWidth="191.0" text="Monto Asignado" />
+            <TableColumn fx:id="tbc_montoGastadoPresupuesto" prefWidth="196.0" text="Monto Gastado" />
+            <TableColumn fx:id="tbc_montoRestantePresupuesto" prefWidth="182.0" text="Monto Restante" />
+         </columns>
+      </TableView>
+      <TableView id="tb_listaUsuarios" fx:id="tb_listaCuentas" layoutX="58.0" layoutY="345.0" prefHeight="184.0" prefWidth="899.0">
+         <columns>
+            <TableColumn fx:id="tbc_nombreBancoCuenta" prefWidth="192.0" text="Nombre Banco" />
+            <TableColumn fx:id="tbc_numeroCuenta" prefWidth="186.0" text="Numero Cuenta" />
+            <TableColumn fx:id="tbc_montoCuenta" prefWidth="201.0" text="Monto" />
+            <TableColumn fx:id="tbc_tipoCuenta" prefWidth="177.0" text="Tipo" />
+         </columns>
+      </TableView>
+      <TableView id="tb_listaUsuarios" fx:id="tb_listaTransacciones" layoutX="58.0" layoutY="769.0" prefHeight="184.0" prefWidth="899.0">
+         <columns>
+            <TableColumn fx:id="tbc_fechaTransaccion" prefWidth="115.0" text="Fecha" />
+            <TableColumn fx:id="tbc_montoTransaccion" prefWidth="115.0" text="Monto" />
+            <TableColumn fx:id="tbc_descripcionTransaccion" prefWidth="160.0" text="Descripcion" />
+            <TableColumn fx:id="tbc_tipoTransaccion" prefWidth="120.0" text="Tipo" />
+            <TableColumn fx:id="tbc_categoriaTransaccion" prefWidth="112.0" text="Categoria" />
+            <TableColumn fx:id="tbc_destinatarioTransaccion" prefWidth="134.0" text="Destinatario" />
+         </columns>
+      </TableView>
+      <TableView id="tb_listaUsuarios" fx:id="tb_usuario" layoutX="58.0" layoutY="77.0" prefHeight="57.0" prefWidth="757.0">
+         <columns>
+            <TableColumn fx:id="tbc_nombreUsuario" prefWidth="115.0" text="Nombre" />
+            <TableColumn fx:id="tbc_cedulaUsuario" prefWidth="115.0" text="Cedula" />
+            <TableColumn fx:id="tbc_telefonoUsuario" prefWidth="124.0" text="Telefono" />
+            <TableColumn fx:id="tbc_correoUsuario" prefWidth="129.0" text="Correo" />
+            <TableColumn fx:id="tbc_direccionUsuario" prefWidth="131.0" text="Direccion" />
+            <TableColumn fx:id="tbc_saldoUsuario" prefWidth="142.0" text="Saldo" />
+         </columns>
+      </TableView>
+      <Button fx:id="btn_modificarPerfil" layoutX="58.0" layoutY="141.0" onAction="#onModificarPerfil" prefHeight="42.0" prefWidth="160.0" style="-fx-background-color: #27b0da; -fx-border-color: black; -fx-border-width: 2;" text="Modificar Perfil" textFill="WHITE">
+         <font>
+            <Font name="Arial Black" size="16.0" />
+         </font>
+      </Button>
+      <Button fx:id="btn_realizarTransaccion" layoutX="226.0" layoutY="141.0" onAction="#onRealizarTransaccion" prefHeight="42.0" prefWidth="211.0" style="-fx-background-color: #231e7f; -fx-border-color: black; -fx-border-width: 2;" text="Realizar Transaccion" textFill="WHITE">
+         <font>
+            <Font name="Arial Black" size="16.0" />
+         </font>
+      </Button>
+      <Button fx:id="btn_crudPresupuestos" layoutX="443.0" layoutY="141.0" onAction="#onCrudPresupuestos" prefHeight="42.0" prefWidth="193.0" style="-fx-background-color: #27b0da; -fx-border-color: black; -fx-border-width: 2;" text="Crud Presupuestos" textFill="WHITE">
+         <font>
+            <Font name="Arial Black" size="16.0" />
+         </font>
+      </Button>
+      <Button fx:id="btn_categorizarTransaccion" layoutX="58.0" layoutY="192.0" onAction="#onCategorizarTransaccion" prefHeight="42.0" prefWidth="202.0" style="-fx-background-color: #231e7f; -fx-border-color: black; -fx-border-width: 2;" text="Filtrar Transaccion" textFill="WHITE">
+         <font>
+            <Font name="Arial Black" size="16.0" />
+         </font>
+      </Button>
+      <ComboBox fx:id="cmb_categoriaTransaccion" layoutX="271.0" layoutY="190.0" prefHeight="47.0" prefWidth="172.0" promptText="Categoria" />
+      <Button fx:id="btn_actualizar1" layoutX="644.0" layoutY="141.0" onAction="#onActualizar" prefHeight="42.0" prefWidth="153.0" style="-fx-background-color: #231e7f; -fx-border-color: black; -fx-border-width: 2;" text="Crud Cuentas" textFill="WHITE">
+         <font>
+            <Font name="Arial Black" size="16.0" />
+         </font>
+      </Button>
+      <ComboBox fx:id="cmb_TipoTransaccion" layoutX="454.0" layoutY="190.0" prefHeight="47.0" prefWidth="172.0" promptText="Tipo" />
+      <DatePicker fx:id="date_fechaTransaccion" layoutX="634.0" layoutY="192.0" prefHeight="47.0" prefWidth="193.0" promptText="Fecha" />
+      <Button fx:id="btn_limpiarCampos" layoutX="60.0" layoutY="245.0" onAction="#onLimpiarCampos" prefHeight="42.0" prefWidth="166.0" style="-fx-background-color: #27b0da; -fx-border-color: black; -fx-border-width: 2;" text="Limpiar campos" textFill="WHITE">
+         <font>
+            <Font name="Arial Black" size="16.0" />
+         </font>
+      </Button>
+        <!-- Subtítulo -->
+      <Text fx:id="txt_subtitulo" fill="#231e7f" layoutY="339.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Cuentas" textAlignment="CENTER" wrappingWidth="211.92919921875">
+         <font>
+             <Font name="Arial" size="24.0" />
+         </font>
+      </Text>
+      <Text fx:id="txt_subtitulo1" fill="#231e7f" layoutX="32.0" layoutY="551.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Presupuestos" textAlignment="CENTER" wrappingWidth="211.92919921875">
+         <font>
+            <Font name="Arial" size="24.0" />
+         </font>
+      </Text>
+      <Text fx:id="txt_subtitulo2" fill="#231e7f" layoutX="32.0" layoutY="762.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Transacciones" textAlignment="CENTER" wrappingWidth="211.92919921875">
+         <font>
+            <Font name="Arial" size="24.0" />
+         </font>
+      </Text>
+
+    </children>
 </AnchorPane>
