@@ -4,20 +4,39 @@ import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
+import javafx.fxml.FXML;
+
 
 public class LoginViewController {
 
-    public AnchorPane ap_login;
-    public Text lbl_bienvenido;
-    public Text lbl_iniciarComo;
-    public Button btn_usuario;
-    public Button btn_administrador;
+        @FXML
+        private Button btn_usuario;
 
-    public void onUsuario(ActionEvent actionEvent) {
+        @FXML
+        private Text lbl_bienvenido;
 
-    }
+        @FXML
+        private AnchorPane ap_login;
 
-    public void onAdministrador(ActionEvent actionEvent) {
+        @FXML
+        private Text lbl_iniciarComo;
 
-    }
+        @FXML
+        private Button btn_administrador;
+
+        @FXML
+        void 231e7f(ActionEvent event) {
+
+        }
+
+        @FXML
+        void onUsuario(ActionEvent event) {
+
+        }
+
+        @FXML
+        void onAdministrador(ActionEvent event) {
+
+        }
+
 }

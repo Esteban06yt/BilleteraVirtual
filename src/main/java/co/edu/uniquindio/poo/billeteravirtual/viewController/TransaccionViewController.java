@@ -1,6 +1,7 @@
 package co.edu.uniquindio.poo.billeteravirtual.viewController;
 
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.image.ImageView;
@@ -9,19 +10,40 @@ import javafx.scene.text.Text;
 
 public class TransaccionViewController {
 
-    public AnchorPane ap_transaccion;
-    public Text txt_tipo;
-    public Text txt_transaccion;
-    public ImageView img_logo;
-    public ComboBox cmb_tipo;
-    public Button btn_realizar;
-    public Button btn_volver;
+    @FXML
+    private Text txt_tipo;
 
-    public void onRealizar(ActionEvent actionEvent) {
+    @FXML
+    private ImageView img_logo;
+
+    @FXML
+    private Text txt_transaccion;
+
+    @FXML
+    private Button btn_realizar;
+
+    @FXML
+    private Button btn_volver;
+
+    @FXML
+    private ComboBox<?> cmb_tipo;
+
+    @FXML
+    private AnchorPane ap_transaccion;
+
+    @FXML
+    void onRealizar(ActionEvent event) {
 
     }
 
-    public void onVolver(ActionEvent actionEvent) {
+    @FXML
+    void onVolver(ActionEvent event) {
 
     }
+
+    @FXML
+    void 231e7f(ActionEvent event) {
+
+    }
+
 }
