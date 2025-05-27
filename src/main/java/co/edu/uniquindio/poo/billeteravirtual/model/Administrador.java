@@ -6,8 +6,8 @@ import co.edu.uniquindio.poo.billeteravirtual.enums.RolAdministrador;
 public class Administrador extends Persona {
     private RolAdministrador rol;
 
-    public Administrador(String id, String cedula, String nombreCompleto, String correo, String telefono, String contrasenia, String codigoRecuperacion, Boolean esCuentaActiva, RolAdministrador rol) {
-        super(id, cedula, nombreCompleto, correo, telefono, contrasenia, codigoRecuperacion, esCuentaActiva);
+    public Administrador(String cedula, String nombreCompleto, String correo, String telefono, String contrasenia, RolAdministrador rol) {
+        super(cedula, nombreCompleto, correo, telefono, contrasenia);
 
         Validar.queNoNulo(rol, "El rol no puede ser nulo");
 
