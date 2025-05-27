@@ -1,5 +1,6 @@
 package co.edu.uniquindio.poo.billeteravirtual.viewController;
 
+import co.edu.uniquindio.poo.billeteravirtual.App;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
@@ -24,11 +25,6 @@ public class LoginViewController {
         @FXML
         private Button btn_administrador;
 
-//        @FXML
-//        void 231e7f(ActionEvent event) {
-//
-//        }
-
         @FXML
         void onUsuario(ActionEvent event) {
 
@@ -36,7 +32,13 @@ public class LoginViewController {
 
         @FXML
         void onAdministrador(ActionEvent event) {
+                app.openAdministrador();
+        }
 
+        App app;
+
+        public void setApp(App app) {
+                this.app = app;
         }
 
 }
