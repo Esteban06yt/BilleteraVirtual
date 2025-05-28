@@ -9,14 +9,14 @@ public class Usuario extends Persona{
     private List<Cuenta> cuentas = new ArrayList<>();
     private List<Transaccion> transacciones = new ArrayList<>();
     private List<Presupuesto> presupuestos = new ArrayList<>();
+    private List<Categoria> categorias = new ArrayList<>();
 
-    public Usuario(String cedula, String nombreCompleto, String correo, String telefono, String contrasenia, String direccion, List<Cuenta> cuentas, List<Transaccion> transacciones, List<Presupuesto> presupuestos) {
+    public Usuario(String cedula, String nombreCompleto, String correo, String telefono, String contrasenia, String direccion, List<Cuenta> cuentas, List<Transaccion> transacciones, List<Presupuesto> presupuestos, List<Categoria> categorias) {
         super(cedula, nombreCompleto, correo, telefono, contrasenia);
-
-        Validar.queNoVacio(direccion, "La dirección no puede estar vacía");
         this.cuentas = (cuentas != null) ? cuentas : new ArrayList<>();
         this.transacciones = (transacciones != null) ? transacciones : new ArrayList<>();
         this.presupuestos = (presupuestos != null) ? presupuestos : new ArrayList<>();
+
         this.saldo = 0.0;
         this.direccion = direccion;
     }
@@ -62,6 +62,14 @@ public class Usuario extends Persona{
         this.presupuestos = presupuestos;
     }
 
+    public List<Categoria> getCategorias() {
+        return categorias;
+    }
+
+    public void setCategorias(List<Categoria> categorias) {
+        this.categorias = categorias;
+    }
+
     @Override
     public String toString() {
         return "Usuario{" +
@@ -70,16 +78,19 @@ public class Usuario extends Persona{
                 ", cuentas=" + cuentas +
                 ", transacciones=" + transacciones +
                 ", presupuestos=" + presupuestos +
+                ", categorias=" + categorias +
                 ", super='" + super.toString() + '\'' +
                 '}';
     }
 
     public void agregarCuenta(Cuenta cuenta) {
+        Validar.queNoNulo(cuenta, "La cuenta no puede ser nula");
         this.cuentas.add(cuenta);
         actualizarSaldoTotal();
     }
 
     public void agregarTransaccion(Transaccion transaccion) {
+        Validar.queNoNulo(transaccion, "La transacción no puede ser nula");
         this.transacciones.add(transaccion);
         actualizarSaldoTotal();
     }
