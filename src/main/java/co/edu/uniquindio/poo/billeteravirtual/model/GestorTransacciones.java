@@ -74,6 +74,9 @@ public class GestorTransacciones {
         }
 
         estrategia.procesar(transaccion, this);
+
+        // Después de procesar la transacción:
+        notificador.notificarObservadores(transaccion);
     }
 
     public Cuenta buscarCuentaDeUsuario(Usuario usuario, String idCuenta) {

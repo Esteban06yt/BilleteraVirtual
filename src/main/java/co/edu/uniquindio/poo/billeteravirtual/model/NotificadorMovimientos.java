@@ -1,12 +1,35 @@
 package co.edu.uniquindio.poo.billeteravirtual.model;
 
+import co.edu.uniquindio.poo.billeteravirtual.interfaces.ObservadorTransaccion;
+import co.edu.uniquindio.poo.billeteravirtual.interfaces.SujetoTransaccion;
 import co.edu.uniquindio.poo.billeteravirtual.service.EmailService;
 
-public class NotificadorMovimientos {
+import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
+
+public class NotificadorMovimientos implements SujetoTransaccion {
     private final EmailService emailService;
+    private final List<ObservadorTransaccion> observadores = new CopyOnWriteArrayList<>();
 
     public NotificadorMovimientos(EmailService emailService) {
         this.emailService = emailService;
+    }
+
+    @Override
+    public void agregarObservador(ObservadorTransaccion obs) {
+        observadores.add(obs);
+    }
+
+    @Override
+    public void eliminarObservador(ObservadorTransaccion obs) {
+        observadores.remove(obs);
+    }
+
+    @Override
+    public void notificarObservadores(Transaccion transaccion) {
+        for (ObservadorTransaccion obs : observadores) {
+            obs.actualizar(transaccion);
+        }
     }
 
     // Notificación de Depósito
