@@ -1,66 +1,67 @@
 package co.edu.uniquindio.poo.billeteravirtual.viewController;
 
 import co.edu.uniquindio.poo.billeteravirtual.App;
+import co.edu.uniquindio.poo.billeteravirtual.enums.TipoTransaccion;
+import co.edu.uniquindio.poo.billeteravirtual.model.*;
+import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
-import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+
+import java.util.UUID;
 
 public class DepositoViewController {
 
-        @FXML
-        private Button btn_realizarDeposito;
+        @FXML private AnchorPane ap_deposito;
+        @FXML private Text txt_titulo, txt_subtitulo, txt_subtitulo1;
+        @FXML private ImageView img_logo;
 
-        @FXML
-        private TextField txf_descripcion;
+        @FXML private TableView<Cuenta> tb_listaCuentas;
+        @FXML private TableColumn<Cuenta, String> tbc_nombreBanco, tbc_numeroCuenta, tbc_tipo;
+        @FXML private TableColumn<Cuenta, Number> tbc_monto;
 
-        @FXML
-        private TableColumn<?, ?> tbc_nombreBanco;
+        @FXML private TextField txf_monto, txf_descripcion;
+        @FXML private ComboBox<Categoria> cmb_categoria;
 
-        @FXML
-        private TableColumn<?, ?> tbc_numeroCuenta;
+        @FXML private Button btn_volver, btn_realizarDeposito, btn_actualizar;
 
-        @FXML
-        private Button btn_volver;
+        private App app;
+        private Usuario usuarioActual;
+        private ObservableList<Cuenta> cuentas = FXCollections.observableArrayList();
 
-        @FXML
-        private Text txt_subtitulo;
+        public void setApp(App app) {
+                this.app = app;
+                usuarioActual = (Usuario) app.getSesionActual();
+                if (usuarioActual == null) {
+                        app.openLoginUsuario();
+                        return;
+                }
+                inicializarTabla();
+                cargarCategorias();
+                actualizarTabla();
+        }
 
-        @FXML
-        private AnchorPane ap_deposito;
+        private void inicializarTabla() {
+                tbc_nombreBanco.setCellValueFactory(c -> new SimpleStringProperty(c.getValue().getNombreBanco()));
+                tbc_numeroCuenta.setCellValueFactory(c -> new SimpleStringProperty());
+                tbc_monto.setCellValueFactory(c -> new SimpleDoubleProperty(c.getValue().getMonto()));
+                tbc_tipo.setCellValueFactory(c -> new SimpleStringProperty(c.getValue().getTipo().name()));
+                tb_listaCuentas.setItems(cuentas);
+        }
 
-        @FXML
-        private Text txt_titulo;
+        private void cargarCategorias() {
+                cmb_categoria.setItems(FXCollections.observableArrayList(app.billetera.getGestorCategorias().listarCategorias()));
+        }
 
-        @FXML
-        private TextField txf_monto;
-
-        @FXML
-        private TableColumn<?, ?> tbc_monto;
-
-        @FXML
-        private ImageView img_logo;
-
-        @FXML
-        private TableColumn<?, ?> tbc_tipo;
-
-        @FXML
-        private TableView<?> tb_listaCuentas;
-
-        @FXML
-        private Button btn_actualizar;
-
-        @FXML
-        private ComboBox<?> cmb_categoria;
-
-        @FXML
-        private Text txt_subtitulo1;
+        private void actualizarTabla() {
+                cuentas.setAll(usuarioActual.getCuentas());
+        }
 
         @FXML
         void onVolver(ActionEvent event) {
@@ -68,19 +69,71 @@ public class DepositoViewController {
         }
 
         @FXML
-        void onRealizarDeposito(ActionEvent event) {
-
+        void onActualizar(ActionEvent event) {
+                actualizarTabla();
         }
 
         @FXML
-        void onActualizar(ActionEvent event) {
+        void onRealizarDeposito(ActionEvent event) {
+                Cuenta cuentaSeleccionada = tb_listaCuentas.getSelectionModel().getSelectedItem();
+                if (cuentaSeleccionada == null) {
+                        mostrarAlerta("Error", "Selecciona una cuenta para realizar el depósito.");
+                        return;
+                }
 
+                String descripcion = txf_descripcion.getText();
+                Categoria categoria = cmb_categoria.getValue();
+
+                double monto;
+                try {
+                        monto = Double.parseDouble(txf_monto.getText());
+                        if (monto <= 0) {
+                                mostrarAlerta("Error", "El monto debe ser mayor que cero.");
+                                return;
+                        }
+                } catch (NumberFormatException e) {
+                        mostrarAlerta("Error", "Monto inválido.");
+                        return;
+                }
+
+                if (categoria == null) {
+                        mostrarAlerta("Error", "Selecciona una categoría.");
+                        return;
+                }
+
+                try {
+                        // Para depósito, destinatario y cuenta origen podrían ser null, o ajusta según tu lógica
+                        app.billetera.getGestorTransacciones().agregarTransaccion(
+                                UUID.randomUUID().toString(),
+                                monto,
+                                descripcion,
+                                TipoTransaccion.DEPOSITO,
+                                categoria,
+                                usuarioActual,
+                                null,
+                                String.valueOf(cuentaSeleccionada)
+                        );
+
+                        mostrarAlerta("Éxito", "Depósito realizado con éxito.");
+                        limpiarCampos();
+                        actualizarTabla();
+                } catch (Exception e) {
+                        mostrarAlerta("Error", e.getMessage());
+                }
         }
 
-        App app;
-
-        public void setApp(App app) {
-                this.app = app;
+        private void limpiarCampos() {
+                txf_descripcion.clear();
+                txf_monto.clear();
+                cmb_categoria.getSelectionModel().clearSelection();
+                tb_listaCuentas.getSelectionModel().clearSelection();
         }
 
+        private void mostrarAlerta(String titulo, String mensaje) {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle(titulo);
+                alert.setHeaderText(null);
+                alert.setContentText(mensaje);
+                alert.showAndWait();
+        }
 }
