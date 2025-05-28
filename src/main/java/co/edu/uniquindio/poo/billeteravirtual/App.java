@@ -9,6 +9,7 @@ import javafx.stage.Stage;
 import javafx.scene.Scene;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import static co.edu.uniquindio.poo.billeteravirtual.enums.RolAdministrador.SUPERADMIN;
 
@@ -18,8 +19,6 @@ public class App extends Application {
     private Stage primaryStage;
     @SuppressWarnings("exports")
     public static BilleteraVirtual billetera = BilleteraVirtual.getInstance();
-    public static UsuarioSession UsuarioActual = UsuarioSession.getInstancia();
-    public static AdministradorSession AdministradorActual = AdministradorSession.getInstancia();
 
     @SuppressWarnings("exports")
     @Override
@@ -374,16 +373,20 @@ public class App extends Application {
     }
 
     public void inicializarData() {
-        // Crear un administrador de prueba
-        Administrador adminEjemplo = new Administrador("1090273807", "Esteban Polanco Mendez", "estebanpolanco06@gmail.com", "+573166558604", "Esteban06yt", SUPERADMIN);
 
-        // Crear un usuario de prueba
-        Usuario usuarioEjemplo = new Usuario("45678901", "Usuario Test", "usuario@correo.com", "+571234567890", "User12345", "Calle Falsa 123", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
+        // Generar IDs para admin y usuario
+        String idAdmin = CodigoGenerador.generarId();
+        String idUsuario = CodigoGenerador.generarId();
+
+        // Crear un administrador de prueba con ID generado
+        Administrador adminEjemplo = new Administrador(idAdmin, "Esteban Polanco Mendez", "estebanpolanco06@gmail.com", "+573166558604", "Esteban06yt", SUPERADMIN);
+
+        // Crear un usuario de prueba con ID generado
+        Usuario usuarioEjemplo = new Usuario(idUsuario, "Camilo Felipe Mendoza Del Castillo", "camilodelcastillo321@gmail.com", "+571234567890", "User12345", "Calle Falsa 123", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
 
         // Guardarlos como los actuales en sesión
         AdministradorSession.getInstancia().setAdministrador(adminEjemplo);
         UsuarioSession.getInstancia().setUsuario(usuarioEjemplo);
-
     }
 
     public static Object getSesionActual() {

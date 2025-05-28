@@ -1,5 +1,6 @@
 package co.edu.uniquindio.poo.billeteravirtual.model;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -9,7 +10,7 @@ public class CodigoGenerador {
     private static final int LONGITUD_CODIGO = 6;
     private static final int LONGITUD_ID = 10;
     private static final Random random = new Random();
-    private static List<Transaccion> transacciones;
+    private static List<Transaccion> transacciones = new ArrayList<>();
 
     public static void setTransacciones(List<Transaccion> listaTransacciones) {
         transacciones = listaTransacciones;
@@ -20,8 +21,6 @@ public class CodigoGenerador {
     }
 
     public static String generarIdTransaccion(String prefijo) {
-        Validar.queNoNulo(prefijo, "El prefijo no puede ser nulo");
-        Validar.queNoNulo(transacciones, "La lista de transacciones no ha sido configurada");
 
         String idGenerado;
         do {
@@ -32,7 +31,7 @@ public class CodigoGenerador {
     }
 
     public static String generarId() {
-        Validar.queNoNulo(transacciones, "La lista de transacciones no ha sido configurada");
+
 
         String idGenerado;
         do {
@@ -43,7 +42,7 @@ public class CodigoGenerador {
     }
 
     public static Integer generarIdCuenta() {
-        Validar.queNoNulo(transacciones, "La lista de transacciones no ha sido configurada");
+
 
         Integer idGenerado;
         do {

@@ -14,7 +14,9 @@ public class Usuario extends Persona{
         super(cedula, nombreCompleto, correo, telefono, contrasenia);
 
         Validar.queNoVacio(direccion, "La dirección no puede estar vacía");
-
+        this.cuentas = (cuentas != null) ? cuentas : new ArrayList<>();
+        this.transacciones = (transacciones != null) ? transacciones : new ArrayList<>();
+        this.presupuestos = (presupuestos != null) ? presupuestos : new ArrayList<>();
         this.saldo = 0.0;
         this.direccion = direccion;
     }
@@ -73,13 +75,11 @@ public class Usuario extends Persona{
     }
 
     public void agregarCuenta(Cuenta cuenta) {
-        Validar.queNoNulo(cuenta, "La cuenta no puede ser nula");
         this.cuentas.add(cuenta);
         actualizarSaldoTotal();
     }
 
     public void agregarTransaccion(Transaccion transaccion) {
-        Validar.queNoNulo(transaccion, "La transacción no puede ser nula");
         this.transacciones.add(transaccion);
         actualizarSaldoTotal();
     }
