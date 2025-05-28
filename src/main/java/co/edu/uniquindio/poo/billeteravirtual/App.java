@@ -10,6 +10,8 @@ import javafx.scene.Scene;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import static co.edu.uniquindio.poo.billeteravirtual.enums.RolAdministrador.SUPERADMIN;
+
 public class App extends Application {
     private Stage primaryStage;
     @SuppressWarnings("exports")
@@ -371,27 +373,10 @@ public class App extends Application {
 
     public void inicializarData() {
         // Crear un administrador de prueba
-        Administrador adminEjemplo = new Administrador(
-                "12345678",                          // cedula
-                "Admin Test",                  // nombreCompleto
-                "admin@correo.com",            // correo
-                "3000000000",                  // telefono
-                "admin123",                    // contrasenia
-                RolAdministrador.SUPER_ADMIN   // rol
-        );
+        Administrador adminEjemplo = new Administrador("1090273807", "Esteban Polanco Mendez", "estebanpolanco06@gmail.com", "+573166558604", "Esteban06yt", SUPERADMIN);
 
         // Crear un usuario de prueba
-        Usuario usuarioEjemplo = new Usuario(
-                "45678901",                         // cedula
-                "Usuario Test",                // nombreCompleto
-                "usuario@correo.com",          // correo
-                "3010000000",                  // telefono
-                "user123",                     // contrasenia
-                "Calle Falsa 123",             // dirección
-                new ArrayList<>(),             // cuentas
-                new ArrayList<>(),             // transacciones
-                new ArrayList<>()              // presupuestos
-        );
+        Usuario usuarioEjemplo = new Usuario("45678901", "Usuario Test", "usuario@correo.com", "+571234567890", "User12345", "Calle Falsa 123", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
 
         // Guardarlos como los actuales en sesión
         AdministradorSession.getInstancia().setAdministrador(adminEjemplo);
