@@ -49,7 +49,7 @@ public class RecargaViewController {
 
         private void inicializarTabla() {
                 tbc_nombreBanco.setCellValueFactory(c -> new SimpleStringProperty(c.getValue().getNombreBanco()));
-                tbc_numeroCuenta.setCellValueFactory(c -> new SimpleStringProperty(c.getValue().getNumeroCuenta()));
+                tbc_numeroCuenta.setCellValueFactory(c -> new SimpleStringProperty());
                 tbc_monto.setCellValueFactory(c -> new SimpleDoubleProperty(c.getValue().getMonto()));
                 tbc_tipo.setCellValueFactory(c -> new SimpleStringProperty(c.getValue().getTipo().name()));
                 tb_listaCuentas.setItems(cuentas);
@@ -102,7 +102,7 @@ public class RecargaViewController {
                 }
 
                 try {
-                        // Suponiendo que el método agregarTransaccion admite tipo RECARGA
+                        // Suponiendo que el metodo agregarTransaccion admite tipo RECARGA
                         app.billetera.getGestorTransacciones().agregarTransaccion(
                                 UUID.randomUUID().toString(),
                                 monto,
@@ -110,8 +110,8 @@ public class RecargaViewController {
                                 TipoTransaccion.RECARGA,
                                 categoria,
                                 usuarioActual,
-                                usuarioActual,
-                                cuentaSeleccionada
+                                String.valueOf(usuarioActual),
+                                String.valueOf(cuentaSeleccionada)
                         );
 
                         mostrarAlerta("Éxito", "Recarga realizada con éxito.");

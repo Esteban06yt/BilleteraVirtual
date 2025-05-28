@@ -19,13 +19,16 @@ public class GestorUsuarios {
 
     /**
      * Agrega un usuario si su cédula no existe aún.
+     *
+     * @return
      * @throws IllegalArgumentException si la cédula ya está registrada.
      */
-    public void agregarUsuario(Usuario usuario) {
+    public boolean agregarUsuario(Usuario usuario) {
         if (buscarUsuario(usuario.getCedula()) != null) {
             throw new IllegalArgumentException("La cédula ya existe: " + usuario.getCedula());
         }
         usuarios.add(usuario);
+        return false;
     }
 
     public Usuario buscarUsuario(String cedula) {

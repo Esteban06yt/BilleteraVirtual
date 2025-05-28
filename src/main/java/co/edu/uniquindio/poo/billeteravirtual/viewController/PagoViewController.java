@@ -49,7 +49,7 @@ public class PagoViewController {
 
         private void inicializarTabla() {
                 tbc_nombreBanco.setCellValueFactory(c -> new SimpleStringProperty(c.getValue().getNombreBanco()));
-                tbc_numeroCuenta.setCellValueFactory(c -> new SimpleStringProperty(c.getValue().getNumeroCuenta()));
+                tbc_numeroCuenta.setCellValueFactory(c -> new SimpleStringProperty());
                 tbc_monto.setCellValueFactory(c -> new SimpleDoubleProperty(c.getValue().getMonto()));
                 tbc_tipo.setCellValueFactory(c -> new SimpleStringProperty(c.getValue().getTipo().name()));
                 tb_listaCuentas.setItems(cuentas);
@@ -117,7 +117,7 @@ public class PagoViewController {
                                 categoria,
                                 usuarioActual,
                                 null, // No hay destinatario directo para un pago a servicio, usar null o ajusta según lógica
-                                cuentaSeleccionada
+                                String.valueOf(cuentaSeleccionada)
                         );
 
                         mostrarAlerta("Éxito", "Pago realizado con éxito.");

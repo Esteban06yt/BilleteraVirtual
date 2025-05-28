@@ -14,7 +14,7 @@ public class GestorCategorias {
     }
 
     // Metodo para agregar una nueva categoría
-    public void agregarCategoria(Categoria categoria) {
+    public boolean agregarCategoria(Categoria categoria) {
         Validar.queNoNulo(categoria, "La categoría no puede ser nula");
         // Verificamos que no exista una categoría con el mismo nombre
         Optional<Categoria> categoriaExistente = categorias.stream()
@@ -26,10 +26,11 @@ public class GestorCategorias {
         }
 
         categorias.add(categoria);
+        return false;
     }
 
     // Metodo para eliminar una categoría
-    public void eliminarCategoria(String idCategoria) {
+    public boolean eliminarCategoria(String idCategoria) {
         Validar.queNoVacio(idCategoria, "El ID de la categoría no puede estar vacío");
         Categoria categoria = buscarCategoriaPorId(idCategoria);
         if (categoria != null) {
@@ -37,6 +38,7 @@ public class GestorCategorias {
         } else {
             throw new IllegalArgumentException("La categoría con ID " + idCategoria + " no existe.");
         }
+        return false;
     }
 
     // Metodo para buscar una categoría por su ID
