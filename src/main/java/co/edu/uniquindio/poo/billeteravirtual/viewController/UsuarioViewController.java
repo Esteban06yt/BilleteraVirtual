@@ -52,13 +52,12 @@ public class UsuarioViewController {
                 Object sesion = App.getSesionActual();
                 if (!(sesion instanceof Usuario usuario)) {
                         // Si no hay usuario, volvemos al login
-                        App.cerrarSesion();
-                        app.openLoginUsuario();
+
                         return;
                 }
 
                 initBindings();
-                cargarDatos(usuario);
+                cargarDatos();
         }
 
         private void initBindings() {
@@ -96,20 +95,21 @@ public class UsuarioViewController {
                 ));
         }
 
-        private void cargarDatos(Usuario usuario) {
+        private void cargarDatos() {
+
                 // Tabla Usuario (lista con un solo elemento)
-                tb_usuario.setItems(FXCollections.observableArrayList(usuario));
+                tb_usuario.setItems(FXCollections.observableArrayList(App.usuarioActual));
 
                 // Cuentas
-                List<Cuenta> cuentas = App.billetera.getGestorCuentas().obtenerCuentasDeUsuario(usuario);
+                List<Cuenta> cuentas = App.billetera.getGestorCuentas().obtenerCuentasDeUsuario(App.usuarioActual);
                 tb_listaCuentas.setItems(FXCollections.observableList(cuentas));
 
                 // Presupuestos
-                List<Presupuesto> presupuestos = App.billetera.getGestorPresupuestos().obtenerPresupuestosDeUsuario(usuario);
+                List<Presupuesto> presupuestos = App.billetera.getGestorPresupuestos().obtenerPresupuestosDeUsuario(App.usuarioActual);
                 tb_listaPresupuestos.setItems(FXCollections.observableList(presupuestos));
 
                 // Transacciones
-                List<Transaccion> transacciones = App.billetera.getGestorTransacciones().obtenerTransaccionesPorUsuario(usuario);
+                List<Transaccion> transacciones = App.billetera.getGestorTransacciones().obtenerTransaccionesPorUsuario(App.usuarioActual);
                 tb_listaTransacciones.setItems(FXCollections.observableList(transacciones));
         }
 

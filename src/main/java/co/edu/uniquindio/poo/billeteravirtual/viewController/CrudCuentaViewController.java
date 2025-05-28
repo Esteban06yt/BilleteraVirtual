@@ -60,7 +60,7 @@ public class CrudCuentaViewController {
 
         public void setApp(App app) {
                 this.app = app;
-                this.usuarioActual = (Usuario) app.getSesionActual(); // ← Obtener usuario de la sesión
+                this.usuarioActual = App.usuarioActual; // ← Obtener usuario de la sesión
                 inicializarDatos();
         }
 
