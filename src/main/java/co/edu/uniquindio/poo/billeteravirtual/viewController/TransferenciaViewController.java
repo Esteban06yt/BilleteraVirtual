@@ -125,7 +125,7 @@ public class TransferenciaViewController {
                     TipoTransaccion.TRANSFERENCIA,
                     cat,
                     usuarioActual,
-                    destinatario,
+                    destinatario.getIdCuenta(),
                     cuentaOrigen.getIdCuenta()
             );
             showAlert("Éxito", "Transferencia realizada.");
