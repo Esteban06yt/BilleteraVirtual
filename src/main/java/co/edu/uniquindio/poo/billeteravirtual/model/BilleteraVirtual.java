@@ -11,6 +11,8 @@ import co.edu.uniquindio.poo.billeteravirtual.model.GestorTransacciones;
 import co.edu.uniquindio.poo.billeteravirtual.model.GestorEstadisticas;
 import co.edu.uniquindio.poo.billeteravirtual.model.GestorReportes;
 
+import static co.edu.uniquindio.poo.billeteravirtual.enums.RolAdministrador.SUPERADMIN;
+
 public class BilleteraVirtual {
 
     private static BilleteraVirtual instance;
@@ -82,5 +84,11 @@ public class BilleteraVirtual {
 
     public GestorReportes getGestorReportes() {
         return gestorReportes;
+    }
+
+    public void cargarDatosIniciales() {
+        // Ejemplo: Agregar un administrador por defecto
+        gestorAdministradores.agregarAdministrador(new Administrador("1090273807", "Esteban Polanco Mendez", "estebanpolanco06@gmail.com", "+573166558604", "Esteban06yt", SUPERADMIN));
+        // Puedes poblar más datos aquí: usuarios, cuentas, etc.
     }
 }
