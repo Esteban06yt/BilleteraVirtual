@@ -46,7 +46,7 @@ public class RecuperacionContraseniaViewController {
                 String codigo = generarCodigo();
                 persona.setCodigoRecuperacion(codigo);
 
-                servicio = new RecuperacionContraseniaService(persona, new EmailService("smtp.gmail.com", 587, "estebanpolanco06@gmail.com", "liqqavbfavvnebgp", true));
+                servicio = new RecuperacionContraseniaService(persona, new EmailService("smtp.gmail.com", 587, "estebanpolanco06@gmail.com", "blma ttmu gfjj alfd", true));
 
                 boolean enviado = servicio.enviarCodigoPorEmail();
 

@@ -45,7 +45,6 @@ public class LoginUsuarioViewController {
 
                         // ⚠️ Llama a inicializarData aquí, no antes
                         app.inicializarData();
-
                         app.openUsuario();
                 } else {
                         Alert alert = new Alert(Alert.AlertType.ERROR);

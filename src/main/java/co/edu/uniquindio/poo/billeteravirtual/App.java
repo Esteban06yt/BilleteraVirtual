@@ -384,18 +384,18 @@ public class App extends Application {
         SistemaBilleteraFacade facade = new SistemaBilleteraFacade();
 
         // Crear un administrador de prueba con ID generado
-        Administrador adminEjemplo = new Administrador(idAdmin, "Esteban Polanco Mendez", "estebanpolanco06@gmail.com", "+573166558604", "Esteban06yt", SUPERADMIN);
+        administradorActual = new Administrador(idAdmin, "Esteban Polanco Mendez", "estebanpolanco06@gmail.com", "+573166558604", "Esteban06yt", SUPERADMIN);
 
         // Crear un usuario de prueba con ID generado
-        Usuario usuarioEjemplo = new Usuario(idUsuario, "Camilo Felipe Mendoza Del Castillo", "camilodelcastillo321@gmail.com", "+571234567890", "User12345", "Calle Falsa 123", new ArrayList<>(), new ArrayList<>(), new ArrayList<>(),new ArrayList<>());
+        usuarioActual = new Usuario(idUsuario, "Camilo Felipe Mendoza Del Castillo", "camilodelcastillo321@gmail.com", "+571234567890", "User12345", "Calle Falsa 123", new ArrayList<>(), new ArrayList<>(), new ArrayList<>(),new ArrayList<>());
 
         // Guardarlos como los actuales en sesión
-        AdministradorSession.getInstancia().setAdministrador(adminEjemplo);
-        UsuarioSession.getInstancia().setUsuario(usuarioEjemplo);
-        listaAdministrador.add(adminEjemplo);
-        listaUsuarios.add(usuarioEjemplo);
-        facade.registrarUsuario(usuarioEjemplo);
-        facade.registrarAdministrador(adminEjemplo);
+        AdministradorSession.getInstancia().setAdministrador(administradorActual);
+        UsuarioSession.getInstancia().setUsuario(usuarioActual);
+        listaAdministrador.add(administradorActual);
+        listaUsuarios.add(usuarioActual);
+        facade.registrarUsuario(usuarioActual);
+        facade.registrarAdministrador(administradorActual);
     }
 
     public static Object getSesionActual() {

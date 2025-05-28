@@ -7,7 +7,6 @@ import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -38,30 +37,33 @@ public class UsuarioViewController {
 
         @FXML private Button btn_volver, btn_modificarPerfil, btn_realizarTransaccion, btn_crudPresupuestos, btn_generarReporte;
         @FXML private Text txt_titulo, txt_subtitulo, txt_subtitulo1, txt_subtitulo2;
-        App app;
+        private App app;
+
+        private static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
         public void setApp(App app) {
                 this.app = app;
         }
 
-        private final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-
         @FXML
-        void initialize() {
+        public void initialize() {
                 // Obtener usuario en sesión
                 Object sesion = App.getSesionActual();
                 if (!(sesion instanceof Usuario usuario)) {
-                        // Si no hay usuario, volvemos al login
-
+                        // Si no hay usuario, volvemos al login o no inicializamos
+                        System.out.println("No hay usuario en sesión");
                         return;
                 }
 
+                // Inicializar bindings de columnas
                 initBindings();
-                cargarDatos();
+
+                // Cargar datos en tablas
+                cargarDatos(usuario);
         }
 
         private void initBindings() {
-                // Usuario
+                // Configurar columnas para tb_usuario (tomando valores del objeto Usuario)
                 tbc_nombreUsuario.setCellValueFactory(c -> new SimpleStringProperty(c.getValue().getNombreCompleto()));
                 tbc_cedulaUsuario.setCellValueFactory(c -> new SimpleStringProperty(c.getValue().getCedula()));
                 tbc_telefonoUsuario.setCellValueFactory(c -> new SimpleStringProperty(c.getValue().getTelefono()));
@@ -95,22 +97,21 @@ public class UsuarioViewController {
                 ));
         }
 
-        private void cargarDatos() {
+        private void cargarDatos(Usuario usuario) {
+                // Crear una lista con el usuario para la tabla (aunque sea un solo usuario)
+                tb_usuario.setItems(FXCollections.observableArrayList(usuario));
 
-                // Tabla Usuario (lista con un solo elemento)
-                tb_usuario.setItems(FXCollections.observableArrayList(App.usuarioActual));
+                // Cuentas del usuario
+                List<Cuenta> cuentas = App.billetera.getGestorCuentas().obtenerCuentasDeUsuario(usuario);
+                tb_listaCuentas.setItems(FXCollections.observableArrayList(cuentas));
 
-                // Cuentas
-                List<Cuenta> cuentas = App.billetera.getGestorCuentas().obtenerCuentasDeUsuario(App.usuarioActual);
-                tb_listaCuentas.setItems(FXCollections.observableList(cuentas));
+                // Presupuestos del usuario
+                List<Presupuesto> presupuestos = App.billetera.getGestorPresupuestos().obtenerPresupuestosDeUsuario(usuario);
+                tb_listaPresupuestos.setItems(FXCollections.observableArrayList(presupuestos));
 
-                // Presupuestos
-                List<Presupuesto> presupuestos = App.billetera.getGestorPresupuestos().obtenerPresupuestosDeUsuario(App.usuarioActual);
-                tb_listaPresupuestos.setItems(FXCollections.observableList(presupuestos));
-
-                // Transacciones
-                List<Transaccion> transacciones = App.billetera.getGestorTransacciones().obtenerTransaccionesPorUsuario(App.usuarioActual);
-                tb_listaTransacciones.setItems(FXCollections.observableList(transacciones));
+                // Transacciones del usuario
+                List<Transaccion> transacciones = App.billetera.getGestorTransacciones().obtenerTransaccionesPorUsuario(usuario);
+                tb_listaTransacciones.setItems(FXCollections.observableArrayList(transacciones));
         }
 
         // ----------------------------------
@@ -147,11 +148,14 @@ public class UsuarioViewController {
         }
 
         public void onActualizar(ActionEvent actionEvent) {
+                // Implementar actualización si es necesaria
         }
 
         public void onCategorizarTransaccion(ActionEvent actionEvent) {
+                // Implementar funcionalidad si se desea
         }
 
         public void onLimpiarCampos(ActionEvent actionEvent) {
+                // Implementar funcionalidad si se desea
         }
 }

@@ -66,7 +66,7 @@ public class CrudCuentaViewController {
 
         private void inicializarDatos() {
                 if (usuarioActual != null) {
-                        cuentas.setAll(usuarioActual.getCuentas());
+                        cuentas.setAll(App.usuarioActual.getCuentas());
                         tb_listaCuentas.setItems(cuentas);
 
                         tbc_nombreBanco.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getNombreBanco()));
