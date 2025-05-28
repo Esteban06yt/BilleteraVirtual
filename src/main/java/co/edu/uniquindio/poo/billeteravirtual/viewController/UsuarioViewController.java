@@ -36,33 +36,28 @@ public class UsuarioViewController {
         @FXML private TableColumn<Transaccion, Number> tbc_montoTransaccion;
         @FXML private TableColumn<Transaccion, String> tbc_fechaTransaccion;
 
-        @FXML private Button btn_volver, btn_modificarPerfil, btn_realizarTransaccion, btn_crudPresupuestos, btn_generarReporte, btn_actualizar,btn_categorizarTransaccion,
-                btn_actualizar1, btn_limpiarCampos;
-
+        @FXML private Button btn_volver, btn_modificarPerfil, btn_realizarTransaccion, btn_crudPresupuestos, btn_generarReporte;
         @FXML private Text txt_titulo, txt_subtitulo, txt_subtitulo1, txt_subtitulo2;
-
-
-
-        private final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-
         App app;
 
         public void setApp(App app) {
                 this.app = app;
         }
 
+        private final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+
         @FXML
         void initialize() {
-
+                // Obtener usuario en sesión
                 Object sesion = App.getSesionActual();
                 if (!(sesion instanceof Usuario usuario)) {
                         // Si no hay usuario, volvemos al login
 
-                        return ;
+                        return;
                 }
 
                 initBindings();
-                cargarDatos(usuario);
+                cargarDatos();
         }
 
         private void initBindings() {
@@ -100,20 +95,21 @@ public class UsuarioViewController {
                 ));
         }
 
-        private void cargarDatos(Usuario usuario) {
+        private void cargarDatos() {
+
                 // Tabla Usuario (lista con un solo elemento)
-                tb_usuario.setItems(FXCollections.observableArrayList(usuario));
+                tb_usuario.setItems(FXCollections.observableArrayList(App.usuarioActual));
 
                 // Cuentas
-                List<Cuenta> cuentas = App.billetera.getGestorCuentas().obtenerCuentasDeUsuario(usuario);
+                List<Cuenta> cuentas = App.billetera.getGestorCuentas().obtenerCuentasDeUsuario(App.usuarioActual);
                 tb_listaCuentas.setItems(FXCollections.observableList(cuentas));
 
                 // Presupuestos
-                List<Presupuesto> presupuestos = App.billetera.getGestorPresupuestos().obtenerPresupuestosDeUsuario(usuario);
+                List<Presupuesto> presupuestos = App.billetera.getGestorPresupuestos().obtenerPresupuestosDeUsuario(App.usuarioActual);
                 tb_listaPresupuestos.setItems(FXCollections.observableList(presupuestos));
 
                 // Transacciones
-                List<Transaccion> transacciones = App.billetera.getGestorTransacciones().obtenerTransaccionesPorUsuario(usuario);
+                List<Transaccion> transacciones = App.billetera.getGestorTransacciones().obtenerTransaccionesPorUsuario(App.usuarioActual);
                 tb_listaTransacciones.setItems(FXCollections.observableList(transacciones));
         }
 
@@ -150,16 +146,12 @@ public class UsuarioViewController {
                 App.billetera.getGestorReportes().exportarTransaccionesAPDF(App.billetera.getGestorTransacciones().listarTransacciones(), "transacciones pdf");
         }
 
-        @FXML
-        public void onCategorizarTransaccion(ActionEvent actionEvent) {
-        }
-
-        @FXML
         public void onActualizar(ActionEvent actionEvent) {
         }
 
-        @FXML
-        public void onLimpiarCampos(ActionEvent actionEvent) {
+        public void onCategorizarTransaccion(ActionEvent actionEvent) {
         }
 
+        public void onLimpiarCampos(ActionEvent actionEvent) {
+        }
 }

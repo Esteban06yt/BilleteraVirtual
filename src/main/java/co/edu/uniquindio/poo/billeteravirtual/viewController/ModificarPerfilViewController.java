@@ -2,6 +2,7 @@ package co.edu.uniquindio.poo.billeteravirtual.viewController;
 
 import co.edu.uniquindio.poo.billeteravirtual.App;
 import javafx.event.ActionEvent;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
@@ -72,10 +73,10 @@ public class ModificarPerfilViewController {
                         App.usuarioActual.setTelefono(telefono);
 
                         // (Opcional) Guardar en almacenamiento o mostrar mensaje
-                        System.out.println("Usuario actualizado correctamente: " + App.usuarioActual);
+                        mostrarAlerta("Modificar Usuario","Usuario actualizado correctamente: " + App.usuarioActual);
 
                 } else {
-                        System.err.println("No hay un usuario actual para actualizar.");
+                        mostrarAlerta("Modificar Usuario","No hay un usuario actual para actualizar.");
                 }
 
         }
@@ -85,5 +86,12 @@ public class ModificarPerfilViewController {
 
         public void setApp(App app) {
                 this.app = app;
+        }
+
+        private void mostrarAlerta(String titulo, String contenido) {
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle(titulo);
+                alert.setContentText(contenido);
+                alert.showAndWait();
         }
 }

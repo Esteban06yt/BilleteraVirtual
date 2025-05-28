@@ -44,7 +44,7 @@ public class PresupuestoViewController {
 
         public void setApp(App app) {
                 this.app = app;
-                this.usuarioActual = (Usuario) app.getSesionActual();
+                this.usuarioActual = App.usuarioActual;
                 inicializarDatos();
         }
 
