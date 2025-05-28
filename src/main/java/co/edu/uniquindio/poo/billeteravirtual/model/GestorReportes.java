@@ -6,6 +6,10 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+
+import co.edu.uniquindio.poo.billeteravirtual.adapter.ReporteCSVAdapter;
+import co.edu.uniquindio.poo.billeteravirtual.adapter.ReportePDFAdapter;
+import co.edu.uniquindio.poo.billeteravirtual.interfaces.ReporteAdapter;
 import org.apache.commons.csv.*;
 import org.apache.pdfbox.pdmodel.*;
 import org.apache.pdfbox.pdmodel.common.PDRectangle;
@@ -13,6 +17,8 @@ import org.apache.pdfbox.pdmodel.font.*;
 
 public class GestorReportes {
 
+    private final ReporteAdapter csvAdapter = new ReporteCSVAdapter();
+    private final ReporteAdapter pdfAdapter = new ReportePDFAdapter();
     private static final DateTimeFormatter FORMATO_FECHA = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
     public void exportarTransaccionesACSV(List<Transaccion> transacciones, String ruta) throws IOException {
@@ -64,5 +70,13 @@ public class GestorReportes {
         }
         doc.save(ruta);
         doc.close();
+    }
+
+    public void exportarACSV(List<Transaccion> transacciones, String ruta) throws IOException {
+        csvAdapter.generar(transacciones, ruta);
+    }
+
+    public void exportarAPDF(List<Transaccion> transacciones, String ruta) throws IOException {
+        pdfAdapter.generar(transacciones, ruta);
     }
 }

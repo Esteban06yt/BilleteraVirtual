@@ -1,6 +1,6 @@
 package co.edu.uniquindio.poo.billeteravirtual.model;
 
-import co.edu.uniquindio.poo.billeteravirtual.repository.TransaccionRepository;
+import co.edu.uniquindio.poo.billeteravirtual.interfaces.TransaccionRepository;
 
 import java.util.Random;
 
