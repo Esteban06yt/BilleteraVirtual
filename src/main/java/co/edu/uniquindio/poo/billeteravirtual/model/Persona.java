@@ -11,7 +11,7 @@ public abstract class Persona {
     protected Boolean esCuentaActiva = true;
 
     public Persona(String cedula, String nombreCompleto, String correo, String telefono, String contrasenia) {
-        Validar.queCedulaValida(cedula);
+
         Validar.queNoVacio(nombreCompleto, "El nombre completo no puede estar vacío");
         Validar.queCorreoValido(correo);
         Validar.queTelefonoValido(telefono);
