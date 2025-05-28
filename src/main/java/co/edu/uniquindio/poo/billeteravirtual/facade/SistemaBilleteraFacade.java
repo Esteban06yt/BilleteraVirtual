@@ -22,6 +22,14 @@ public class SistemaBilleteraFacade {
         return sistema.getGestorUsuarios().autenticarUsuario(correo, contrasenia);
     }
 
+    public Usuario buscarUsuarioPorCorreo(String correo) {
+        return sistema.getGestorUsuarios().buscarUsuarioPorCorreo(correo);
+    }
+
+    public Administrador buscarAdministradorPorCorreo(String correo) {
+        return sistema.getGestorAdministradores().buscarAdmministradorPorCorreo(correo);
+    }
+
     // -------------------------
     // Usuarios
     // -------------------------

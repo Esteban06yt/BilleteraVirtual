@@ -74,4 +74,12 @@ public class GestorAdministradores {
         }
         return null;
     }
+
+    public Administrador buscarAdmministradorPorCorreo(String correo) {
+        // Si tienes usuarios y administradores, busca en ambas listas
+        for (Administrador a : administradores) {
+            if (a.getCorreo().equalsIgnoreCase(correo)) return a;
+        }
+        return null;
+    }
 }
