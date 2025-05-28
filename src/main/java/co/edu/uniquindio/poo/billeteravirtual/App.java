@@ -1,5 +1,8 @@
 package co.edu.uniquindio.poo.billeteravirtual;
 
+import co.edu.uniquindio.poo.billeteravirtual.command.Command;
+import co.edu.uniquindio.poo.billeteravirtual.command.GestorComandos;
+import co.edu.uniquindio.poo.billeteravirtual.command.RealizarTransaccionCommand;
 import co.edu.uniquindio.poo.billeteravirtual.model.Administrador;
 import co.edu.uniquindio.poo.billeteravirtual.model.BilleteraVirtual;
 import co.edu.uniquindio.poo.billeteravirtual.viewController.*;
@@ -367,10 +370,6 @@ public class App extends Application {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-    }
-
-    public void setAdministradorLogeado(Administrador admin) {
-        this.administradorLogeado = admin;
     }
 
     public void inicializarData() {
