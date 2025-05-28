@@ -87,4 +87,12 @@ public class GestorUsuarios {
         }
         return null; // No encontrado
     }
+
+    public Usuario buscarUsuarioPorCorreo(String correo) {
+        // Si tienes usuarios y administradores, busca en ambas listas
+        for (Usuario u : usuarios) {
+            if (u.getCorreo().equalsIgnoreCase(correo)) return u;
+        }
+        return null;
+    }
 }

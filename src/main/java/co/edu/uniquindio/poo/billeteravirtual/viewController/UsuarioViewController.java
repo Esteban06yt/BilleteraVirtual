@@ -38,7 +38,7 @@ public class UsuarioViewController {
 
         @FXML private Button btn_volver, btn_modificarPerfil, btn_realizarTransaccion, btn_crudPresupuestos, btn_generarReporte;
         @FXML private Text txt_titulo, txt_subtitulo, txt_subtitulo1, txt_subtitulo2;
-        private App app;
+        App app;
 
         public void setApp(App app) {
                 this.app = app;
@@ -144,5 +144,14 @@ public class UsuarioViewController {
                         "transacciones.csv"
                 );
                 App.billetera.getGestorReportes().exportarTransaccionesAPDF(App.billetera.getGestorTransacciones().listarTransacciones(), "transacciones pdf");
+        }
+
+        public void onActualizar(ActionEvent actionEvent) {
+        }
+
+        public void onCategorizarTransaccion(ActionEvent actionEvent) {
+        }
+
+        public void onLimpiarCampos(ActionEvent actionEvent) {
         }
 }

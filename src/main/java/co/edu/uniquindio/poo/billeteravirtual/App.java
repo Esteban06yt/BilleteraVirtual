@@ -382,7 +382,7 @@ public class App extends Application {
         Administrador adminEjemplo = new Administrador(idAdmin, "Esteban Polanco Mendez", "estebanpolanco06@gmail.com", "+573166558604", "Esteban06yt", SUPERADMIN);
 
         // Crear un usuario de prueba con ID generado
-        Usuario usuarioEjemplo = new Usuario(idUsuario, "Camilo Felipe Mendoza Del Castillo", "camilodelcastillo321@gmail.com", "+571234567890", "User12345", "Calle Falsa 123", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
+        Usuario usuarioEjemplo = new Usuario(idUsuario, "Camilo Felipe Mendoza Del Castillo", "camilodelcastillo321@gmail.com", "+571234567890", "User12345", "Calle Falsa 123", new ArrayList<>(), new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
 
         // Guardarlos como los actuales en sesión
         AdministradorSession.getInstancia().setAdministrador(adminEjemplo);
