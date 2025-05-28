@@ -1,5 +1,6 @@
 package co.edu.uniquindio.poo.billeteravirtual;
 
+import co.edu.uniquindio.poo.billeteravirtual.facade.SistemaBilleteraFacade;
 import co.edu.uniquindio.poo.billeteravirtual.model.*;
 import co.edu.uniquindio.poo.billeteravirtual.viewController.*;
 import javafx.application.Application;
@@ -377,6 +378,9 @@ public class App extends Application {
         // Generar IDs para admin y usuario
         String idAdmin = CodigoGenerador.generarId();
         String idUsuario = CodigoGenerador.generarId();
+        List<Usuario> listaUsuarios = new ArrayList<>();
+        List<Administrador> listaAdministrador = new ArrayList<>();
+        SistemaBilleteraFacade facade = new SistemaBilleteraFacade();
 
         // Crear un administrador de prueba con ID generado
         Administrador adminEjemplo = new Administrador(idAdmin, "Esteban Polanco Mendez", "estebanpolanco06@gmail.com", "+573166558604", "Esteban06yt", SUPERADMIN);
@@ -387,6 +391,10 @@ public class App extends Application {
         // Guardarlos como los actuales en sesión
         AdministradorSession.getInstancia().setAdministrador(adminEjemplo);
         UsuarioSession.getInstancia().setUsuario(usuarioEjemplo);
+        listaAdministrador.add(adminEjemplo);
+        listaUsuarios.add(usuarioEjemplo);
+        facade.registrarUsuario(usuarioEjemplo);
+        facade.registrarAdministrador(adminEjemplo);
     }
 
     public static Object getSesionActual() {

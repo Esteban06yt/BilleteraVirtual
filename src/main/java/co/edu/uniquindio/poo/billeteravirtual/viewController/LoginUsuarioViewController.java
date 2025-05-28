@@ -38,19 +38,16 @@ public class LoginUsuarioViewController {
                 String correo = txf_correo.getText();
                 String contrasenia = txf_contrasenia.getText();
 
-                // 1. Autenticar
                 Usuario usuario = facade.autenticarUsuario(correo, contrasenia);
                 if (usuario != null) {
-                        // 2. Guardar en sesión
                         UsuarioSession.getInstancia().setUsuario(usuario);
-
-                        // 3. Registrar observador para alertas en UI
                         BilleteraVirtual.getInstance().getGestorTransacciones().getNotificador().agregarObservador(new UsuarioObservador(usuario));
 
-                        // 4. Abrir la vista principal de usuario
+                        // ⚠️ Llama a inicializarData aquí, no antes
+                        app.inicializarData();
+
                         app.openUsuario();
                 } else {
-                        // Credenciales inválidas → mostrar error
                         Alert alert = new Alert(Alert.AlertType.ERROR);
                         alert.setTitle("Error de autenticación");
                         alert.setHeaderText(null);
