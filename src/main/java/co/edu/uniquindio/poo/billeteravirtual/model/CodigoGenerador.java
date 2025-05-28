@@ -1,7 +1,6 @@
 package co.edu.uniquindio.poo.billeteravirtual.model;
 
-import co.edu.uniquindio.poo.billeteravirtual.interfaces.TransaccionRepository;
-
+import java.util.List;
 import java.util.Random;
 
 public class CodigoGenerador {
@@ -10,72 +9,69 @@ public class CodigoGenerador {
     private static final int LONGITUD_CODIGO = 6;
     private static final int LONGITUD_ID = 10;
     private static final Random random = new Random();
-    private static TransaccionRepository transaccionRepository;
+    private static List<Transaccion> transacciones;
 
-    public static void setTransaccionRepository(TransaccionRepository repository) {
-        transaccionRepository = repository;
+    public static void setTransacciones(List<Transaccion> listaTransacciones) {
+        transacciones = listaTransacciones;
     }
 
-    // Generar un código aleatorio de longitud 6
     public static String generarCodigo() {
         return generarCadenaAleatoria(LONGITUD_CODIGO);
     }
 
-    // Generar un ID de transacción único con un prefijo
     public static String generarIdTransaccion(String prefijo) {
         Validar.queNoNulo(prefijo, "El prefijo no puede ser nulo");
-        Validar.queNoNulo(transaccionRepository, "El repositorio de transacciones no ha sido configurado");
+        Validar.queNoNulo(transacciones, "La lista de transacciones no ha sido configurada");
 
         String idGenerado;
         do {
-            idGenerado = prefijo + "_" + generarCadenaAleatoria(LONGITUD_ID); // Genera un nuevo ID con el prefijo
-        } while (transaccionRepository.existeIdTransaccion(idGenerado)); // Verifica si ya existe en el repositorio
+            idGenerado = prefijo + "_" + generarCadenaAleatoria(LONGITUD_ID);
+        } while (existeIdTransaccion(idGenerado));
 
-        return idGenerado; // Retorna el ID único
+        return idGenerado;
     }
 
-    // Generar un ID único sin prefijo
     public static String generarId() {
-        Validar.queNoNulo(transaccionRepository, "El repositorio de transacciones no ha sido configurado");
+        Validar.queNoNulo(transacciones, "La lista de transacciones no ha sido configurada");
 
         String idGenerado;
         do {
-            idGenerado = generarCadenaAleatoria(LONGITUD_ID); // Genera un nuevo ID sin prefijo
-        } while (transaccionRepository.existeIdTransaccion(idGenerado)); // Verifica si ya existe en el repositorio
+            idGenerado = generarCadenaAleatoria(LONGITUD_ID);
+        } while (existeIdTransaccion(idGenerado));
 
-        return idGenerado; // Retorna el ID único
+        return idGenerado;
     }
 
-    // Generar un ID de cuenta único (Integer)
     public static Integer generarIdCuenta() {
-        Validar.queNoNulo(transaccionRepository, "El repositorio de transacciones no ha sido configurado");
+        Validar.queNoNulo(transacciones, "La lista de transacciones no ha sido configurada");
 
         Integer idGenerado;
         do {
-            // Genera un nuevo ID para cuenta como número
             idGenerado = Integer.parseInt(generarCadenaAleatoriaNumeros(LONGITUD_ID));
-        } while (transaccionRepository.existeIdTransaccion(idGenerado.toString())); // Verifica si ya existe en el repositorio
+        } while (existeIdTransaccion(idGenerado.toString()));
 
-        return idGenerado; // Retorna el ID único como Integer
+        return idGenerado;
     }
 
-    // Generar una cadena aleatoria con números
+    private static boolean existeIdTransaccion(String id) {
+        return transacciones.stream()
+                .anyMatch(t -> t != null && id.equals(t.getIdTransaccion()));
+    }
+
     private static String generarCadenaAleatoriaNumeros(int longitud) {
         StringBuilder sb = new StringBuilder(longitud);
         for (int i = 0; i < longitud; i++) {
             int index = random.nextInt(NUMEROS.length());
-            sb.append(NUMEROS.charAt(index)); // Añade un número aleatorio
+            sb.append(NUMEROS.charAt(index));
         }
         return sb.toString();
     }
 
-
-    // Generar una cadena aleatoria con caracteres alfanuméricos
     private static String generarCadenaAleatoria(int longitud) {
         StringBuilder sb = new StringBuilder(longitud);
         for (int i = 0; i < longitud; i++) {
             int index = random.nextInt(CARACTERES.length());
-            sb.append(CARACTERES.charAt(index)); // Añade un caracter aleatorio
+            sb.append(CARACTERES.charAt(index));
         }
         return sb.toString();
     }
