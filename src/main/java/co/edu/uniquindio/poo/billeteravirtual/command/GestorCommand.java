@@ -2,7 +2,7 @@ package co.edu.uniquindio.poo.billeteravirtual.command;
 
 import java.util.Stack;
 
-public class GestorComandos {
+public class GestorCommand {
 
     private Stack<Command> historialComandos = new Stack<>();
 
