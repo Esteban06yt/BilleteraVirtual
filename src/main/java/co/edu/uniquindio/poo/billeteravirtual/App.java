@@ -13,6 +13,8 @@ import java.util.ArrayList;
 import static co.edu.uniquindio.poo.billeteravirtual.enums.RolAdministrador.SUPERADMIN;
 
 public class App extends Application {
+    public static Administrador administradorActual;
+    public static Usuario usuarioActual;
     private Stage primaryStage;
     @SuppressWarnings("exports")
     public static BilleteraVirtual billetera = BilleteraVirtual.getInstance();
@@ -382,5 +384,18 @@ public class App extends Application {
         AdministradorSession.getInstancia().setAdministrador(adminEjemplo);
         UsuarioSession.getInstancia().setUsuario(usuarioEjemplo);
 
+    }
+
+    public static Object getSesionActual() {
+        if (administradorActual != null) {
+            return administradorActual;
+        } else {
+            return usuarioActual;
+        }
+    }
+
+    public static void cerrarSesion() {
+        administradorActual = null;
+        usuarioActual = null;
     }
 }

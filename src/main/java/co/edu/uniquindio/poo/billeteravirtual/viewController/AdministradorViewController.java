@@ -71,7 +71,7 @@ public class AdministradorViewController {
         }
 
         private void obtenerAdministradorSesion() {
-                Object sesion = app.getSesion();
+                Object sesion = app.getSesionActual();
 
                 if (sesion instanceof Administrador administradorSesion) {
                         listAdministrador.clear();
