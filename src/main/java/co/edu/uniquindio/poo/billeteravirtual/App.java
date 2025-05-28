@@ -1,5 +1,6 @@
 package co.edu.uniquindio.poo.billeteravirtual;
 
+import co.edu.uniquindio.poo.billeteravirtual.model.Administrador;
 import co.edu.uniquindio.poo.billeteravirtual.model.BilleteraVirtual;
 import co.edu.uniquindio.poo.billeteravirtual.viewController.*;
 import javafx.application.Application;
@@ -14,6 +15,7 @@ public class App extends Application {
     private Stage primaryStage;
     @SuppressWarnings("exports")
     public static BilleteraVirtual billetera = BilleteraVirtual.getInstance();
+    public static Administrador administradorActual;
 
     @SuppressWarnings("exports")
     @Override
@@ -365,6 +367,10 @@ public class App extends Application {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
+    }
+
+    public void setAdministradorLogeado(Administrador admin) {
+        this.administradorLogeado = admin;
     }
 
     public void inicializarData() {
