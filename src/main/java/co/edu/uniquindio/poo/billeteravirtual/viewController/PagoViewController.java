@@ -14,7 +14,10 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 
+import java.time.LocalDateTime;
 import java.util.UUID;
+
+import static co.edu.uniquindio.poo.billeteravirtual.enums.TipoTransaccion.PAGO;
 
 public class PagoViewController {
 
@@ -109,16 +112,14 @@ public class PagoViewController {
 
                 try {
                         // Aquí asumimos que la transacción de pago tiene que registrar el servicio en la descripción
-                        app.billetera.getGestorTransacciones().agregarTransaccion(
-                                UUID.randomUUID().toString(),
-                                monto,
-                                descripcion + " | Servicio: " + servicio,
-                                TipoTransaccion.PAGO,
-                                categoria,
-                                usuarioActual,
-                                null, // No hay destinatario directo para un pago a servicio, usar null o ajusta según lógica
-                                String.valueOf(cuentaSeleccionada)
-                        );
+                        Transaccion transaccion = new Transaccion.Builder()
+                                .withFechaHora(LocalDateTime.now())
+                                .withMonto(monto)
+                                .withDescripcion(descripcion)
+                                .withTipo(PAGO)
+                                .withCategoria(categoria)
+                                .withEmisor(usuarioActual)
+                                .build();
 
                         mostrarAlerta("Éxito", "Pago realizado con éxito.");
                         limpiarCampos();
