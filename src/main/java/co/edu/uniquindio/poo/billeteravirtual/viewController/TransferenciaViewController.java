@@ -16,7 +16,10 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 
+import java.time.LocalDateTime;
 import java.util.UUID;
+
+import static co.edu.uniquindio.poo.billeteravirtual.enums.TipoTransaccion.TRANSFERENCIA;
 
 public class TransferenciaViewController {
 
@@ -91,8 +94,8 @@ public class TransferenciaViewController {
         }
 
         String destNum = txf_numeroCuentaDestino.getText();
-        String desc    = txf_descripcion.getText();
-        Categoria cat  = cmb_categoria.getValue();
+        String descripcion    = txf_descripcion.getText();
+        Categoria categoria  = cmb_categoria.getValue();
         double   monto;
         try {
             monto = Double.parseDouble(txf_monto.getText());
@@ -105,7 +108,7 @@ public class TransferenciaViewController {
             showAlert("Error", "Ingresa número de cuenta destino.");
             return;
         }
-        if (cat == null) {
+        if (categoria == null) {
             showAlert("Error", "Selecciona una categoría.");
             return;
         }
@@ -118,16 +121,15 @@ public class TransferenciaViewController {
         }
 
         try {
-            app.billetera.getGestorTransacciones().agregarTransaccion(
-                    UUID.randomUUID().toString(),
-                    monto,
-                    desc,
-                    TipoTransaccion.TRANSFERENCIA,
-                    cat,
-                    usuarioActual,
-                    destinatario.getIdCuenta(),
-                    cuentaOrigen.getIdCuenta()
-            );
+            Transaccion transaccion = new Transaccion.Builder()
+                    .withFechaHora(LocalDateTime.now())
+                    .withMonto(monto)
+                    .withDescripcion(descripcion)
+                    .withTipo(TRANSFERENCIA)
+                    .withCategoria(categoria)
+                    .withEmisor(usuarioActual)
+                    .build();
+
             showAlert("Éxito", "Transferencia realizada.");
             clearFields();
             refreshTable();

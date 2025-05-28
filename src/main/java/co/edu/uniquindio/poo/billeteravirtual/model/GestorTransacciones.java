@@ -32,7 +32,7 @@ public class GestorTransacciones {
     }
 
     // Metodo para agregar una transacción usando el Builder
-    public void agregarTransaccion(String idTransaccion, Double monto, String descripcion, TipoTransaccion tipo, Categoria categoria, Usuario emisor, String destinatario, String idCuentaEmisor) {
+    public void agregarTransaccion(String idTransaccion, Double monto, String descripcion, TipoTransaccion tipo, Categoria categoria, Usuario emisor, Usuario destinatario, String idCuentaEmisor) {
         // Buscar la cuenta específica del emisor
         Cuenta cuentaEmisor = buscarCuentaDeUsuario(emisor, idCuentaEmisor);
         if (cuentaEmisor == null) {

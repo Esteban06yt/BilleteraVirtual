@@ -2,6 +2,7 @@ package co.edu.uniquindio.poo.billeteravirtual.viewController;
 
 import co.edu.uniquindio.poo.billeteravirtual.App;
 import co.edu.uniquindio.poo.billeteravirtual.enums.TipoTransaccion;
+import co.edu.uniquindio.poo.billeteravirtual.facade.SistemaBilleteraFacade;
 import co.edu.uniquindio.poo.billeteravirtual.model.*;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -14,7 +15,10 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 
+import java.time.LocalDateTime;
 import java.util.UUID;
+
+import static co.edu.uniquindio.poo.billeteravirtual.enums.TipoTransaccion.RECARGA;
 
 public class RecargaViewController {
 
@@ -103,16 +107,14 @@ public class RecargaViewController {
 
                 try {
                         // Suponiendo que el metodo agregarTransaccion admite tipo RECARGA
-                        app.billetera.getGestorTransacciones().agregarTransaccion(
-                                UUID.randomUUID().toString(),
-                                monto,
-                                descripcion,
-                                TipoTransaccion.RECARGA,
-                                categoria,
-                                usuarioActual,
-                                String.valueOf(usuarioActual),
-                                String.valueOf(cuentaSeleccionada)
-                        );
+                        Transaccion transaccion = new Transaccion.Builder()
+                                .withFechaHora(LocalDateTime.now())
+                                .withMonto(monto)
+                                .withDescripcion(descripcion)
+                                .withTipo(RECARGA)
+                                .withCategoria(categoria)
+                                .withDestinatario(usuarioActual)
+                                .build();
 
                         mostrarAlerta("Éxito", "Recarga realizada con éxito.");
                         limpiarCampos();

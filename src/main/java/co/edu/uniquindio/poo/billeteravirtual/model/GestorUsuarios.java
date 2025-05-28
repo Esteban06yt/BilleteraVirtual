@@ -76,4 +76,15 @@ public class GestorUsuarios {
         }
         return null;
     }
+
+    public Usuario obtenerUsuarioPorIdCuenta(String idCuenta) {
+        for (Usuario usuario : usuarios) {
+            for (Cuenta cuenta : usuario.getCuentas()) {
+                if (cuenta.getIdCuenta().equals(idCuenta)) {
+                    return usuario;
+                }
+            }
+        }
+        return null; // No encontrado
+    }
 }

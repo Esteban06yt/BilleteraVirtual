@@ -14,7 +14,10 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 
+import java.time.LocalDateTime;
 import java.util.UUID;
+
+import static co.edu.uniquindio.poo.billeteravirtual.enums.TipoTransaccion.DEPOSITO;
 
 public class DepositoViewController {
 
@@ -103,16 +106,14 @@ public class DepositoViewController {
 
                 try {
                         // Para depósito, destinatario y cuenta origen podrían ser null, o ajusta según tu lógica
-                        app.billetera.getGestorTransacciones().agregarTransaccion(
-                                UUID.randomUUID().toString(),
-                                monto,
-                                descripcion,
-                                TipoTransaccion.DEPOSITO,
-                                categoria,
-                                usuarioActual,
-                                null,
-                                String.valueOf(cuentaSeleccionada)
-                        );
+                        Transaccion transaccion = new Transaccion.Builder()
+                                .withFechaHora(LocalDateTime.now())
+                                .withMonto(monto)
+                                .withDescripcion(descripcion)
+                                .withTipo(DEPOSITO)
+                                .withCategoria(categoria)
+                                .withDestinatario(usuarioActual)
+                                .build();
 
                         mostrarAlerta("Éxito", "Depósito realizado con éxito.");
                         limpiarCampos();

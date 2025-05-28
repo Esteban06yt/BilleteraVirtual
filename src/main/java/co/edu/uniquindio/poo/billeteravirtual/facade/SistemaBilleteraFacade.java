@@ -46,6 +46,10 @@ public class SistemaBilleteraFacade {
         return sistema.getGestorUsuarios().eliminarUsuario(cedula);
     }
 
+    public Usuario buscarUsuarioPorCuenta(String idCuenta) {
+        return sistema.getGestorUsuarios().obtenerUsuarioPorIdCuenta(idCuenta);
+    }
+
     // -------------------------
     // Administradores
     // -------------------------
