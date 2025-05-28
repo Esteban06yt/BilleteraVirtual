@@ -1,27 +1,29 @@
 package co.edu.uniquindio.poo.billeteravirtual.controller;
 
-import co.edu.uniquindio.poo.billeteravirtual.enums.RolAdministrador;
+import co.edu.uniquindio.poo.billeteravirtual.facade.SistemaBilleteraFacade;
 import co.edu.uniquindio.poo.billeteravirtual.model.Administrador;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+import co.edu.uniquindio.poo.billeteravirtual.model.BilleteraVirtual;
+
+import java.util.Collection;
 
 public class AdministradorController {
 
-    /**
-    private Administrador administradorLogueado;
+    private static AdministradorController instance;
+    BilleteraVirtual billetera;
+    SistemaBilleteraFacade billeteraFacade;
 
-    public AdministradorController() {
-
-        administradorLogueado = new Administrador("1", "111111", "Juan Pérez", "juan.perez@mail.com", "3001234567", "1234", "abc", true, RolAdministrador.SOPORTE);
+    public AdministradorController(BilleteraVirtual billetera) {
+        this.billetera = billetera;
     }
 
-    // Retorna una lista con un solo administrador (el logueado)
-    public ObservableList<Administrador> getAdministradorLogueado() {
-        return FXCollections.observableArrayList(administradorLogueado);
+    public Collection<Administrador> obtenerListaAdministradores() {
+        return billeteraFacade.listarAdministradores();
     }
 
-    public void actualizarAdministrador() {
-
-    }*/
-
+    public static AdministradorController getInstance() {
+        if (instance == null) {
+            //instance = new AdministradorController();
+        }
+        return instance;
+    }
 }
