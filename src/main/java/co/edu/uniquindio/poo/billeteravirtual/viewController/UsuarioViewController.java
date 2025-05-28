@@ -36,25 +36,29 @@ public class UsuarioViewController {
         @FXML private TableColumn<Transaccion, Number> tbc_montoTransaccion;
         @FXML private TableColumn<Transaccion, String> tbc_fechaTransaccion;
 
-        @FXML private Button btn_volver, btn_modificarPerfil, btn_realizarTransaccion, btn_crudPresupuestos, btn_generarReporte;
+        @FXML private Button btn_volver, btn_modificarPerfil, btn_realizarTransaccion, btn_crudPresupuestos, btn_generarReporte, btn_actualizar,btn_categorizarTransaccion,
+                btn_actualizar1, btn_limpiarCampos;
+
         @FXML private Text txt_titulo, txt_subtitulo, txt_subtitulo1, txt_subtitulo2;
-        private App app;
+
+
+
+        private final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+
+        App app;
 
         public void setApp(App app) {
                 this.app = app;
         }
 
-        private final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-
         @FXML
         void initialize() {
-                // Obtener usuario en sesión
+
                 Object sesion = App.getSesionActual();
                 if (!(sesion instanceof Usuario usuario)) {
                         // Si no hay usuario, volvemos al login
-                        App.cerrarSesion();
-                        app.openLoginUsuario();
-                        return;
+
+                        return ;
                 }
 
                 initBindings();
@@ -145,4 +149,17 @@ public class UsuarioViewController {
                 );
                 App.billetera.getGestorReportes().exportarTransaccionesAPDF(App.billetera.getGestorTransacciones().listarTransacciones(), "transacciones pdf");
         }
+
+        @FXML
+        public void onCategorizarTransaccion(ActionEvent actionEvent) {
+        }
+
+        @FXML
+        public void onActualizar(ActionEvent actionEvent) {
+        }
+
+        @FXML
+        public void onLimpiarCampos(ActionEvent actionEvent) {
+        }
+
 }

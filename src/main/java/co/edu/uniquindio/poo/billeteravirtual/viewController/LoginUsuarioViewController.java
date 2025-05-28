@@ -26,7 +26,7 @@ public class LoginUsuarioViewController {
         @FXML private TextField txf_contrasenia;
         @FXML private Text txt_usuario;
 
-        private App app;
+        App app;
         private final SistemaBilleteraFacade facade = new SistemaBilleteraFacade();
 
         public void setApp(App app) {
