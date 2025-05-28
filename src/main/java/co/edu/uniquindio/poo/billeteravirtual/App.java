@@ -375,10 +375,10 @@ public class App extends Application {
 
     public void inicializarData() {
         // Crear un administrador de prueba
-        Administrador adminEjemplo = new Administrador("1090273807", "Esteban Polanco Mendez", "estebanpolanco06@gmail.com", "+573166558604", "Esteban06yt", SUPERADMIN);
+        Administrador adminEjemplo = new Administrador("1095208966", "Andres Arboleda", "Andres@gmail.com", "+573207249141", "Andres123", SUPERADMIN);
 
         // Crear un usuario de prueba
-        Usuario usuarioEjemplo = new Usuario("45678901", "Usuario Test", "usuario@correo.com", "+571234567890", "User12345", "Calle Falsa 123", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
+        Usuario usuarioEjemplo = new Usuario("1029387012", "Usuario Test", "usuario@correo.com", "+571234567890", "User12345", "Calle Falsa 123", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
 
         // Guardarlos como los actuales en sesión
         AdministradorSession.getInstancia().setAdministrador(adminEjemplo);

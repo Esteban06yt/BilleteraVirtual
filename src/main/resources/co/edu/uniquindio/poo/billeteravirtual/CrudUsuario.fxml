@@ -64,7 +64,7 @@
                 <Font name="Arial Black" size="16.0" />
             </font>
         </Button>
-        <Button fx:id="btn_eliminarUsuario" layoutX="604.0" layoutY="659.0" onAction="#onEliminarUsuario" prefHeight="42.0" prefWidth="160.0" style="-fx-background-color: #27b0da; -fx-border-color: black; -fx-border-width: 2;" text="Eliminar" textFill="WHITE">
+        <Button fx:id="btn_eliminarUsuario" layoutX="234.0" layoutY="659.0" onAction="#onEliminarUsuario" prefHeight="42.0" prefWidth="160.0" style="-fx-background-color: #27b0da; -fx-border-color: black; -fx-border-width: 2;" text="Eliminar" textFill="WHITE">
             <font>
                 <Font name="Arial Black" size="16.0" />
             </font>
@@ -79,11 +79,6 @@
                 <Font name="Arial Black" size="16.0" />
             </font>
         </Button>
-      <Button fx:id="btn_verCuentas" layoutX="235.0" layoutY="659.0" onAction="#onVerCuentas" prefHeight="42.0" prefWidth="160.0" style="-fx-background-color: #27b0da; -fx-border-color: black; -fx-border-width: 2;" text="Ver cuentas" textFill="WHITE">
-         <font>
-            <Font name="Arial Black" size="16.0" />
-         </font>
-      </Button>
 
         <!-- Subtítulo -->
         <Text fx:id="txt_subtitulo" fill="#27b0da" layoutX="45.0" layoutY="105.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gestion usuarios" textAlignment="CENTER" wrappingWidth="211.92919921875">

@@ -25,8 +25,23 @@ public class SistemaBilleteraFacade {
     // -------------------------
     // Usuarios
     // -------------------------
-    public void registrarUsuario(Usuario usuario) {
-        sistema.getGestorUsuarios().agregarUsuario(usuario);
+    public boolean registrarUsuario(Usuario usuario) {
+        boolean centinela = false;
+        if (!verificarUsuario(usuario.getCedula())) {
+            listarUsuarios().add(usuario);
+            centinela = true;
+        }
+        return centinela;
+    }
+
+    public boolean verificarUsuario(String cedula) {
+        boolean centinela = false;
+        for (Usuario auto : listarUsuarios()) {
+            if (auto.getCedula().equals(cedula)) {
+                centinela = true;
+            }
+        }
+        return centinela;
     }
 
     public Usuario buscarUsuario(String cedula) {
@@ -37,9 +52,21 @@ public class SistemaBilleteraFacade {
         return sistema.getGestorUsuarios().getUsuarios();
     }
 
-    public boolean actualizarUsuario(String cedula, String nombre, String correo, String telefono, String contrasenia, String direccion) {
-        return sistema.getGestorUsuarios()
-                .actualizarUsuario(cedula, nombre, correo, telefono, contrasenia, direccion);
+    public boolean actualizarUsuario(String cedula, Usuario actualizado) {
+        boolean centinela = false;
+        for (Usuario usuario : listarUsuarios()) {
+            if (usuario.getCedula().equals(cedula)) {
+                usuario.setCedula(actualizado.getCedula());
+                usuario.setNombreCompleto(actualizado.getNombreCompleto());
+                usuario.setTelefono(actualizado.getTelefono());
+                usuario.setCorreo(actualizado.getCorreo());
+                usuario.setDireccion(actualizado.getDireccion());
+                usuario.setContrasenia(actualizado.getContrasenia());
+                centinela = true;
+                break;
+            }
+        }
+        return centinela;
     }
 
     public boolean eliminarUsuario(String cedula) {
