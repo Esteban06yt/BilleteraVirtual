@@ -1,21 +1,21 @@
 package co.edu.uniquindio.poo.billeteravirtual;
 
-import co.edu.uniquindio.poo.billeteravirtual.model.Administrador;
-import co.edu.uniquindio.poo.billeteravirtual.model.BilleteraVirtual;
+import co.edu.uniquindio.poo.billeteravirtual.model.*;
 import co.edu.uniquindio.poo.billeteravirtual.viewController.*;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
-
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class App extends Application {
     private Stage primaryStage;
     @SuppressWarnings("exports")
     public static BilleteraVirtual billetera = BilleteraVirtual.getInstance();
-    public static Administrador administradorActual;
+    public static UsuarioSession UsuarioActual = UsuarioSession.getInstancia();
+    public static AdministradorSession AdministradorActual = AdministradorSession.getInstancia();
 
     @SuppressWarnings("exports")
     @Override
@@ -370,6 +370,32 @@ public class App extends Application {
     }
 
     public void inicializarData() {
+        // Crear un administrador de prueba
+        Administrador adminEjemplo = new Administrador(
+                "12345678",                          // cedula
+                "Admin Test",                  // nombreCompleto
+                "admin@correo.com",            // correo
+                "3000000000",                  // telefono
+                "admin123",                    // contrasenia
+                RolAdministrador.SUPER_ADMIN   // rol
+        );
+
+        // Crear un usuario de prueba
+        Usuario usuarioEjemplo = new Usuario(
+                "45678901",                         // cedula
+                "Usuario Test",                // nombreCompleto
+                "usuario@correo.com",          // correo
+                "3010000000",                  // telefono
+                "user123",                     // contrasenia
+                "Calle Falsa 123",             // dirección
+                new ArrayList<>(),             // cuentas
+                new ArrayList<>(),             // transacciones
+                new ArrayList<>()              // presupuestos
+        );
+
+        // Guardarlos como los actuales en sesión
+        AdministradorSession.getInstancia().setAdministrador(adminEjemplo);
+        UsuarioSession.getInstancia().setUsuario(usuarioEjemplo);
 
     }
 }
