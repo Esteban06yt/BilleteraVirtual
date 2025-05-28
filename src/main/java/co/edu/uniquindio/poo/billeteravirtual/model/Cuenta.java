@@ -10,11 +10,27 @@ public class Cuenta implements CuentaInterface {
     private Double monto = 0.0;
     private TipoCuenta tipo;
 
-    public Cuenta(String nombreBanco, TipoCuenta tipo) {
-        this.idCuenta = CodigoGenerador.generarId();
+    public Cuenta(String nombreBanco, TipoCuenta tipo, String idCuenta, Integer numeroCuenta, Double monto) {
         this.nombreBanco = nombreBanco;
-        this.numeroCuenta = CodigoGenerador.generarIdCuenta();
         this.tipo = tipo;
+
+        // Si quieres usar los valores que vienen como parámetros:
+        this.idCuenta = idCuenta;
+        this.numeroCuenta = numeroCuenta;
+
+        // Si quieres generar nuevos valores usando CodigoGenerador (ignorando los parámetros):
+        // this.idCuenta = CodigoGenerador.generarId();
+        // this.numeroCuenta = CodigoGenerador.generarIdCuenta();
+
+        this.monto = monto;
+    }
+
+    public Cuenta(String nombreBanco, TipoCuenta tipo) {
+        this.nombreBanco = nombreBanco;
+        this.tipo = tipo;
+        this.idCuenta = CodigoGenerador.generarId();
+        this.numeroCuenta = CodigoGenerador.generarIdCuenta();
+        this.monto = 0.0;
     }
 
     public String getIdCuenta() {

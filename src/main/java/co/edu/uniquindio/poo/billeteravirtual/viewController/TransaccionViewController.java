@@ -32,7 +32,7 @@ public class TransaccionViewController {
     public void setApp(App app) {
         this.app = app;
         // Obtener el usuario actual de la sesión
-        Object s = app.getSesionActual();
+        Object s = app.usuarioActual;
         if (s instanceof Usuario) {
             this.usuarioActual = (Usuario) s;
         }

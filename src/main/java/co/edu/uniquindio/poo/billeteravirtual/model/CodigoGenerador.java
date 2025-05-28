@@ -8,7 +8,7 @@ public class CodigoGenerador {
     private static final String CARACTERES = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
     private static final String NUMEROS = "0123456789";
     private static final int LONGITUD_CODIGO = 6;
-    private static final int LONGITUD_ID = 10;
+    private static final int LONGITUD_ID = 9;
     private static final Random random = new Random();
     private static List<Transaccion> transacciones = new ArrayList<>();
 

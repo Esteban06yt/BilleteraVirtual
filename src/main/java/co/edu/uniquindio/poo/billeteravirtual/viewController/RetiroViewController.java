@@ -41,11 +41,12 @@ public class RetiroViewController {
 
         public void setApp(App app) {
                 this.app = app;
-                usuarioActual = (Usuario) app.getSesionActual();
-                if (usuarioActual == null) {
-                        app.openLoginUsuario();
-                        return;
+                // Obtener el usuario actual de la sesión
+                Object s = app.usuarioActual;
+                if (s instanceof Usuario) {
+                        this.usuarioActual = (Usuario) s;
                 }
+
                 inicializarTabla();
                 cargarCategorias();
                 actualizarTabla();

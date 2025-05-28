@@ -1,7 +1,10 @@
 package co.edu.uniquindio.poo.billeteravirtual;
 
+import co.edu.uniquindio.poo.billeteravirtual.enums.TipoCuenta;
+import co.edu.uniquindio.poo.billeteravirtual.enums.TipoTransaccion;
 import co.edu.uniquindio.poo.billeteravirtual.facade.SistemaBilleteraFacade;
 import co.edu.uniquindio.poo.billeteravirtual.model.*;
+import co.edu.uniquindio.poo.billeteravirtual.model.BilleteraVirtual;
 import co.edu.uniquindio.poo.billeteravirtual.viewController.*;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -9,14 +12,17 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+
 
 import static co.edu.uniquindio.poo.billeteravirtual.enums.RolAdministrador.SUPERADMIN;
 
 public class App extends Application {
     public static Administrador administradorActual;
     public static Usuario usuarioActual;
+    private static SistemaBilleteraFacade sistemaBilleteraFacade;
     private Stage primaryStage;
     @SuppressWarnings("exports")
     public static BilleteraVirtual billetera = BilleteraVirtual.getInstance();
@@ -373,31 +379,122 @@ public class App extends Application {
             e.printStackTrace();
         }
     }
-
     public void inicializarData() {
-
-        // Generar IDs para admin y usuario
-        String idAdmin = CodigoGenerador.generarId();
-        String idUsuario = CodigoGenerador.generarId();
+        BilleteraVirtual billetera1 = billetera;
+        // Inicializar listas
         List<Usuario> listaUsuarios = new ArrayList<>();
         List<Administrador> listaAdministrador = new ArrayList<>();
         SistemaBilleteraFacade facade = new SistemaBilleteraFacade();
+        List<Categoria> categorias = new ArrayList<>();
+        List<Cuenta> cuentas = new ArrayList<>();
+        List<Presupuesto> presupuestos = new ArrayList<>();
+        List<Transaccion> transacciones = new ArrayList<>();
 
-        // Crear un administrador de prueba con ID generado
-        administradorActual = new Administrador(idAdmin, "Esteban Polanco Mendez", "estebanpolanco06@gmail.com", "+573166558604", "Esteban06yt", SUPERADMIN);
+        // Categorías
+        Categoria comida = new Categoria("Comida", "Gastos en alimentos y restaurantes");
+        Categoria transporte = new Categoria("Transporte", "Gastos en transporte público y gasolina");
+        Categoria entretenimiento = new Categoria("Entretenimiento", "Cine, música, salidas");
+        categorias.add(comida);
+        categorias.add(transporte);
+        categorias.add(entretenimiento);
 
-        // Crear un usuario de prueba con ID generado
-        usuarioActual = new Usuario(idUsuario, "Camilo Felipe Mendoza Del Castillo", "camilodelcastillo321@gmail.com", "+571234567890", "User12345", "Calle Falsa 123", new ArrayList<>(), new ArrayList<>(), new ArrayList<>(),new ArrayList<>());
+        // Presupuestos
+        Presupuesto presupuestoJuan = new Presupuesto("Presupuesto comida", 200000.0, comida);
+        Presupuesto presupuestoMaria = new Presupuesto("Presupuesto transporte", 150000.0, transporte);
+        presupuestos.add(presupuestoJuan);
+        presupuestos.add(presupuestoMaria);
 
-        // Guardarlos como los actuales en sesión
+        // Cuentas
+        Cuenta cuentaJuan = new Cuenta("Bancolombia", TipoCuenta.AHORROS, CodigoGenerador.generarId(), CodigoGenerador.generarIdCuenta(), 500000.0);
+        Cuenta cuentaMaria = new Cuenta("Davivienda", TipoCuenta.CORRIENTE, CodigoGenerador.generarId(), CodigoGenerador.generarIdCuenta(), 300000.0);
+        cuentas.add(cuentaJuan);
+        cuentas.add(cuentaMaria);
+
+        // Usuarios
+        usuarioActual = new Usuario(
+                CodigoGenerador.generarId(),
+                "Camilo Felipe Mendoza Del Castillo",
+                "camilodelcastillo321@gmail.com",
+                "+571234567890",
+                "User12345",
+                "Calle Falsa 123",
+                new ArrayList<>(List.of(cuentaJuan)),
+                new ArrayList<>(),
+                new ArrayList<>(List.of(presupuestoJuan)),
+                categorias
+        );
+
+        Usuario maria = new Usuario(
+                CodigoGenerador.generarId(),
+                "María López",
+                "maria@gmail.com",
+                "+573123087123",
+                "Mari123456",
+                "Calle Falsa 5",
+                new ArrayList<>(List.of(cuentaMaria)),
+                new ArrayList<>(),
+                new ArrayList<>(List.of(presupuestoMaria)),
+                categorias
+        );
+
+        // Transacciones (una vez que los usuarios existen)
+        Transaccion transaccion1 = new Transaccion.Builder()
+                .withIdTransaccion("TXN001")
+                .withFechaHora(LocalDateTime.now().minusDays(1))
+                .withMonto(15000.0)
+                .withDescripcion("Almuerzo en restaurante")
+                .withTipo(TipoTransaccion.PAGO)
+                .withCategoria(comida)
+                .withEmisor(usuarioActual)
+                .withDestinatario(maria)
+                .build();
+
+        Transaccion transaccion2 = new Transaccion.Builder()
+                .withIdTransaccion("TXN002")
+                .withFechaHora(LocalDateTime.now())
+                .withMonto(50000.0)
+                .withDescripcion("Pago gasolina")
+                .withTipo(TipoTransaccion.RETIRO)
+                .withCategoria(transporte)
+                .withEmisor(maria)
+                .withDestinatario(usuarioActual)
+                .build();
+
+        transacciones.add(transaccion1);
+        transacciones.add(transaccion2);
+
+        // Asignar transacciones a usuarios
+        usuarioActual.getTransacciones().add(transaccion1);
+        usuarioActual.getTransacciones().add(transaccion2);
+        maria.getTransacciones().add(transaccion1);
+        maria.getTransacciones().add(transaccion2);
+
+        // Administrador
+        administradorActual = new Administrador(
+                CodigoGenerador.generarId(),
+                "Esteban Polanco Mendez",
+                "estebanpolanco06@gmail.com",
+                "+573166558604",
+                "Esteban06yt",
+                SUPERADMIN
+        );
+
+        // Sesiones y registros
+        App.sistemaBilleteraFacade = facade;
         AdministradorSession.getInstancia().setAdministrador(administradorActual);
         UsuarioSession.getInstancia().setUsuario(usuarioActual);
+
         listaAdministrador.add(administradorActual);
         listaUsuarios.add(usuarioActual);
+        listaUsuarios.add(maria);
+
         facade.registrarUsuario(usuarioActual);
         facade.registrarAdministrador(administradorActual);
+
+
     }
 
+    
     public static Object getSesionActual() {
         if (administradorActual != null) {
             return administradorActual;

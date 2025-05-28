@@ -16,6 +16,7 @@ public class Usuario extends Persona{
         this.cuentas = (cuentas != null) ? cuentas : new ArrayList<>();
         this.transacciones = (transacciones != null) ? transacciones : new ArrayList<>();
         this.presupuestos = (presupuestos != null) ? presupuestos : new ArrayList<>();
+        this.categorias = (categorias !=null)? categorias : new ArrayList<>();
 
         this.saldo = 0.0;
         this.direccion = direccion;

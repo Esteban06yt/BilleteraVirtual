@@ -17,7 +17,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 public class UsuarioViewController {
-
+        ;
         @FXML private TableView<Usuario> tb_usuario;
         @FXML private TableColumn<Usuario, String> tbc_nombreUsuario, tbc_cedulaUsuario, tbc_telefonoUsuario, tbc_correoUsuario, tbc_direccionUsuario;
         @FXML private TableColumn<Usuario, Number> tbc_saldoUsuario;
@@ -27,8 +27,10 @@ public class UsuarioViewController {
         @FXML private TableColumn<Cuenta, Number> tbc_numeroCuenta, tbc_montoCuenta;
 
         @FXML private TableView<Presupuesto> tb_listaPresupuestos;
-        @FXML private TableColumn<Presupuesto, String> tbc_nombrePresupuesto, tbc_categoriaPresupuesto;
+        @FXML private TableColumn<Presupuesto, String> tbc_nombrePresupuesto;
         @FXML private TableColumn<Presupuesto, Number> tbc_montoAsignadoPresupuesto, tbc_montoGastadoPresupuesto, tbc_montoRestantePresupuesto;
+        @FXML private TableColumn<Presupuesto, String> tbc_CategoriaPresupuesto;
+
 
         @FXML private TableView<Transaccion> tb_listaTransacciones;
         @FXML private TableColumn<Transaccion, String> tbc_descripcionTransaccion, tbc_tipoTransaccion, tbc_categoriaTransaccion, tbc_destinatarioTransaccion;
@@ -48,7 +50,7 @@ public class UsuarioViewController {
         @FXML
         public void initialize() {
                 // Obtener usuario en sesión
-                Object sesion = App.getSesionActual();
+                Object sesion = App.usuarioActual;
                 if (!(sesion instanceof Usuario usuario)) {
                         // Si no hay usuario, volvemos al login o no inicializamos
                         System.out.println("No hay usuario en sesión");
@@ -79,10 +81,11 @@ public class UsuarioViewController {
 
                 // Presupuestos
                 tbc_nombrePresupuesto.setCellValueFactory(c -> new SimpleStringProperty(c.getValue().getNombre()));
-                tbc_categoriaPresupuesto.setCellValueFactory(c -> new SimpleStringProperty(c.getValue().getCategoria().getNombre()));
                 tbc_montoAsignadoPresupuesto.setCellValueFactory(c -> new SimpleDoubleProperty(c.getValue().getMontoAsignado()));
                 tbc_montoGastadoPresupuesto.setCellValueFactory(c -> new SimpleDoubleProperty(c.getValue().getMontoGastado()));
                 tbc_montoRestantePresupuesto.setCellValueFactory(c -> new SimpleDoubleProperty(c.getValue().calcularDisponible()));
+                tbc_CategoriaPresupuesto.setCellValueFactory(c -> new SimpleStringProperty(c.getValue().getCategoria().getNombre()));
+
 
                 // Transacciones
                 tbc_fechaTransaccion.setCellValueFactory(c -> new SimpleStringProperty(c.getValue().getFechaHora().format(DATE_FORMAT)));
